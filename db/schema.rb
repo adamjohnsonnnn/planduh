@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201172504) do
+ActiveRecord::Schema.define(version: 20171201215951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "preferences", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "keyword", null: false
+    t.boolean "is_necessary?", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_preferences_on_user_id"
+  end
+
+  create_table "survey_questions", force: :cascade do |t|
+    t.text "question_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "survey_responses", force: :cascade do |t|
+    t.integer "survey_question_id"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_responses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "survey_response_id"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
