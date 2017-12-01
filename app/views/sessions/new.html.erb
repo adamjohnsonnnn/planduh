@@ -1,0 +1,23 @@
+<div class="registration-container" >
+<h3>login</h3>
+
+<% if @errors %>
+<ul>
+  <% @errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<form action="/sessions" method="POST">
+<p>
+  <input type="text" name="email" placeholder="email" class="registration-form-field">
+</p>
+<p>
+  <input type="password" name="password" placeholder="password" class="registration-form-field">
+</p>
+<p>
+  <input type="submit" value="login" placeholder="login" class="form-button">
+</p>
+</form>
+</div>
