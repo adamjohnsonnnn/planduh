@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :survey_questions, only: [:show]
+  resources :survey_questions, only: [:show] do
+    resources :survey_responses
+  end
 
   resources :itineraries
 
