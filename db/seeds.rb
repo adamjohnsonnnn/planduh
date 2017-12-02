@@ -7,7 +7,50 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-# SurveyQuestion.create!(:question_text => 'Do you like to drink? ')
+# SurveyQuestion.create!(:question_text => 'If you had a day off work, which one of these activities would appeal most to you? ')
+
+
+
+
+SurveyResponse.create!(:response => 'Yes', :survey_question_id => 1)
+SurveyResponse.create!(:response => 'No', :survey_question_id => 1)
+
+SurveyResponse.create!(:response => 'Yes', :survey_question_id => 2)
+SurveyResponse.create!(:response => 'No', :survey_question_id => 2)
+
+
+
+SurveyResponse.create!(:response => 'Yay', :survey_question_id => 3)
+SurveyResponse.create!(:response => 'Blah..', :survey_question_id => 3)
+SurveyResponse.create!(:response => 'I could go either way', :survey_question_id => 3)
+
+
+
+
+
+
+
+
+
+
+
+# SurveyResponse.create!(:response => 'Go day drinking at a bar', :survey_question_id => 6)
+# SurveyResponse.create!(:response => 'Visit a museum ', :survey_question_id => 6)
+# SurveyResponse.create!(:response => 'Ride bike or go for a run ', :survey_question_id => 6)
+# SurveyResponse.create!(:response => 'Play board games or work on a puzzle', :survey_question_id => 6)
+
+
+
+
+
+# SurveyQuestion.create!(:question_text => 'Do you like physical activity?  ')
+# SurveyQuestion.create!(:question_text => 'Do you like physical activity?  ')
+# SurveyQuestion.create!(:question_text => 'Do you like physical activity?  ')
+
+
+
+
+
 # SurveyQuestion.create!(:question_text => 'Do you like physical activity?  ')
 # SurveyQuestion.create!(:question_text => 'How do you feel about being outdoors?  ')
 
@@ -21,7 +64,9 @@ require 'faker'
 
 # SurveyResponse.create!(:response => 'Las Vegas', :survey_question_id => 4)
 
-SurveyResponse.create!(:response => 'Guitar', :survey_question_id => 5)
-SurveyResponse.create!(:response => 'Jazz', :survey_question_id => 5)
-SurveyResponse.create!(:response => 'Blues', :survey_question_id => 5)
-SurveyResponse.create!(:response => 'Rap', :survey_question_id => 5)
+# SurveyResponse.create!(:response => 'Guitar', :survey_question_id => 5)
+# SurveyResponse.create!(:response => 'Jazz', :survey_question_id => 5)
+# SurveyResponse.create!(:response => 'Blues', :survey_question_id => 5)
+# SurveyResponse.create!(:response => 'Rap', :survey_question_id => 5)
+
+
