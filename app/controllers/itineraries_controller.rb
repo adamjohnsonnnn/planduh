@@ -7,7 +7,7 @@ class ItinerariesController < ApplicationController
 
   def show
     y = YelpResponse.new
-    response = y.get_events_response({location: "chicago", categories: "festivals-fairs", start_date: 1512185212})
+    response = y.get_events_response({location: "chicago", categories: "visual-arts", start_date: 1512185212})
     y.assign_values(response)
 
     @activity = Activity.create!(
@@ -18,7 +18,8 @@ class ItinerariesController < ApplicationController
       tickets_url: y.tickets_url,
       cost: y.cost,
       cost_max: y.cost_max,
-      image_url: y.image_url
+      image_url: y.image_url,
+      itinerary_id: 1
     )
   end
 
