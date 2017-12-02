@@ -18,6 +18,7 @@ class YelpResponse < ApplicationRecord
       "location" => args.fetch(:location, ""),
       "categories" => args.fetch(:categories, ""),
       "start_date" => args.fetch(:start_date, ""),
+      "is_free" => args.fetch(:is_free, false),
       "limit" => 1
     }
 
@@ -44,6 +45,8 @@ class YelpResponse < ApplicationRecord
     self.cost = response["events"][0]["cost"]
     self.cost_max = response["events"][0]["cost_max"]
     self.image_url = response["events"][0]["image_url"]
+    self.is_free = response["events"][0]["is_free"]
+    self.is_canceled = response["events"][0]["is_canceled"]
     format_and_set_address(response)
   end
 

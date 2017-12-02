@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(version: 20171202152854) do
     t.string "time_start"
     t.string "event_site_url"
     t.string "tickets_url"
-    t.float "cost"
-    t.float "cost_max"
+    t.integer "cost"
+    t.integer "cost_max"
+    t.boolean "is_free"
+    t.boolean "is_canceled"
     t.string "image_url"
     t.bigint "itinerary_id"
     t.datetime "created_at", null: false
@@ -83,8 +85,10 @@ ActiveRecord::Schema.define(version: 20171202152854) do
     t.string "time_start"
     t.string "event_site_url"
     t.string "tickets_url"
-    t.float "cost"
-    t.float "cost_max"
+    t.integer "cost"
+    t.integer "cost_max"
+    t.boolean "is_free"
+    t.boolean "is_canceled"
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
