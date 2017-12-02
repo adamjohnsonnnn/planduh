@@ -29,6 +29,8 @@ gem 'bcrypt'
 gem 'rspec-rails'
 gem 'rails-controller-testing'
 gem 'faker'
+gem 'httparty'
+gem 'dotenv-rails', groups: [:development, :test, :production]
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
