@@ -13,3 +13,18 @@
     <li><%= image_tag(@activity.image_url, size: "320x240") %></li>
   </ul>
 <% end %>
+
+<div id="googleMap" ></div>
+
+<script>
+function myMap() {
+var mapProp= {
+    center:new google.maps.LatLng(41.878114,-87.629798),
+    zoom:5,
+};
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrLYL2C-ffJ7nncDl6Sb4QzM6Irt5yRXc&callback=myMap"></script>
+
