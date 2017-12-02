@@ -1,6 +1,6 @@
-class CreateActivities < ActiveRecord::Migration[5.1]
+class CreateYelpResponses < ActiveRecord::Migration[5.1]
   def change
-    create_table :activities do |t|
+    create_table :yelp_responses do |t|
       t.string   :name
       t.string   :display_address
       t.string   :time_start
@@ -11,8 +11,6 @@ class CreateActivities < ActiveRecord::Migration[5.1]
       t.boolean  :is_free
       t.boolean  :is_canceled
       t.string   :image_url
-
-      t.references :itinerary
 
       t.timestamps
     end

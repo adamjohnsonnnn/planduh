@@ -1,0 +1,15 @@
+<h3>This is the itineraries show page!</h3>
+<% if @error %>
+  <h3><%= @error %></h3>
+<% else %>
+  <ul style="list-style-type:none">
+    <li>Event Name: <%= @activity.name %></li><br>
+    <li>Address: <%= @activity.display_address %></li><br>
+    <li>Date: <%= @activity.format_date %></li><br>
+    <li>Time: <%= @activity.format_time %></li><br>
+    <li><%= link_to "Visit Event Site", @activity.event_site_url %></li><br>
+    <li><%= link_to "Buy Tickets", @activity.tickets_url %></li><br>
+    <li>Cost: $<%= @activity.filter_cost %></li><br>
+    <li><%= image_tag(@activity.image_url, size: "320x240") %></li>
+  </ul>
+<% end %>

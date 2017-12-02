@@ -62,3 +62,6 @@ Temporary Items
 
 # sftp configuration file
 sftp-config.json
+
+# API keys
+.env

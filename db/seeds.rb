@@ -5,24 +5,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
+# require 'faker'
 
 # SurveyQuestion.create!(:question_text => 'If you had a day off work, which one of these activities would appeal most to you? ')
 
 
 
 
-SurveyResponse.create!(:response => 'Yes', :survey_question_id => 1)
-SurveyResponse.create!(:response => 'No', :survey_question_id => 1)
+# SurveyResponse.create!(:response => 'Yes', :survey_question_id => 1)
+# SurveyResponse.create!(:response => 'No', :survey_question_id => 1)
 
-SurveyResponse.create!(:response => 'Yes', :survey_question_id => 2)
-SurveyResponse.create!(:response => 'No', :survey_question_id => 2)
+# SurveyResponse.create!(:response => 'Yes', :survey_question_id => 2)
+# SurveyResponse.create!(:response => 'No', :survey_question_id => 2)
 
 
 
-SurveyResponse.create!(:response => 'Yay', :survey_question_id => 3)
-SurveyResponse.create!(:response => 'Blah..', :survey_question_id => 3)
-SurveyResponse.create!(:response => 'I could go either way', :survey_question_id => 3)
+# SurveyResponse.create!(:response => 'Yay', :survey_question_id => 3)
+# SurveyResponse.create!(:response => 'Blah..', :survey_question_id => 3)
+# SurveyResponse.create!(:response => 'I could go either way', :survey_question_id => 3)
 
 
 
@@ -69,4 +69,5 @@ SurveyResponse.create!(:response => 'I could go either way', :survey_question_id
 # SurveyResponse.create!(:response => 'Blues', :survey_question_id => 5)
 # SurveyResponse.create!(:response => 'Rap', :survey_question_id => 5)
 
-
+User.create!(first_name: "Jimbo", last_name: "Fancy", email: "jbo@woof.bork", password: "asdf1234")
+Itinerary.create!(confirmed?: true, user_id: 1)
