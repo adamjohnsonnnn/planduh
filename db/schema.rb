@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20171202013738) do
 
   create_table "survey_questions", force: :cascade do |t|
     t.text "question_text"
+    t.string "version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

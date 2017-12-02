@@ -1,0 +1,17 @@
+
+
+<div>
+  <ul>
+    <%= link_to_prev_page @questions, "previous" %>
+    <%= link_to_next_page @questions, "next" %>
+    <% @questions.each do |question| %>
+      <% if question.version == "Yes/No" %>
+       <%= render partial: "yes_no_question", locals: {question: question} %>
+       <%= render partial: 'yes_no_response', locals: {question: question} %>
+      <% elsif question.version == "Multiple Choice" %>
+        <%= render partial: "multiple_choice_question", locals: {question: question} %>
+        <%= render partial: 'multiple_choice_response', locals: {question: question} %>
+       <% end  %>
+    <% end %>
+  </ul>
+</div>
