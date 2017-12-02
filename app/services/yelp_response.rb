@@ -15,10 +15,10 @@ class YelpResponse
     url = "https://api.yelp.com/v3/events"
 
     query = {
-      "location" = args.location,
-      "categories" = args.categories,
-      "start_date" = args.start_date,
-      "limit" = 1
+      "location" => args.location,
+      "categories" => args.categories,
+      "start_date" => args.start_date,
+      "limit" => 1
     }
 
     headers = {
