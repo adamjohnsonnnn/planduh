@@ -16,7 +16,14 @@ ActiveRecord::Schema.define(version: 20171202013738) do
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.string "details"
+    t.string "name"
+    t.string "display_address"
+    t.string "time_start"
+    t.string "event_site_url"
+    t.string "tickets_url"
+    t.float "cost"
+    t.float "cost_max"
+    t.string "image_url"
     t.bigint "itinerary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
