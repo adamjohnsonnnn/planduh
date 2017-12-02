@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20171202013738) do
 
   create_table "user_responses", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "survey_response_id"
+    t.integer "survey_question_id"
     t.text "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

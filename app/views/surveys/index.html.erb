@@ -11,6 +11,10 @@
       <% elsif question.version == "Multiple Choice" %>
         <%= render partial: "multiple_choice_question", locals: {question: question} %>
         <%= render partial: 'multiple_choice_response', locals: {question: question} %>
+      <% elsif question.version == "Open-ended" %>
+        <%= render partial: "open_ended_question", locals: {question: question} %>
+        <%= render partial: "open_ended_response", locals: {question: question} %>
+
        <% end  %>
     <% end %>
   </ul>
