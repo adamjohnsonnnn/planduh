@@ -4,11 +4,15 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :survey_questions, only: [:show]
+
+  resources :itineraries
+
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :preferences, only: [:new, :create, :destroy]
 
-  root "users#new"
+  root "users#index"
 
   get 'logout', to: "sessions#destroy", as: 'logout'
 
