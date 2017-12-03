@@ -16,6 +16,12 @@ class ItinerariesController < ApplicationController
     y = YelpResponse.new
     response = y.get_businesses_response({term: "fancy", categories: "restaurants", location: "chicago", price: "3", open_at: 1512345600, limit: 1})
     handle_businesses_response(response, y)
+
+    # @activities.each do |activity|
+    #   p activity.name
+    #   p activity.latitude.to_s
+    #   p activity.longitude.to_s
+    # end
   end
 
   def destroy
