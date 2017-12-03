@@ -35,6 +35,8 @@ class ItinerariesController < ApplicationController
       cost_max: y.cost_max,
       image_url: y.image_url,
       display_address: y.display_address,
+      latitude: y.latitude,
+      longitude: y.longitude,
       itinerary_id: 1,
       version: "event"
     )
@@ -48,7 +50,6 @@ class ItinerariesController < ApplicationController
       @activities << set_event_attributes(y)
     end
   end
-
 
   def set_business_attributes(y)
       Activity.create!(

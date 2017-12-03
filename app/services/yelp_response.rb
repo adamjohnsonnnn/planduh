@@ -64,6 +64,8 @@ class YelpResponse < ApplicationRecord
     self.image_url = response["events"][0]["image_url"] || ""
     self.is_free = response["events"][0]["is_free"] || ""
     self.is_canceled = response["events"][0]["is_canceled"] || ""
+    self.latitude = response["events"][0]["latitude"] || ""
+    self.longitude = response["events"][0]["longitude"] || ""
     format_and_set_address(response)
   end
 
