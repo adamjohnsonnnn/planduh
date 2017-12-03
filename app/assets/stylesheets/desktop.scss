@@ -1,0 +1,13 @@
+/* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+        .customjumbotron{
+            background-image: url('https://i.amz.mshcdn.com/atVl90rKiSGeSLkp9cjbGZwG03A=/950x534/filters:quality(90)/2013%2F11%2F18%2F42%2F8540647831.2f72e.jpg');
+        }
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+        .customjumbotron{
+            background-image: url('https://i.amz.mshcdn.com/atVl90rKiSGeSLkp9cjbGZwG03A=/950x534/filters:quality(90)/2013%2F11%2F18%2F42%2F8540647831.2f72e.jpg');
+        }
+    }

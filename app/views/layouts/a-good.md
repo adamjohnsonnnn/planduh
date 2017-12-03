@@ -10,7 +10,8 @@
     <%= javascript_include_tag 'application' %>
   </head>
   <body>
-   <section class="body-container">
+   <sec
+   tion class="body-container">
     <nav id="js-main-header class="main-header main-header--static">
       <ul>
       <% if logged_in? %>
