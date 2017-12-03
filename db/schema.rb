@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202152854) do
+ActiveRecord::Schema.define(version: 20171203001021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,16 @@ ActiveRecord::Schema.define(version: 20171202152854) do
     t.index ["user_id"], name: "index_preferences_on_user_id"
   end
 
+  create_table "recommenders", force: :cascade do |t|
+    t.text "event_matrix"
+    t.text "business_matrix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "survey_questions", force: :cascade do |t|
     t.text "question_text"
+    t.string "version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,7 +80,7 @@ ActiveRecord::Schema.define(version: 20171202152854) do
 
   create_table "user_responses", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "survey_response_id"
+    t.integer "survey_question_id"
     t.text "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
