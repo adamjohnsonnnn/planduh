@@ -5,9 +5,12 @@ class UserResponsesController < ApplicationController
   end
 
   def create
+   current_page = params[:survey_question_id].to_i + 1
    user_answer = params[:answer]
    question_id = params[:survey_question_id]
+
     @user_response = UserResponse.create!(response: user_answer, survey_question_id: question_id, :user_id => current_user.id)
+    redirect_to "/surveys?page=#{current_page}"
   end
 
 

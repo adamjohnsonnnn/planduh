@@ -1,11 +1,12 @@
 
 <div>
-  <form action="/survey_questions/<%= question.id %>/user_responses" method="POST">
+  <form class="js--form" action="/survey_questions/<%= question.id %>/user_responses" method="POST">
       <select name="answer">
         <% question.responses.each do |response| %>
           <option value="<%= response.response %>"  ><%= response.response %></option>
         <% end %>
       </select>
-      <input type="submit" value="submit">
+      <%= hidden_field_tag 'page', '1', {class: 'js-form-page'}%>
+      <input type="submit" value="submit" >
     </form>
 </div>
