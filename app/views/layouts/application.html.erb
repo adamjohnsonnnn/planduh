@@ -17,7 +17,7 @@
 
     <div class="container">
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a class="navbar-brand" href="#">PlanDuh</a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,9 +27,9 @@
         <ul class="navbar-nav ml-auto">
           <% if logged_in? %>
 
-          <li class="nav-item active">
+<!--           <li class="nav-item active">
             <a class="nav-link" href="http://localhost:3000/">Home <span class="sr-only">(current)</span></a>
-          </li>
+          </li> -->
 
           <li class="nav-item active"><%= link_to "Home", root_path, class: "nav-link"  %></li>
 
@@ -53,9 +53,13 @@
     <main role="main">
 
       <div class="jumbotron">
-        <center><h1 class="display-3">PlanDuh</h1>
-        <p class="lead">Discover Local Events </p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Learn More</a></p></center>
+        <center>
+          <img src='https://i.imgur.com/W29FmAv.png' width="150px" />
+          <!-- <h2>PlanDuh</h2> -->
+          <p>"Oh, I don't know what to do." <br/>- person before PlanDuh</p>
+          <p>"I had a lot of fun." <br />- person after PlanDuh</p>
+          <!-- <p class="lead">Discover Local Events </p> -->
+          <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Learn More</a></p></center> -->
       </div>
 
         <%= yield %>

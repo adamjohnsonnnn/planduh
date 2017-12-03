@@ -3,6 +3,12 @@ class ItinerariesController < ApplicationController
   end
 
   def create
+    @itinerary = Itinerary.new(user: current_user)
+    p params
+    p current_user.preferences
+    p current_user.necessary_preferences
+    p "@@@@@@@@@@@@@@@@@"
+    p current_user.submitted_preferences
   end
 
   def show
