@@ -1,5 +1,5 @@
-function myMap() {
-
+function myMap(octopus) {
+  console.log(octopus);
   // var event_location = {lat: 41.9298671, lng: -87.655268};
   // var restaurant_location = {lat: 41.881323483914, lng: -87.6245379144271};
 

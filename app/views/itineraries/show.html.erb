@@ -2,6 +2,13 @@
   <%= render partial: "activity", collection: @activities %>
 </ul>
 
-<div id="googleMap" ></div>
+<% octopus = "potato" %>
+<div id="googleMap" style="width: 400px; height: 400px"></div>
+<script>
+  $(document).ready(function(){
+    var octopus =  <%= octopus %>      // pass ruby variable to javascript
+    myMap(octopus);    // init show map for company card (only print marker)
+  });
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrLYL2C-ffJ7nncDl6Sb4QzM6Irt5yRXc&callback=myMap"></script>
 

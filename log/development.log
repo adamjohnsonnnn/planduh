@@ -12464,3 +12464,811 @@ Processing by UsersController#new as HTML
 Completed 200 OK in 26ms (Views: 23.2ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (212.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "planduh_development"[0m
+  [1m[35m (183.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "planduh_test"[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5639883873923918010)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20171201172504)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying NOT NULL, "last_name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201172504"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePreferences (20171201215824)
+  [1m[35m (40.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "preferences" ("id" bigserial primary key, "user_id" bigint, "keyword" character varying NOT NULL, "is_necessary?" boolean DEFAULT 'f', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_preferences_on_user_id" ON "preferences"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215824"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSurveyQuestions (20171201215844)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "survey_questions" ("id" bigserial primary key, "question_text" text, "version" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215844"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSurveyResponses (20171201215936)
+  [1m[35m (40.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "survey_responses" ("id" bigserial primary key, "survey_question_id" integer, "response" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215936"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserResponses (20171201215951)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "user_responses" ("id" bigserial primary key, "user_id" integer, "survey_question_id" integer, "response" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215951"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateItineraries (20171202013729)
+  [1m[35m (39.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "itineraries" ("id" bigserial primary key, "confirmed?" boolean, "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_itineraries_on_user_id" ON "itineraries"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171202013729"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActivities (20171202013738)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "activities" ("id" bigserial primary key, "name" character varying, "display_address" character varying, "time_start" character varying, "event_site_url" character varying, "tickets_url" character varying, "cost" integer, "cost_max" integer, "is_free" boolean, "is_canceled" boolean, "image_url" character varying, "rating" character varying, "price" character varying, "display_phone" character varying, "title" character varying, "url" character varying, "latitude" decimal, "longitude" decimal, "version" character varying, "itinerary_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_activities_on_itinerary_id" ON "activities"  ("itinerary_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171202013738"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateYelpResponses (20171202152854)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "yelp_responses" ("id" bigserial primary key, "name" character varying, "display_address" character varying, "time_start" character varying, "event_site_url" character varying, "tickets_url" character varying, "cost" integer, "cost_max" integer, "is_free" boolean, "is_canceled" boolean, "image_url" character varying, "rating" character varying, "price" character varying, "display_phone" character varying, "title" character varying, "url" character varying, "latitude" decimal, "longitude" decimal, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171202152854"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRecommenders (20171203001021)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "recommenders" ("id" bigserial primary key, "event_matrix" text, "business_matrix" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171203001021"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-12-03 19:40:41.080960"], ["updated_at", "2017-12-03 19:40:41.080960"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5639883873923918010)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "Do you have any dietary restrictions?"], ["version", "Open-ended"], ["created_at", "2017-12-03 19:40:46.454016"], ["updated_at", "2017-12-03 19:40:46.454016"]]
+  [1m[35m (40.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "Do you like physical activity?"], ["version", "Yes/No"], ["created_at", "2017-12-03 19:40:46.497866"], ["updated_at", "2017-12-03 19:40:46.497866"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "Do you like to drink?"], ["version", "Yes/No"], ["created_at", "2017-12-03 19:40:46.500554"], ["updated_at", "2017-12-03 19:40:46.500554"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "How do you feel about being outdoors?"], ["version", "Multiple Choice"], ["created_at", "2017-12-03 19:40:46.502933"], ["updated_at", "2017-12-03 19:40:46.502933"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "\nWould you visit Paris, the YellowStone, or Las Vegas if given a free trip weekend trip?"], ["version", "Multiple Choice"], ["created_at", "2017-12-03 19:40:46.505094"], ["updated_at", "2017-12-03 19:40:46.505094"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "If you had a free day off of work, which one of these activities would appeal the most to you?"], ["version", "Multiple Choice"], ["created_at", "2017-12-03 19:40:46.507034"], ["updated_at", "2017-12-03 19:40:46.507034"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "What is your favorite type of music?"], ["version", "Multiple Choice"], ["created_at", "2017-12-03 19:40:46.509196"], ["updated_at", "2017-12-03 19:40:46.509196"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 2], ["response", "Yes, I'm very active!"], ["created_at", "2017-12-03 19:40:46.549542"], ["updated_at", "2017-12-03 19:40:46.549542"]]
+  [1m[35m (41.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 2], ["response", "No...I don't prefer physical activity for my events"], ["created_at", "2017-12-03 19:40:46.594824"], ["updated_at", "2017-12-03 19:40:46.594824"]]
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 3], ["response", "Yes, pour me a cold one"], ["created_at", "2017-12-03 19:40:46.637938"], ["updated_at", "2017-12-03 19:40:46.637938"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 3], ["response", "No, not much of a drinker these days"], ["created_at", "2017-12-03 19:40:46.640866"], ["updated_at", "2017-12-03 19:40:46.640866"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 4], ["response", "Love it"], ["created_at", "2017-12-03 19:40:46.643701"], ["updated_at", "2017-12-03 19:40:46.643701"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 4], ["response", "ehhh, only if it is nice out"], ["created_at", "2017-12-03 19:40:46.646530"], ["updated_at", "2017-12-03 19:40:46.646530"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 4], ["response", "I prefer to be inside whenever possible"], ["created_at", "2017-12-03 19:40:46.648792"], ["updated_at", "2017-12-03 19:40:46.648792"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Go day drinking at a bar"], ["created_at", "2017-12-03 19:40:46.650983"], ["updated_at", "2017-12-03 19:40:46.650983"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Visit a museum "], ["created_at", "2017-12-03 19:40:46.653663"], ["updated_at", "2017-12-03 19:40:46.653663"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Ride bike or go for a run "], ["created_at", "2017-12-03 19:40:46.655976"], ["updated_at", "2017-12-03 19:40:46.655976"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Play board games or work on a puzzle"], ["created_at", "2017-12-03 19:40:46.658225"], ["updated_at", "2017-12-03 19:40:46.658225"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 5], ["response", "Paris"], ["created_at", "2017-12-03 19:40:46.660530"], ["updated_at", "2017-12-03 19:40:46.660530"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 5], ["response", "YellowStone"], ["created_at", "2017-12-03 19:40:46.662733"], ["updated_at", "2017-12-03 19:40:46.662733"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 5], ["response", "Las Vegas"], ["created_at", "2017-12-03 19:40:46.664980"], ["updated_at", "2017-12-03 19:40:46.664980"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Classic Rock"], ["created_at", "2017-12-03 19:40:46.667118"], ["updated_at", "2017-12-03 19:40:46.667118"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Indie"], ["created_at", "2017-12-03 19:40:46.669732"], ["updated_at", "2017-12-03 19:40:46.669732"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Electronic"], ["created_at", "2017-12-03 19:40:46.672473"], ["updated_at", "2017-12-03 19:40:46.672473"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Hip Hop"], ["created_at", "2017-12-03 19:40:46.674802"], ["updated_at", "2017-12-03 19:40:46.674802"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "I'm down for anything!"], ["created_at", "2017-12-03 19:40:46.677027"], ["updated_at", "2017-12-03 19:40:46.677027"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "N/A"], ["created_at", "2017-12-03 19:40:46.679232"], ["updated_at", "2017-12-03 19:40:46.679232"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["survey_question_id", 1], ["created_at", "2017-12-03 19:40:46.681541"], ["updated_at", "2017-12-03 19:40:46.681541"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["first_name", "Jimbo"], ["last_name", "Fancy"], ["email", "jbo@woof.bork"], ["password_digest", "$2a$10$zosNkmW86TmMyEYxNGFuaOElJveU7kJb4h2NMi0Fd/UyMNbVeh9h6"], ["created_at", "2017-12-03 19:40:46.775733"], ["updated_at", "2017-12-03 19:40:46.775733"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "itineraries" ("confirmed?", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["confirmed?", "t"], ["user_id", 1], ["created_at", "2017-12-03 19:40:46.846041"], ["updated_at", "2017-12-03 19:40:46.846041"]]
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "recommenders" ("event_matrix", "business_matrix", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_matrix", "---\n:hours:\n  1:\n  - food-and-drink\n  - nightlife\n  2:\n  - food-and-drink\n  - nightlife\n  3:\n  - food-and-drink\n  - nightlife\n  4:\n  - food-and-drink\n  - nightlife\n  5:\n  - food-and-drink\n  - nightlife\n  6:\n  - food-and-drink\n  - sports-active-life\n  7:\n  - food-and-drink\n  - sports-active-life\n  8:\n  - food-and-drink\n  - sports-active-life\n  9:\n  - food-and-drink\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  10:\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  11:\n  - food-and-drink\n  - music\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  12:\n  - food-and-drink\n  - sports-active-life\n  - festivals-fairs\n  13:\n  - food-and-drink\n  - sports-active-life\n  - festivals-fairs\n  14:\n  - music\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  15:\n  - film\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  16:\n  - film\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  17:\n  - film\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  18:\n  - music\n  - film\n  - food-and-drink\n  19:\n  - music\n  - film\n  - food-and-drink\n  20:\n  - music\n  - film\n  - food-and-drink\n  - nightlife\n  21:\n  - music\n  - film\n  - nightlife\n  22:\n  - music\n  - film\n  - nightlife\n  23:\n  - music\n  - film\n  - nightlife\n  24:\n  - music\n  - film\n  - nightlife\n"], ["business_matrix", "{:hours=>{1=>[\"nightlife\"], 2=>[\"nightlife\"], 3=>[\"nightlife\"], 4=>[\"nightlife\"], 5=>[\"active\", \"nightlife\"], 6=>[\"active\"], 7=>[\"active\", \"restaurants\", \"massage_therapy\"], 8=>[\"active\", \"restaurants\"], 9=>[\"active\", \"arts\", \"beautysvc\", \"localflavor\"], 10=>[\"active\", \"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 11=>[\"active\", \"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 12=>[\"restaurants\", \"localflavor\"], 13=>[\"restaurants\", \"active\", \"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 14=>[\"active\", \"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 15=>[\"active\", \"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 16=>[\"active\", \"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 17=>[\"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 18=>[\"arts\", \"beautysvc\", \"localflavor\", \"shopping\"], 19=>[\"arts\", \"beautysvc\", \"restaurants\", \"localflavor\"], 20=>[\"restaurants\", \"localflavor\", \"nightlife\"], 21=>[\"restaurants\", \"localflavor\", \"nightlife\"], 22=>[\"localflavor\", \"nightlife\"], 23=>[\"nightlife\"], 24=>[\"nightlife\"]}}"], ["created_at", "2017-12-03 19:40:46.902924"], ["updated_at", "2017-12-03 19:40:46.902924"]]
+  [1m[35m (39.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 13:41:15 -0600
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:41:16.085492"], ["updated_at", "2017-12-03 19:41:16.085492"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:41:17.084664"], ["updated_at", "2017-12-03 19:41:17.084664"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.8ms)
+  Rendered itineraries/show.html.erb within layouts/application (21.1ms)
+Completed 200 OK in 8169ms (Views: 6770.0ms | ActiveRecord: 15.8ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 13:44:52 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:44:52.488467"], ["updated_at", "2017-12-03 19:44:52.488467"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:44:53.195128"], ["updated_at", "2017-12-03 19:44:53.195128"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.4ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 1000ms (Views: 34.2ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 13:45:56 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:45:56.802272"], ["updated_at", "2017-12-03 19:45:56.802272"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.6ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:45:57.188725"], ["updated_at", "2017-12-03 19:45:57.188725"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 695ms (Views: 36.4ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 13:47:01 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:47:02.280758"], ["updated_at", "2017-12-03 19:47:02.280758"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:47:02.636202"], ["updated_at", "2017-12-03 19:47:02.636202"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.3ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 804ms (Views: 33.7ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 13:47:20 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:47:20.960498"], ["updated_at", "2017-12-03 19:47:20.960498"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:47:21.430223"], ["updated_at", "2017-12-03 19:47:21.430223"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 843ms (Views: 32.2ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 13:48:32 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:48:32.716526"], ["updated_at", "2017-12-03 19:48:32.716526"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 19:48:33.141684"], ["updated_at", "2017-12-03 19:48:33.141684"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.4ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 757ms (Views: 33.8ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:11:07 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:11:08.441063"], ["updated_at", "2017-12-03 22:11:08.441063"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:11:08.949635"], ["updated_at", "2017-12-03 22:11:08.949635"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.4ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 995ms (Views: 86.0ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:11:20 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:11:20.433421"], ["updated_at", "2017-12-03 22:11:20.433421"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:11:20.957727"], ["updated_at", "2017-12-03 22:11:20.957727"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 847ms (Views: 38.3ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:12:14 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:12:14.820987"], ["updated_at", "2017-12-03 22:12:14.820987"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:12:15.191311"], ["updated_at", "2017-12-03 22:12:15.191311"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.8ms)
+  Rendered itineraries/show.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 759ms (Views: 67.6ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:14:05 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:14:05.753627"], ["updated_at", "2017-12-03 22:14:05.753627"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:14:06.286817"], ["updated_at", "2017-12-03 22:14:06.286817"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 1036ms (Views: 140.4ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:16:29 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:16:29.288742"], ["updated_at", "2017-12-03 22:16:29.288742"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:16:29.669282"], ["updated_at", "2017-12-03 22:16:29.669282"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 756ms (Views: 111.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:16:49 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:16:49.447839"], ["updated_at", "2017-12-03 22:16:49.447839"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:16:50.192117"], ["updated_at", "2017-12-03 22:16:50.192117"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 1153ms (Views: 113.5ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:17:06 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:17:06.270309"], ["updated_at", "2017-12-03 22:17:06.270309"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:17:06.786120"], ["updated_at", "2017-12-03 22:17:06.786120"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.3ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 892ms (Views: 110.6ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:17:13 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:17:13.485409"], ["updated_at", "2017-12-03 22:17:13.485409"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:17:15.006881"], ["updated_at", "2017-12-03 22:17:15.006881"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.8ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 1813ms (Views: 34.1ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:18:08 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:18:08.391038"], ["updated_at", "2017-12-03 22:18:08.391038"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:18:08.998502"], ["updated_at", "2017-12-03 22:18:08.998502"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 1029ms (Views: 114.3ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:18:31 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:18:31.885633"], ["updated_at", "2017-12-03 22:18:31.885633"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:18:32.287493"], ["updated_at", "2017-12-03 22:18:32.287493"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (4.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 761ms (Views: 113.9ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:18:50 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:18:50.886189"], ["updated_at", "2017-12-03 22:18:50.886189"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:18:51.270250"], ["updated_at", "2017-12-03 22:18:51.270250"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (4.5ms)
+  Rendered itineraries/show.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 861ms (Views: 120.2ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:19:03 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:19:03.752480"], ["updated_at", "2017-12-03 22:19:03.752480"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:19:04.655057"], ["updated_at", "2017-12-03 22:19:04.655057"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 1258ms (Views: 113.5ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:19:19 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:19:19.600136"], ["updated_at", "2017-12-03 22:19:19.600136"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:19:20.012485"], ["updated_at", "2017-12-03 22:19:20.012485"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 733ms (Views: 38.8ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:19:48 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:19:48.791454"], ["updated_at", "2017-12-03 22:19:48.791454"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:19:49.115171"], ["updated_at", "2017-12-03 22:19:49.115171"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.3ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 734ms (Views: 111.9ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:20:00 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:20:01.222592"], ["updated_at", "2017-12-03 22:20:01.222592"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:20:01.845129"], ["updated_at", "2017-12-03 22:20:01.845129"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 1087ms (Views: 35.8ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:21:24 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:21:24.516893"], ["updated_at", "2017-12-03 22:21:24.516893"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:21:25.030580"], ["updated_at", "2017-12-03 22:21:25.030580"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.3ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 935ms (Views: 118.2ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:21:46 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:21:46.444638"], ["updated_at", "2017-12-03 22:21:46.444638"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:21:46.851610"], ["updated_at", "2017-12-03 22:21:46.851610"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 756ms (Views: 36.8ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:22:12 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:22:13.255248"], ["updated_at", "2017-12-03 22:22:13.255248"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:22:13.633738"], ["updated_at", "2017-12-03 22:22:13.633738"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 880ms (Views: 115.1ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:22:48 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:22:48.732920"], ["updated_at", "2017-12-03 22:22:48.732920"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:22:49.145375"], ["updated_at", "2017-12-03 22:22:49.145375"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 747ms (Views: 39.0ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:26:26 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:26:26.385289"], ["updated_at", "2017-12-03 22:26:26.385289"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:26:26.715053"], ["updated_at", "2017-12-03 22:26:26.715053"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 725ms (Views: 136.4ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:28:52 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:28:52.528980"], ["updated_at", "2017-12-03 22:28:52.528980"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:28:53.312061"], ["updated_at", "2017-12-03 22:28:53.312061"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 1148ms (Views: 40.0ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:29:34 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:29:34.684753"], ["updated_at", "2017-12-03 22:29:34.684753"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:29:35.037848"], ["updated_at", "2017-12-03 22:29:35.037848"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.3ms)
+  Rendered itineraries/show.html.erb within layouts/application (53.5ms)
+Completed 200 OK in 681ms (Views: 89.4ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:30:10 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:30:11.057774"], ["updated_at", "2017-12-03 22:30:11.057774"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:30:11.470521"], ["updated_at", "2017-12-03 22:30:11.470521"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.3ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 726ms (Views: 30.6ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:30:30 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:30:30.294390"], ["updated_at", "2017-12-03 22:30:30.294390"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:30:30.799992"], ["updated_at", "2017-12-03 22:30:30.799992"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.4ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 879ms (Views: 112.7ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:30:45 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:30:45.776201"], ["updated_at", "2017-12-03 22:30:45.776201"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:30:46.236679"], ["updated_at", "2017-12-03 22:30:46.236679"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.2ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 854ms (Views: 113.0ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:31:04 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:31:04.743584"], ["updated_at", "2017-12-03 22:31:04.743584"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:31:05.093788"], ["updated_at", "2017-12-03 22:31:05.093788"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.3ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 660ms (Views: 35.5ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:32:17 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:32:18.255439"], ["updated_at", "2017-12-03 22:32:18.255439"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:32:18.619638"], ["updated_at", "2017-12-03 22:32:18.619638"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.8ms)
+  Rendered itineraries/show.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 849ms (Views: 121.0ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/itineraries/1" for 127.0.0.1 at 2017-12-03 16:33:28 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Big Blue Game Watch - New York Giants vs. Oakland Raiders"], ["display_address", "2642 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-03 23:30"], ["event_site_url", "https://www.yelp.com/events/chicago-big-blue-game-watch-new-york-giants-vs-oakland-raiders?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/MXGTZy20VCLj2RYl7Ef2iQ/o.jpg"], ["latitude", "41.9298671"], ["longitude", "-87.655268"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:33:29.021915"], ["updated_at", "2017-12-03 22:33:29.021915"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Acanto"], ["display_address", "18 S Michigan Ave Chicago, IL 60603"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/Bt-bUmbNzN9nnvscNR3URg/o.jpg"], ["rating", "4.0"], ["price", "$$$"], ["display_phone", "(312) 578-0763"], ["title", "Italian"], ["url", "https://www.yelp.com/biz/acanto-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.881323483914"], ["longitude", "-87.6245379144271"], ["version", "dining"], ["itinerary_id", 1], ["created_at", "2017-12-03 22:33:29.423837"], ["updated_at", "2017-12-03 22:33:29.423837"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.5ms)
+  Rendered itineraries/show.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 707ms (Views: 43.0ms | ActiveRecord: 3.0ms)
+
+
