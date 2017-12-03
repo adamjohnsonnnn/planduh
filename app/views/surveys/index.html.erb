@@ -1,38 +1,37 @@
 
 
 
-  <ul>
+<div id="pag-links">
   <%= link_to_prev_page @questions, "previous" %>
   <%= link_to_next_page @questions, "next" %>
+ </div>
 
     <%= render partial: "shared/errors", locals: {errors: @errors} if @errors %>
 
-    <% @questions.each do |question| %>
-
   <div id="js--questions">
 
-    <% if question.version == "Yes/No" %>
-       <%= render partial: "yes_no_question", locals: {question: question} %>
-       <%= render partial: 'yes_no_response', locals: {question: question} %>
-    <% elsif question.version == "Multiple Choice" %>
-        <%= render partial: "multiple_choice_question", locals: {question: question} %>
-        <%= render partial: 'multiple_choice_response', locals: {question: question} %>
-    <% elsif question.version == "Open-ended" %>
-        <%= render partial: "open_ended_question", locals: {question: question} %>
-        <%= render partial: "open_ended_response", locals: {question: question} %>
-      <% end  %>
-  </div>
+    <% @questions.each do |question| %>
+      <% if question.version == "Yes/No" %>
+         <%= render partial: "yes_no_question", locals: {question: question} %>
+         <%= render partial: 'yes_no_response', locals: {question: question} %>
+      <% elsif question.version == "Multiple Choice" %>
+          <%= render partial: "multiple_choice_question", locals: {question: question} %>
+          <%= render partial: 'multiple_choice_response', locals: {question: question} %>
+      <% elsif question.version == "Open-ended" %>
+          <%= render partial: "open_ended_question", locals: {question: question} %>
+          <%= render partial: "open_ended_response", locals: {question: question} %>
+     <% end  %>
     <% end %>
-  </ul>
+  </div>
 
 
   <div class="js--paginator">
-    <%= paginate @questions, window: 1, remote: true  %>
+    <%= paginate @questions, window: 1 %>
   </div>
 
 
   <div id="js--save-pref-button">
-      <% if logged_in? && current_user.user_responses.count > 5  %>
-        <%= button_to "Save", preferences_path, method: 'POST' %>
+      <% if logged_in? && current_user.user_responses.count > 8  %>
+        <%= button_to "Save!", preferences_path, method: 'POST', class: "btn btn-lg btn-success" %>
       <% end %>
   </div>

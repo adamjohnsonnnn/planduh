@@ -28,7 +28,5 @@ class UserResponsesController < ApplicationController
     @user_responses.destroy
   end
 
-
-
 end
 

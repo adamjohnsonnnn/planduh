@@ -1,6 +1,6 @@
 
-<div>
-  <form class="js--form" action="/survey_questions/<%= question.id %>/user_responses" method="POST">
+<div class="pag-links">
+  <form  action="/survey_questions/<%= question.id %>/user_responses" method="POST">
       <select name="answer">
         <% question.responses.each do |response| %>
           <option value="<%= response.response %>"  ><%= response.response %></option>
