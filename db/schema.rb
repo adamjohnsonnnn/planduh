@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20171202152854) do
     t.boolean "is_free"
     t.boolean "is_canceled"
     t.string "image_url"
+    t.string "rating"
+    t.string "price"
+    t.string "display_phone"
+    t.string "title"
+    t.string "url"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.string "version"
     t.bigint "itinerary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,6 +98,13 @@ ActiveRecord::Schema.define(version: 20171202152854) do
     t.boolean "is_free"
     t.boolean "is_canceled"
     t.string "image_url"
+    t.string "rating"
+    t.string "price"
+    t.string "display_phone"
+    t.string "title"
+    t.string "url"
+    t.decimal "latitude"
+    t.decimal "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
