@@ -1,5 +1,20 @@
-<div class="registration-container" >
-<h3>registration</h3>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style>
+
+<div class="container" >
+<h2 class = "form-signin-heading">Sign Up</h2>
 
 <% if @errors %>
 <ul>
@@ -9,23 +24,29 @@
 </ul>
 <% end %>
 
-<%= form_for @user do |form| %>
+<%= form_for @user, :html => {class: "form-signin"} do |form| %>
 
 <p>
-  <%= form.text_field :first_name, placeholder: "first name", class: "registration-form-field" %>
+  <%= form.text_field :first_name, placeholder: "first name", class: "form-control"%>
 </p>
 <p>
-  <%= form.text_field :last_name, placeholder: "last name", class: "registration-form-field" %>
+  <%= form.text_field :last_name, placeholder: "last name", class: "form-control" %>
 </p>
 <p>
-  <%= form.text_field :email, placeholder: "email", class: "registration-form-field" %>
+  <%= form.text_field :email, placeholder: "email", class: "form-control" %>
 </p>
 <p>
-  <%= form.password_field :password, placeholder: "password", class: "registration-form-field" %>
+  <%= form.password_field :password, placeholder: "password", class: "form-control" %>
 </p>
+<div class="checkbox">
+          <label>
+            <input type="checkbox" value="terms_conditions"> I Agree To Terms of Use
+          </label>
+        </div>
 <p>
-  <%= form.submit "register", class: "form-button" %>
+  <%= form.submit "Sign in", class: "btn btn-lg btn-primary btn-block" %>
 </p>
 
 <% end %>
 </div>
+

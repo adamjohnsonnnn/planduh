@@ -1,5 +1,22 @@
-<div class="registration-container" >
-<h3>login</h3>
+<style id="style-1-cropbar-clipper">
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style>
+
+
+
+<div class="container" >
+<h2 class = "form-signin-heading">Login</h2>
 
 <% if @errors %>
 <ul>
@@ -9,15 +26,15 @@
 </ul>
 <% end %>
 
-<form action="/sessions" method="POST">
+<form class="form-signin" action="/sessions" method="POST">
 <p>
-  <input type="text" name="email" placeholder="email" class="registration-form-field">
+  <input type="text" name="email" placeholder="email" class="form-control">
 </p>
 <p>
-  <input type="password" name="password" placeholder="password" class="registration-form-field">
+  <input type="password" name="password" placeholder="password" class="form-control">
 </p>
 <p>
-  <input type="submit" value="login" placeholder="login" class="form-button">
+  <input type="submit" value="login" placeholder="login" class="btn btn-lg btn-primary btn-block">
 </p>
 </form>
 </div>
