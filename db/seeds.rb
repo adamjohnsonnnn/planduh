@@ -20,12 +20,12 @@ question_7 = SurveyQuestion.create!(:question_text => 'If you had a free day off
 question_8 = SurveyQuestion.create!(:question_text => 'What is your favorite type of music?', :version => "Multiple Choice")
 
 
-response_1 = SurveyResponse.create!(:response => 'Yes', :survey_question => question_1)
-response_2 = SurveyResponse.create!(:response => 'No', :survey_question => question_1)
-response_3 = SurveyResponse.create!(:response => 'Yes', :survey_question => question_2)
-response_4 = SurveyResponse.create!(:response => 'No', :survey_question => question_2)
+response_1 = SurveyResponse.create!(:response => "Yes, I'm very active!", :survey_question => question_1)
+response_2 = SurveyResponse.create!(:response => "No...I don't prefer physical activity for my events", :survey_question => question_1)
+response_3 = SurveyResponse.create!(:response => 'Yes, pour me a cold one', :survey_question => question_2)
+response_4 = SurveyResponse.create!(:response => 'No, not much of a drinker these days', :survey_question => question_2)
 response_11 = SurveyResponse.create!(:response => 'Love it', :survey_question => question_5)
-response_15 = SurveyResponse.create!(:response => 'Only if its nice out', :survey_question => question_5)
+response_15 = SurveyResponse.create!(:response => 'ehhh, only if it is nice out', :survey_question => question_5)
 response_16 = SurveyResponse.create!(:response => 'I prefer to be inside whenever possible', :survey_question => question_5)
 response_18 = SurveyResponse.create!(:response => 'Go day drinking at a bar', :survey_question => question_7)
 response_19 = SurveyResponse.create!(:response => 'Visit a museum ', :survey_question => question_7)
@@ -39,6 +39,7 @@ response_26 = SurveyResponse.create!(:response => 'Indie', :survey_question => q
 response_28 = SurveyResponse.create!(:response => 'Electronic', :survey_question => question_8)
 response_29 = SurveyResponse.create!(:response => 'Hip Hop', :survey_question => question_8)
 response_30 = SurveyResponse.create!(:response => "I'm down for anything!"  , :survey_question => question_8)
+response_30 = SurveyResponse.create!(:response => "N/A"  , :survey_question => question_8)
 response_31 = SurveyResponse.create!(:response => nil  , :survey_question => question_0)
 
 User.create!(first_name: "Jimbo", last_name: "Fancy", email: "jbo@woof.bork", password: "asdf1234")
