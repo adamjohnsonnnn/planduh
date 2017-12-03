@@ -2,7 +2,9 @@
 
 <nav class="preference-nav">
   <ul>
+    <% if logged_in? %>
      <dt><%= link_to "Tell us about yourself!", surveys_path %></dt>
+    <% end %>
      <dt><%= link_to "Create A New Itinerary!", new_itinerary_path %></dt>
   </ul>
 </nav>
