@@ -43,3 +43,65 @@ response_31 = SurveyResponse.create!(:response => nil  , :survey_question => que
 
 User.create!(first_name: "Jimbo", last_name: "Fancy", email: "jbo@woof.bork", password: "asdf1234")
 Itinerary.create!(confirmed?: true, user_id: 1)
+
+recommender = Recommender.create!(event_matrix: {
+		hours: {
+		1 => ['food-and-drink', 'nightlife'],
+		2 => ['food-and-drink', 'nightlife'],
+		3 => ['food-and-drink', 'nightlife'],
+		4 => ['food-and-drink', 'nightlife'],
+		5 => ['food-and-drink', 'nightlife'],
+		6 => ['food-and-drink','sports-active-life'],
+		7 => ['food-and-drink','sports-active-life'],
+		8 => ['food-and-drink','sports-active-life'],
+		9 => ['food-and-drink', 'visual-arts', 'performing-arts', 'lectures-books', 'fashion', 'sports-active-life', 'festivals-fairs'],
+		10 => ['visual-arts', 'performing-arts', 'lectures-books', 'fashion', 'sports-active-life', 'festivals-fairs'],
+		11 => ['food-and-drink','music', 'visual-arts', 'performing-arts', 'lectures-books', 'fashion', 'sports-active-life', 'festivals-fairs'],
+		12 => ['food-and-drink', 'sports-active-life', 'festivals-fairs'],
+		13 => ['food-and-drink', 'sports-active-life', 'festivals-fairs'],
+		14 => ['music', 'visual-arts', 'performing-arts', 'lectures-books', 'fashion', 'sports-active-life', 'festivals-fairs'],
+		15 => ['film', 'visual-arts', 'performing-arts', 'lectures-books', 'fashion', 'sports-active-life', 'festivals-fairs'],
+		16 => ['film', 'visual-arts', 'performing-arts', 'lectures-books', 'fashion', 'sports-active-life', 'festivals-fairs'],
+		17 => ['film', 'visual-arts', 'performing-arts', 'lectures-books', 'fashion'],
+		18 => ['music', 'film', 'food-and-drink'],
+		19 => ['music', 'film', 'food-and-drink'],
+		20 => ['music', 'film', 'food-and-drink', 'nightlife'],
+		21 => ['music', 'film', 'nightlife'],
+		22 => ['music', 'film', 'nightlife'],
+		23 => ['music', 'film', 'nightlife'],
+		24 => ['music', 'film', 'nightlife'] 
+		}
+	}, business_matrix: {
+		hours: {
+		1 => ['nightlife'],
+		2 => ['nightlife'],
+		3 => ['nightlife'],
+		4 => ['nightlife'],
+		5 => ['active','nightlife'],
+		6 => ['active'],
+		7 => ['active', 'restaurants', 'massage_therapy'],
+		8 => ['active', 'restaurants'],
+		9 => ['active', 'arts', 'beautysvc', 'localflavor'],
+		10 => ['active', 'arts', 'beautysvc', 'localflavor', 'shopping'],
+		11 => ['active', 'arts', 'beautysvc', 'localflavor', 'shopping'],
+		12 => ['restaurants', 'localflavor'],
+		13 => ['restaurants','active', 'arts', 'beautysvc', 'localflavor', 'shopping'],
+		14 => ['active', 'arts', 'beautysvc', 'localflavor', 'shopping'],
+		15 => ['active', 'arts', 'beautysvc', 'localflavor', 'shopping'],
+		16 => ['active', 'arts', 'beautysvc', 'localflavor', 'shopping'],
+		17 => ['arts', 'beautysvc', 'localflavor', 'shopping'],
+		18 => ['arts', 'beautysvc', 'localflavor', 'shopping'],
+		19 => ['arts', 'beautysvc', 'restaurants', 'localflavor'],
+		20 => ['restaurants', 'localflavor', 'nightlife'],
+		21 => ['restaurants', 'localflavor', 'nightlife'],
+		22 => ['localflavor', 'nightlife'],
+		23 => ['nightlife'],
+		24 => ['nightlife'] 
+		}
+	}
+	)
+
+
+
+
+
