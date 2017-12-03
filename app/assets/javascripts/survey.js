@@ -9,13 +9,7 @@ var Survey = {
     console.log("next page",event)
   },
 
-  submitForm: function(e){
-    console.log("HELLO")
-    pageNum = $(this).attr("href").match(/page=([0-9]+)/)[1]
-    $('.js-form-page').val(pageNum)
-    $("form.js--form").submit()
 
-  }
 
 }
 

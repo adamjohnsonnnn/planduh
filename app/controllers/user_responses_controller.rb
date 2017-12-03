@@ -5,12 +5,21 @@ class UserResponsesController < ApplicationController
   end
 
   def create
-   current_page = params[:survey_question_id].to_i + 1
+   next_page = params[:survey_question_id].to_i + 1
+   current_page = params[:survey_question_id].to_i
+
    user_answer = params[:answer]
    question_id = params[:survey_question_id]
 
-    @user_response = UserResponse.create!(response: user_answer, survey_question_id: question_id, :user_id => current_user.id)
-    redirect_to "/surveys?page=#{current_page}"
+    @user_response = UserResponse.new(response: user_answer, survey_question_id: question_id, :user_id => current_user.id)
+
+    if @user_response.save
+      redirect_to "/surveys?page=#{next_page}"
+    else
+      @errors = @user_response.errors.full_messages
+      flash[:warning] = "It looks like you have already answered this question. Please click next to continue!"
+      redirect_to "/surveys?page=#{current_page}"
+    end
   end
 
 
@@ -23,11 +32,3 @@ class UserResponsesController < ApplicationController
 
 end
 
-
-    ##Will ajax on tuesday
-
-    # if @user_response.save
-    #   redirect_to survey_question_user_responses_path , :page => params[:page]
-    # else
-    #   flash[:notice] = "Something went wrong"
-    # end

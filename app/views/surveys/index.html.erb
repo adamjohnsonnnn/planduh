@@ -1,12 +1,16 @@
 
 
-<div id="js--survey-form">
+
   <ul>
   <%= link_to_prev_page @questions, "previous" %>
   <%= link_to_next_page @questions, "next" %>
 
+    <%= render partial: "shared/errors", locals: {errors: @errors} if @errors %>
+
     <% @questions.each do |question| %>
-  <tbody id="js--questions">
+
+  <div id="js--questions">
+
     <% if question.version == "Yes/No" %>
        <%= render partial: "yes_no_question", locals: {question: question} %>
        <%= render partial: 'yes_no_response', locals: {question: question} %>
@@ -17,17 +21,18 @@
         <%= render partial: "open_ended_question", locals: {question: question} %>
         <%= render partial: "open_ended_response", locals: {question: question} %>
       <% end  %>
-    </tbody>
+  </div>
     <% end %>
   </ul>
+
 
   <div class="js--paginator">
     <%= paginate @questions, window: 1, remote: true  %>
   </div>
-</div>
+
 
   <div id="js--save-pref-button">
       <% if logged_in? && current_user.user_responses.count > 5  %>
-        <%= button_to "Save", preferences_path, method: 'POST', notice: "Please answer all of the questions to get the best experience" %>
+        <%= button_to "Save", preferences_path, method: 'POST' %>
       <% end %>
   </div>
