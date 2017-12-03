@@ -20,4 +20,8 @@ module ApplicationHelper
       current_user == user
   end
 
+  def slice_time_itinerary(time)
+    time[0..1].to_i
+  end
+
 end

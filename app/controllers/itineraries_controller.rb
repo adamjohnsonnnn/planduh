@@ -11,6 +11,8 @@ class ItinerariesController < ApplicationController
     p current_user.submitted_preferences
     p "$$$$$$$$$$$$$$$$$$"
     p Recommender.first.business_matrix
+    p "!!!!!!!!!!!!!!!!!"
+    p slice_time_itinerary(params[:begin_time])
   end
 
   def show
