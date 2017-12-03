@@ -9,6 +9,8 @@ class ItinerariesController < ApplicationController
     p current_user.necessary_preferences
     p "@@@@@@@@@@@@@@@@@"
     p current_user.submitted_preferences
+    p "$$$$$$$$$$$$$$$$$$"
+    p Recommender.first.business_matrix
   end
 
   def show
