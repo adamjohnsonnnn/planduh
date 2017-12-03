@@ -3,16 +3,21 @@ class ItinerariesController < ApplicationController
   end
 
   def create
-    @itinerary = Itinerary.new(user: current_user)
-    p params
-    p current_user.preferences
-    p current_user.necessary_preferences
-    p "@@@@@@@@@@@@@@@@@"
-    p current_user.submitted_preferences
-    p "$$$$$$$$$$$$$$$$$$"
-    p Recommender.first.business_matrix
-    p "!!!!!!!!!!!!!!!!!"
-    p slice_time_itinerary(params[:begin_time])
+    @itinerary = Itinerary.create(user: current_user)
+    preferences_api = current_user.submitted_preferences
+    p designated_preference = preferences_api.sample
+    p "************"
+    p designated_preference.events_categories.sample
+    # category_api = preferences_api[0].categories
+    # start_date_time = user_input_to_unix(params[:date], params[:begin_time])
+    # end_date_time = user_input_to_unix(params[:date], params[:end_time])
+    # y = YelpResponse.new
+    # response = y.get_events_response({location: params[:location], categories: category_api, start_date: start_date_time , end_date: end_date_time})
+    # handle_events_response(response, y, @itinerary)
+    # y.destroy
+    p Preference.all
+    # preferences_api_biz = current_user.submitted_preferences
+    # category_api_biz = preferences_api[0].categories
   end
 
   def show
@@ -35,7 +40,7 @@ class ItinerariesController < ApplicationController
   end
 
   private
-  def set_event_attributes(y)
+  def set_event_attributes(y, itinerary)
       Activity.create!(
       name: y.name,
       time_start: y.time_start,
@@ -47,17 +52,22 @@ class ItinerariesController < ApplicationController
       display_address: y.display_address,
       latitude: y.latitude,
       longitude: y.longitude,
-      itinerary_id: 1,
+      itinerary_id: itinerary.id,
       version: "event"
     )
   end
 
-  def handle_events_response(response, y)
+  def handle_events_response(response, y, itinerary)
     if response["error"]
       @error = "Sorry we're having a hard time finding an event for you. Please try again."
     else
       y.assign_event_values(response)
-      @activities << set_event_attributes(y)
+      # @activities << set_event_attributes(y, itinerary)
+      set_event_attributes(y, itinerary)
+      p "*****************"
+      p y
+      p "*****************"
+      p itinerary
     end
   end
 

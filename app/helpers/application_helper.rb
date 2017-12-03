@@ -20,8 +20,31 @@ module ApplicationHelper
       current_user == user
   end
 
+# TIME HELPERS (ITINERARIES)
   def slice_time_itinerary(time)
     time[0..1].to_i
+  end
+
+  def time_window(start_time, end_time)
+    start_time = slice_time_itinerary(start_time)
+    end_time = slice_time_itinerary(end_time)
+    if start_time <= end_time
+      time_window = end_time - start_time
+      return time_window
+    else
+      adjusted_end_time = end_time + 24
+      time_window = adjusted_end_time - start_time
+      return time_window
+    end
+  end
+
+  def user_input_to_unix(date, time)
+    dt = create_datetime(date, time)
+    DateTime.parse(dt).to_i
+  end
+
+  def create_datetime(date, time)
+    date_time = date + " " + time
   end
 
 end
