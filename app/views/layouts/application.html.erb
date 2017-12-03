@@ -31,7 +31,7 @@
             <a class="nav-link" href="http://localhost:3000/">Home <span class="sr-only">(current)</span></a>
           </li>
 
-          <li class="nav-item active"><%= link_to "Home", root_path, class: "nav-link"  %></li>
+          <li class="nav-item active"><%= link_to "#{current_user.first_name}'s Profile", user_path(current_user.id), class: "nav-link"  %></li>
 
           <li class="nav-item active"><%= link_to "Logout", logout_path, class: "nav-link" %></li>
 
@@ -47,7 +47,6 @@
       </div>
     </nav>
 
-
     <!-- <h3 class="text-muted">PlanDuh</h3> -->
 
     <main role="main">
@@ -55,8 +54,17 @@
       <div class="jumbotron">
         <center><h1 class="display-3">PlanDuh</h1>
         <p class="lead">Discover Local Events </p>
+      <% if logged_in? && current_user.preferences.empty? %>
+         <p><a class="btn btn-lg btn-success" href="/surveys" role="button">Tell us about yourself!</a></p>
+     <% end  %>
         <p><a class="btn btn-lg btn-success" href="#" role="button">Learn More</a></p></center>
       </div>
+
+
+      <% flash.each do |name, msg| %>
+        <%= content_tag(:div, msg, class: "alert") %>
+
+      <% end  %>
 
         <%= yield %>
 
