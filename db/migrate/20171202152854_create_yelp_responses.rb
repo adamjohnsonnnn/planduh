@@ -11,6 +11,13 @@ class CreateYelpResponses < ActiveRecord::Migration[5.1]
       t.boolean  :is_free
       t.boolean  :is_canceled
       t.string   :image_url
+      t.string   :rating
+      t.string   :price
+      t.string   :display_phone
+      t.string   :title
+      t.string   :url
+      t.decimal  :latitude
+      t.decimal  :longitude
 
       t.timestamps
     end
