@@ -3,5 +3,6 @@ class Preference < ApplicationRecord
 
  serialize :events_categories
  serialize :business_categories
+ serialize :keywords
 
 end

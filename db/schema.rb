@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
 
   create_table "preferences", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "keyword", null: false
+    t.text "keywords", null: false
     t.text "events_categories", null: false
     t.text "business_categories", null: false
     t.boolean "is_necessary?", default: false

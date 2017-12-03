@@ -10,7 +10,7 @@ class YelpResponse < ApplicationRecord
       "end_date" => args.fetch(:end_date, ""),
       "is_free" => args.fetch(:is_free, false),
       "limit" => 1,
-      "radius" => 2000
+      "radius" => 4500
     }
 
     headers = {
@@ -38,7 +38,7 @@ class YelpResponse < ApplicationRecord
       "open_at" => args.fetch(:open_at, ""),
       "price" => args.fetch(:price, false),
       "limit" => 1,
-      "radius" => 925
+      "radius" => 3500
     }
 
     headers = {

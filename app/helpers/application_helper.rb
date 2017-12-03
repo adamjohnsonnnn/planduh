@@ -47,4 +47,12 @@ module ApplicationHelper
     date_time = date + " " + time
   end
 
+  def convert_to_yelp_budget(dollar_amount)
+  dollar_amount = dollar_amount.to_i
+   return "1,2" if dollar_amount <= 10
+   return "1,2,3" if dollar_amount <= 30
+   return "1,2,3" if dollar_amount <= 60
+   return "1,2,3,4" if dollar_amount > 60
+  end
+
 end
