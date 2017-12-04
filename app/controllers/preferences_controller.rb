@@ -15,12 +15,12 @@ class PreferencesController < ApplicationController
   end
 
   def set_preferences
-    Preference.create!(:user_id => current_user.id, :events_categories => [grab_restrictions], :business_categories => [grab_restrictions], :keywords => [grab_restrictions], :is_necessary? => true) if grab_restrictions != nil || grab_responses != "None"
+    Preference.create!(:user_id => current_user.id, :events_categories => [grab_restrictions], :business_categories => [grab_restrictions], :google_places_types => ['restaurant', 'cafe'], :keywords => ['restaurants'], :is_necessary? => true) if grab_restrictions != nil || grab_responses != "None"
 
-    Preference.create!(:user_id => current_user.id, :events_categories => ["sports-active-life", "performing-arts", "festivals-fairs"], :business_categories => ['active', 'arts', 'massage_therapy'], :keywords => ["outdoors", "experience", "sport", "games"]) if active_lifestyle_check
-    Preference.create!(:user_id => current_user.id, :events_categories => ["music", "festivals-fairs", "fashion", "film"], :business_categories => ['nightlife', 'arts'], :keywords => ["music", "festival", "comedy"]) if music_check
-    Preference.create!(:user_id => current_user.id, :events_categories => ["nightlife","performing-arts", "lectures-books", "visual-arts"], :business_categories => ['nightlife', 'shopping', 'beautysvc'], :keywords => ["nightlife", "party", "social"]) if night_club_check
-    Preference.create!(:user_id => current_user.id, :events_categories => ["food-and-drink"], :business_categories => ['restaurants', 'nightlife'], :keywords => ["delicious", "inspired", "atmosphere", "creative"]) if drinking_check
+    Preference.create!(:user_id => current_user.id, :events_categories => ["sports-active-life", "performing-arts", "festivals-fairs"], :business_categories => ['active', 'arts', 'massage_therapy'], :google_places_types => ['amusement parks', 'art_gallery', 'aquarium', 'bowling_alley', 'gym', 'park', 'spa', 'zoo'], :keywords => ["outside", "experience", "best", "games"]) if active_lifestyle_check
+    Preference.create!(:user_id => current_user.id, :events_categories => ["music", "festivals-fairs", "fashion", "film"], :business_categories => ['nightlife', 'arts'], :google_places_types => ['movie_theater', 'beauty_salon', 'book_store', 'clothing_store', 'shopping_mall', 'museum'], :keywords => ["fun", "great", "happy"]) if music_check
+    Preference.create!(:user_id => current_user.id, :events_categories => ["nightlife","performing-arts", "lectures-books", "visual-arts"], :business_categories => ['nightlife', 'shopping', 'beautysvc'], :google_places_types => ['bar', 'nightclub', 'stadium', 'university'], :keywords => ["energy", "party", "social"]) if night_club_check
+    Preference.create!(:user_id => current_user.id, :events_categories => ["food-and-drink"], :business_categories => ['restaurants', 'nightlife'], :google_places_types => ['restaurant', 'bakery', 'cafe'], :keywords => ["delicious", "inspired", "atmosphere", "creative"]) if drinking_check
   end
 
   def grab_responses
