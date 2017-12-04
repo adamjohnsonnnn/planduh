@@ -5,13 +5,14 @@ class ItinerariesController < ApplicationController
   def create
     @itinerary = Itinerary.create(user: current_user)
     # # EVENTS API REQUEST
-    # submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
-    # p @itinerary.activities
+      submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
+      p @itinerary.activities
+      redirect_to "/itineraries/#{@itinerary.id}"
 
     # #BUSINESS SEARCH API REQUEST
-    window = time_window(params[:begin_time], params[:end_time])
-    submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], window, @itinerary)
-    redirect_to "/itineraries/#{@itinerary.id}"
+      # window = time_window(params[:begin_time], params[:end_time])
+      # submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], window, @itinerary)
+      # redirect_to "/itineraries/#{@itinerary.id}"
 
     # WORKING ON METHOD TO TOGGLE BETWEEN API CALLS
     # sample_business_or_events_search
@@ -35,6 +36,7 @@ class ItinerariesController < ApplicationController
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
       marker.lat activity.latitude
       marker.lng activity.longitude
+      marker.infowindow activity.build_info_window
     end
   end
 
@@ -84,7 +86,7 @@ class ItinerariesController < ApplicationController
       image_url: y.image_url,
       display_address: y.display_address,
       itinerary_id: itinerary.id,
-      version: "dining"
+      version: "business"
     )
   end
 
@@ -119,7 +121,7 @@ class ItinerariesController < ApplicationController
         open_date_time = user_input_to_unix(date, begin_time)
         user_budget = convert_to_yelp_budget(budget)
         y = YelpResponse.new
-        response = y.get_businesses_response({term: business_search_term, categories: category_request_biz, location: location, price: "1,2,3", open_at: 1512345600, limit: 20})
+        response = y.get_businesses_response({term: business_search_term, categories: category_request_biz, location: location, price: user_budget, open_at: open_date_time, limit: 20})
         response_container = []
         response_container << response["businesses"].sample
         response_convert_hash = {}
@@ -134,5 +136,4 @@ class ItinerariesController < ApplicationController
     sample_type << submit_business_api_call(params[:date], params[:begin_time], params[:location], @itinerary)
     sample_type.sample
   end
-
 end

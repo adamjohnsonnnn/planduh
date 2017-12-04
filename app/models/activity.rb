@@ -23,4 +23,21 @@ class Activity < ApplicationRecord
     end
   end
 
+  def build_info_window
+    if self.version == "business"
+      activity_info = "<h5>#{self.name}</h5>
+                      <p>#{self.display_address}</p>
+                      <a href=#{self.url}>Visit Website</a>"
+    elsif self.version == "event"
+      activity_info = "<h5>#{self.name}</h5>
+                      <p>#{self.display_address}</p>
+                      <a href=#{self.event_site_url}>Visit Website</a>"
+    elsif self.version == "google_place"
+      activity_info = "<h5>Google Places Result</h5>
+                      <p>Make sure to add info</p>
+                      <a href=#>Visit Website</a>"
+    end
+    activity_info
+  end
+
 end
