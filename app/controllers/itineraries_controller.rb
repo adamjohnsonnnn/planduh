@@ -9,8 +9,9 @@ class ItinerariesController < ApplicationController
     # p @itinerary.activities
 
     # #BUSINESS SEARCH API REQUEST
-    # submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], @itinerary)
-    # p @itinerary.activities
+    window = time_window(params[:begin_time], params[:end_time])
+    submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], window, @itinerary)
+    redirect_to "/itineraries/#{@itinerary.id}"
 
     # WORKING ON METHOD TO TOGGLE BETWEEN API CALLS
     # sample_business_or_events_search
@@ -18,28 +19,17 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    @activities = []
-    y = YelpResponse.new
-    response = y.get_events_response({location: "chicago", categories: "sports-active-life", start_date: 1512324000, end_date: 1512367199})
-    # response = y.get_events_response({location: location, categories: categories, start_date: start_date})
-    handle_events_response(response, y)
-    y.destroy
+    @itinerary = Itinerary.find(params[:id])
+    @activities = @itinerary.activities
+    # y = YelpResponse.new
+    # response = y.get_events_response({location: "chicago", categories: "sports-active-life", start_date: 1512324000, end_date: 1512367199})
+    # handle_events_response(response, y)
+    # y.destroy
 
-    y = YelpResponse.new
-    response = y.get_businesses_response({term: "fancy", categories: "restaurants", location: "chicago", price: "3", open_at: 1512345600, limit: 1})
-    response = y.get_businesses_response()
-    handle_businesses_response(response, y)
-
-    # @activities.each do |activity|
-    #   p activity.name
-    #   p activity.latitude.to_s
-    #   p activity.longitude.to_s
-    # end
-
-    @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
-      marker.lat activity.latitude
-      marker.lng activity.longitude
-    end
+    # y = YelpResponse.new
+    # response = y.get_businesses_response({term: "fancy", categories: "restaurants", location: "chicago", price: "3", open_at: 1512345600, limit: 1})
+    # response = y.get_businesses_response()
+    # handle_businesses_response(response, y)
   end
 
   def destroy
@@ -109,21 +99,27 @@ class ItinerariesController < ApplicationController
     end_date_time = user_input_to_unix(date, end_time)
     y = YelpResponse.new
     response = y.get_events_response({location: location, categories: category_request, start_date: start_date_time, end_date: end_date_time})
+    p response
     handle_events_response(response, y, itinerary)
     y.destroy
   end
 
-  def submit_business_api_call(date, begin_time, budget, location, itinerary)
-      preferences_request_biz = current_user.supplemental_preferences
-      designated_preference_biz = preferences_request_biz.sample
-      category_request_biz = designated_preference_biz.business_categories.sample
-      business_search_term = designated_preference_biz.keywords.sample
-      open_date_time = user_input_to_unix(date, begin_time)
-      user_budget = convert_to_yelp_budget(budget)
-      y = YelpResponse.new
-      response = y.get_businesses_response({term: business_search_term, categories: category_request_biz, location: location, price: "1,2,3", open_at: 1512345600, limit: 1})
-      handle_businesses_response(response, y, itinerary)
-      y.destroy
+  def submit_business_api_call(date, begin_time, budget, location, time_window,itinerary)
+      time_window.times do
+        preferences_request_biz = current_user.supplemental_preferences
+        designated_preference_biz = preferences_request_biz.sample
+        category_request_biz = designated_preference_biz.business_categories.sample
+        business_search_term = designated_preference_biz.keywords.sample
+        open_date_time = user_input_to_unix(date, begin_time)
+        user_budget = convert_to_yelp_budget(budget)
+        y = YelpResponse.new
+        response = y.get_businesses_response({term: business_search_term, categories: category_request_biz, location: location, price: "1,2,3", open_at: 1512345600, limit: 20})
+        response_container = []
+        response_container << response["businesses"].sample
+        response_convert_hash = {}
+        response_convert_hash["businesses"] = response_container
+        handle_businesses_response(response_convert_hash, y, itinerary)
+      end
   end
 
   def sample_business_or_events_search
