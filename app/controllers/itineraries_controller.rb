@@ -21,7 +21,6 @@ class ItinerariesController < ApplicationController
   def show
     @itinerary = Itinerary.find(params[:id])
     @activities = @itinerary.activities
-    p @activities
     # y = YelpResponse.new
     # response = y.get_events_response({location: "chicago", categories: "sports-active-life", start_date: 1512324000, end_date: 1512367199})
     # handle_events_response(response, y)
