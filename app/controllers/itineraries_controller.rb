@@ -158,7 +158,7 @@ class ItinerariesController < ApplicationController
     query = business_search_term
 
     # submit GOOGLE PLACES API request
-    @client = GooglePlaces::Client.new("AIzaSyDcXqSmNy66_F5aF7EbVUNtWjBOuXtwxyU")
+    @client = GooglePlaces::Client.new("")
     initial_response = @client.spots(lat_long[0], lat_long[1], :types => google_places_request_types, :keywords => query, :radius => 2000)
     sorted_response = initial_response.sort_by { |response| response.rating || 0 }
     reverse_sorted_response = sorted_response.reverse
