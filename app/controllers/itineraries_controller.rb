@@ -43,6 +43,7 @@ class ItinerariesController < ApplicationController
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
       marker.lat activity.latitude
       marker.lng activity.longitude
+      marker.infowindow activity.build_info_window
     end
   end
 
@@ -134,7 +135,7 @@ class ItinerariesController < ApplicationController
       image_url: y.image_url,
       display_address: y.display_address,
       itinerary_id: itinerary.id,
-      version: "dining"
+      version: "business"
     )
   end
 
@@ -197,5 +198,4 @@ class ItinerariesController < ApplicationController
     sample_type << submit_business_api_call(params[:date], params[:begin_time], params[:location], @itinerary)
     sample_type.sample
   end
-
 end
