@@ -3,7 +3,7 @@
   <form action="/survey_questions/<%= question.id %>/user_responses" method="POST">
       <select name="answer">
         <% question.responses.each do |response| %>
-          <option value="<%= response.response %>"  ><%= response.response %></option>
+          <li><option value="<%= response.response %>"  ><%= response.response %></option></li>
         <% end %>
       </select>
       <input type="submit" value="submit">
