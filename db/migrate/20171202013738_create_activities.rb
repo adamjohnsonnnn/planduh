@@ -3,6 +3,7 @@ class CreateActivities < ActiveRecord::Migration[5.1]
     create_table :activities do |t|
       t.string   :name
       t.string   :display_address
+      t.string   :business_hours
       t.string   :time_start
       t.string   :event_site_url
       t.string   :tickets_url

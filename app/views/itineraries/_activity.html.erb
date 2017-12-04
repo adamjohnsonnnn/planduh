@@ -13,7 +13,7 @@
         <li><%= link_to "Visit Event Site", activity.event_site_url %></li>
         <li><%= link_to "Buy Tickets", activity.tickets_url if activity.is_free == false %></li>
         <li>Cost: $<%= activity.filter_cost %></li><br>
-      <% else %>
+      <% elsif activity.version == "dining"%>
         <li><h3>Dining: <%= activity.name %></h3></li>
         <li><%= image_tag(activity.image_url, size: "320x240") %></li>
         <li>Address: <%= activity.display_address %></li>
@@ -22,6 +22,9 @@
         <li>Price: <%= activity.price %></li>
         <li>Type: <%= activity.title %></li>
         <li><%= link_to "Visit Website", activity.url %></li>
+      <% else %>
+        <li><h1>Google Places Result</h1></li>
+        <li><%= activity.name %></li>
       <% end %>
       </ul>
     <% end %>
