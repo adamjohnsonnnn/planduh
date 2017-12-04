@@ -13,36 +13,109 @@
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 
 <script type="text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  var mapStyle = [
+    {
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": 33
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2e5d4"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#c5dac6"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": 20
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "lightness": 20
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#c5c6c6"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#e4d7c6"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#fbfaf7"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#acbcc9"
+            }
+        ]
+    }
+];
+
+  var handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {styles: mapStyle}, internal: {id: 'map'}}, function(){
     let markers = handler.addMarkers(<%=raw @markers_hash.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    console.log(markers);
+    // console.log(markers);
   });
 
 
 
 
 
-
-
-// var infowindow = new google.maps.InfoWindow();
-
-// for (i = 0; i < locations.length; i++) {
-//   var marker = new google.maps.Marker({
-//     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-//     map: map
-//   });
-
-//   //extend the bounds to include each marker's position
-//   bounds.extend(marker.position);
-
-//   google.maps.event.addListener(marker, 'click', (function(marker, i) {
-//     return function() {
-//       infowindow.setContent(locations[i][0]);
-//       infowindow.open(map, marker);
-//     }
-//   })(marker, i));
-// }
 </script>
