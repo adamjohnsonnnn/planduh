@@ -10,6 +10,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
+require 'google_maps_service'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -30,3 +31,12 @@ module RailsRegistrationSkeleton
     config.generators.system_tests = nil
   end
 end
+
+
+
+GoogleMapsService.configure do |config|
+  config.key = 'AIzaSyCo4u77P42L_GTLi8VCa0QoVyOR0WKRJwQ'
+  config.retry_timeout = 20
+  config.queries_per_second = 10
+end
+

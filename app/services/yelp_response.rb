@@ -72,16 +72,16 @@ class YelpResponse < ApplicationRecord
   end
 
   def assign_business_values(response)
-    self.name = response["businesses"][0]["name"] || ""
-    self.rating = response["businesses"][0]["rating"] || ""
-    self.price = response["businesses"][0]["price"] || ""
-    self.title = response["businesses"][0]["categories"][0]["title"] || ""
-    self.url = response["businesses"][0]["url"] || ""
-    self.latitude = response["businesses"][0]["coordinates"]["latitude"] || 0
-    self.longitude = response["businesses"][0]["coordinates"]["longitude"] || 0
-    self.image_url = response["businesses"][0]["image_url"] || ""
-    self.display_phone = response["businesses"][0]["display_phone"] || ""
-    format_and_set_address(response)
+      self.name = response["businesses"][0]["name"] || ""
+      self.rating = response["businesses"][0]["rating"] || ""
+      self.price = response["businesses"][0]["price"] || ""
+      self.title = response["businesses"][0]["categories"][0]["title"] || ""
+      self.url = response["businesses"][0]["url"] || ""
+      self.latitude = response["businesses"][0]["coordinates"]["latitude"] || 0
+      self.longitude = response["businesses"][0]["coordinates"]["longitude"] || 0
+      self.image_url = response["businesses"][0]["image_url"] || ""
+      self.display_phone = response["businesses"][0]["display_phone"] || ""
+      format_and_set_address(response)
   end
 
   def format_and_set_address(response)

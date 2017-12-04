@@ -35,6 +35,8 @@ gem 'httparty'
 gem 'dotenv-rails', groups: [:development, :test, :production]
 gem 'gmaps4rails'
 gem 'coffee-rails'
+gem 'google_places'
+gem 'google_maps_service'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

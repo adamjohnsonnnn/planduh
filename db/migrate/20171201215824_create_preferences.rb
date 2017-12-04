@@ -5,6 +5,7 @@ class CreatePreferences < ActiveRecord::Migration[5.1]
       t.text :keywords, null: false
       t.text  :events_categories, null: false
       t.text :business_categories, null: false
+      t.text :google_places_types, null: false
       t.boolean :is_necessary?, default: false
 
       t.timestamps

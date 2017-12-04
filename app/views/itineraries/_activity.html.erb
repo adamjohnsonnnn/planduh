@@ -31,6 +31,9 @@
         <li>Price: <%= activity.price %></li>
         <li>Type: <%= activity.title %></li>
         <li><%= link_to "Visit Website", activity.url %></li>
+      <% else %>
+        <li><h1>Google Places Result</h1></li>
+        <li><%= activity.name %></li>
       <% end %>
       </ul>
     <% end %>
