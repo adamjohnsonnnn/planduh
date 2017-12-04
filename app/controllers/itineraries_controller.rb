@@ -29,6 +29,17 @@ class ItinerariesController < ApplicationController
     response = y.get_businesses_response({term: "fancy", categories: "restaurants", location: "chicago", price: "3", open_at: 1512345600, limit: 1})
     response = y.get_businesses_response()
     handle_businesses_response(response, y)
+
+    # @activities.each do |activity|
+    #   p activity.name
+    #   p activity.latitude.to_s
+    #   p activity.longitude.to_s
+    # end
+
+    @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
+      marker.lat activity.latitude
+      marker.lng activity.longitude
+    end
   end
 
   def destroy

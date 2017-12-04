@@ -33,6 +33,8 @@ gem 'rails-controller-testing'
 gem 'faker'
 gem 'httparty'
 gem 'dotenv-rails', groups: [:development, :test, :production]
+gem 'gmaps4rails'
+gem 'coffee-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
