@@ -28,7 +28,7 @@
 
 
   <div id="js--save-pref-button">
-      <% if logged_in? && current_user.user_responses.count > 8  %>
+      <% if logged_in? && current_user.user_responses.count == 7  %>
         <%= button_to "Save!", preferences_path, method: 'POST', class: "btn btn-lg btn-success" %>
       <% end %>
   </div>
