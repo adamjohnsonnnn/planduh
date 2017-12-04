@@ -5,7 +5,7 @@
     <% else %>
       <ul style="list-style-type:none">
       <% if activity.version == "event" %>
-        <li><h3>Event Name: <%= activity.name %></h3></li>
+        <li><h3>Event: <%= activity.name %></h3></li>
         <li><%= image_tag(activity.image_url, size: "320x240") %></li>
         <li>Address: <%= activity.display_address %></li>
         <li>Date: <%= activity.format_date %></li>
@@ -14,7 +14,7 @@
         <li><%= link_to "Buy Tickets", activity.tickets_url if activity.is_free == false %></li>
         <li>Cost: $<%= activity.filter_cost %></li><br>
       <% else %>
-        <li><h3>Restaurant: <%= activity.name %></h3></li>
+        <li><h3>Dining: <%= activity.name %></h3></li>
         <li><%= image_tag(activity.image_url, size: "320x240") %></li>
         <li>Address: <%= activity.display_address %></li>
         <li>Phone: <%= activity.display_phone %></li>
