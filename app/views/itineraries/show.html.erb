@@ -102,93 +102,14 @@
     }
 ];
 
-// # Gmaps-For_Rails Solution ##################################
-// var directionsDisplay = new google.maps.DirectionsRenderer();
-// var directionsService = new google.maps.DirectionsService();
-
-// function calcRoute(hash) {
-//   // var origin      = new google.maps.LatLng(41.9013442993164, -87.6317977905273);
-//   // var destination = new google.maps.LatLng(41.8845841437224, -87.6489488181068);
-//   // var destination2 = new google.maps.LatLng(41.8807263672352, -87.6315075159073);
-//   var origin      = new google.maps.LatLng(parseFloat(hash[0]["lat"]), parseFloat(hash[0]["lng"]));
-//   var destination = new google.maps.LatLng(parseFloat(hash[1]["lat"]), parseFloat(hash[1]["lng"]));
-//   var destination2 = new google.maps.LatLng(parseFloat(hash[2]["lat"]), parseFloat(hash[2]["lng"]));
-//   console.log(origin);
-//   console.log(destination);
-//   console.log(destination2);
-
-//   // Leg 1 ###############################################
-//   var request = {
-//       origin:      origin,
-//       destination: destination,
-//       travelMode:  google.maps.TravelMode.DRIVING
-//   };
-//   directionsService.route(request, function(response, status) {
-//     if (status == google.maps.DirectionsStatus.OK) {
-//       directionsDisplay.setDirections(response);
-//     }
-//   });
-
-  // Leg 2 ##################################################
-  // var request2 = {
-  //     origin:      destination,
-  //     destination: destination2,
-  //     travelMode:  google.maps.TravelMode.DRIVING
-  // };
-  // directionsService.route(request2, function(response, status) {
-  //   if (status == google.maps.DirectionsStatus.OK) {
-  //     directionsDisplay.setDirections(response);
-  //   }
-  // });
-// }
-
-// calcRoute(<%=raw @markers_hash.to_json %>);
-
-
-
   var handler = Gmaps.build('Google');
-  // var directionsService = new google.maps.DirectionsService;
-  // var directionsDisplay = new google.maps.DirectionsRenderer;
-
   // put options inside provider hash! ######################
   handler.buildMap({ provider: {minZoom: 9, styles: mapStyle}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers(<%=raw @markers_hash.to_json %>);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    // directionsDisplay.setMap(handler.getMap());
   });
-
-    // Non-Gmaps-Gem-Solution ##################################
-      // function calculateAndDisplayRoute() {
-      //         directionsDisplay.setMap(map);
-      //         directionsService.route({
-      //           origin: document.getElementById('start').value,
-      //           destination: document.getElementById('end').value,
-      //           travelMode: 'DRIVING'
-      //         }, function(response, status) {
-      //           if (status === 'OK') {
-      //             directionsDisplay.setDirections(response);
-      //           } else {
-      //             window.alert('Directions request failed due to ' + status);
-      //           }
-      //         });
-      //       }
-      // calculateAndDisplayRoute(directionsService, directionsDisplay);
-
 </script><br>
-
-
-
-<!--
-<div>
-  <strong>Mode of Travel: </strong>
-  <select id="mode" onchange="calcRoute();">
-    <option value="DRIVING">Driving</option>
-    <option value="WALKING">Walking</option>
-    <option value="BICYCLING">Bicycling</option>
-    <option value="TRANSIT">Transit</option>
-  </select>
-</div><br> -->
 
 <div id="lyft-web-button-parent"></div>
 <script type="text/javascript">
@@ -198,13 +119,10 @@
     clientId: '<%= ENV["LYFT_CLIENT_ID"] %>',
     clientToken: '<%= ENV["LYFT_CLIENT_TOKEN"] %>',
     location: {
-      pickup: {
-        latitude: '41.8934761420147',
-        longitude: '-87.6259666423279'
-      },
+      pickup: {},
       destination: {
-        latitude: '41.8881494',
-        longitude: '-87.6624139',
+        latitude: '<%= @markers_hash[0][:lat] %>',
+        longitude: '<%= @markers_hash[0][:lng] %>',
       },
     },
     parentElement: document.getElementById('lyft-web-button-parent'),
