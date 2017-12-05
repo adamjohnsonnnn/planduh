@@ -55,4 +55,11 @@ module ApplicationHelper
    return "1,2,3,4" if dollar_amount > 60
   end
 
+  def find_and_ensure_user(id)
+    user = User.find_by(id: id)
+
+    redirect_to '/404' if user.nil? || user != current_user
+    user
+  end
+
 end

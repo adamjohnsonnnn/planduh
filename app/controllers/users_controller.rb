@@ -16,7 +16,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    redirect_unless_logged_in
+    if find_and_ensure_user(params[:id])
+      @user = User.find(params[:id])
+      redirect_to "user/show/#{@user.id}"
 
+    end
   end
 
   def index

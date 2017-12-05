@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20171203001021) do
   create_table "activities", force: :cascade do |t|
     t.string "name"
     t.string "display_address"
-    t.string "business_hours"
     t.string "time_start"
     t.string "event_site_url"
     t.string "tickets_url"
@@ -27,14 +26,6 @@ ActiveRecord::Schema.define(version: 20171203001021) do
     t.boolean "is_free"
     t.boolean "is_canceled"
     t.string "image_url"
-    t.string "rating"
-    t.string "price"
-    t.string "display_phone"
-    t.string "title"
-    t.string "url"
-    t.decimal "latitude"
-    t.decimal "longitude"
-    t.string "version"
     t.bigint "itinerary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,7 +33,6 @@ ActiveRecord::Schema.define(version: 20171203001021) do
   end
 
   create_table "itineraries", force: :cascade do |t|
-    t.string "name"
     t.boolean "confirmed?"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -52,10 +42,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
 
   create_table "preferences", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "keywords", null: false
-    t.text "events_categories", null: false
-    t.text "business_categories", null: false
-    t.text "google_places_types", null: false
+    t.string "keyword", null: false
     t.boolean "is_necessary?", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -111,13 +98,6 @@ ActiveRecord::Schema.define(version: 20171203001021) do
     t.boolean "is_free"
     t.boolean "is_canceled"
     t.string "image_url"
-    t.string "rating"
-    t.string "price"
-    t.string "display_phone"
-    t.string "title"
-    t.string "url"
-    t.decimal "latitude"
-    t.decimal "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
