@@ -28,17 +28,6 @@ class ItinerariesController < ApplicationController
   def show
     @itinerary = Itinerary.find(params[:id])
     @activities = @itinerary.activities
-    p @activities
-    # y = YelpResponse.new
-    # response = y.get_events_response({location: "chicago", categories: "sports-active-life", start_date: 1512324000, end_date: 1512367199})
-    # handle_events_response(response, y)
-    # y.destroy
-
-    # y = YelpResponse.new
-    # response = y.get_businesses_response({term: "fancy", categories: "restaurants", location: "chicago", price: "3", open_at: 1512345600, limit: 1})
-    # response = y.get_businesses_response()
-    # handle_businesses_response(response, y)
-
 
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
       marker.lat activity.latitude
@@ -158,7 +147,7 @@ class ItinerariesController < ApplicationController
     query = business_search_term
 
     # submit GOOGLE PLACES API request
-    @client = GooglePlaces::Client.new("AIzaSyDcXqSmNy66_F5aF7EbVUNtWjBOuXtwxyU")
+    @client = GooglePlaces::Client.new(ENV["GOOGLE_PLACES_TOKEN"])
     initial_response = @client.spots(lat_long[0], lat_long[1], :types => google_places_request_types, :keywords => query, :radius => 2000)
     sorted_response = initial_response.sort_by { |response| response.rating || 0 }
     reverse_sorted_response = sorted_response.reverse
@@ -173,20 +162,20 @@ class ItinerariesController < ApplicationController
       photos = response.photos
       if photos.length > 0
         photo = photos[0].fetch_url(800)
-        else
+      else
         photo = nil
       end
       Activity.create!(
       name: response.name,
-      rating: response.rating,
-      price: response.price_level,
-      display_phone: response.formatted_phone_number,
-      url: response.website,
+      rating: response.rating || "unrated",
+      price: response.price_level || "mystery",
+      display_phone: response.formatted_phone_number || "mystery",
+      url: response.website || "#",
       latitude: response.lat,
       longitude: response.lng,
-      image_url: photo,
-      display_address: response.formatted_address,
-      business_hours: response.opening_hours,
+      image_url: photo || "https://i.imgur.com/W29FmAv.png",
+      display_address: response.formatted_address || "mystery",
+      business_hours: response.opening_hours || "mystery",
       itinerary_id: itinerary.id,
       version: "google_places"
     )

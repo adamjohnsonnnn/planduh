@@ -23,17 +23,15 @@
         <li>Type: <%= activity.title %></li>
         <li><%= link_to "Visit Website", activity.url %></li>
       <% else %>
-        <li>Google Result: <%= activity.name %></li>
+        <li><h3>Google Result: <%= activity.name %></h3></li>
+      <% if activity.image_url %>
         <li><%= image_tag(activity.image_url, size: "320x240") %></li>
+      <% end %>
         <li>Address: <%= activity.display_address %></li>
         <li>Phone: <%= activity.display_phone %></li>
         <li>Rating: <%= activity.rating %></li>
         <li>Price: <%= activity.price %></li>
-        <li>Type: <%= activity.title %></li>
-        <li><%= link_to "Visit Website", activity.url %></li>
-      <% else %>
-        <li><h1>Google Places Result</h1></li>
-        <li><%= activity.name %></li>
+        <li><%= link_to "Visit Website", activity.url %></li><br>
       <% end %>
       </ul>
     <% end %>
