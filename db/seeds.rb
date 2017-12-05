@@ -42,8 +42,8 @@ response_30 = SurveyResponse.create!(:response => "I'm down for anything!"  , :s
 response_30 = SurveyResponse.create!(:response => "N/A"  , :survey_question => question_8)
 response_31 = SurveyResponse.create!(:response => nil  , :survey_question => question_0)
 
-User.create!(first_name: "Jimbo", last_name: "Fancy", email: "jbo@woof.bork", password: "asdf1234")
-Itinerary.create!(confirmed?: true, user_id: 1)
+# User.find_or_create_by!(first_name: "Jimbo", last_name: "Fancy", email: "jbo@woof.bork", password: "asdf1234")
+# Itinerary.create!(confirmed?: true, user: user, begin_time: "12:00", end_time: "22:00", date: "12/15/2017", budget: 100, location: "Chicago" )
 
 recommender = Recommender.create!(event_matrix: {
 		hours: {
