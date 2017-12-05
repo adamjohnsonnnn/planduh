@@ -3,6 +3,9 @@ class ItinerariesController < ApplicationController
   end
 
   def create
+    # MAKE FIELDS IN SUBMIT FORM **REQUIRED**
+    # REMOVE DUPLICATE ACTIVITIES
+
     @itinerary = Itinerary.create(user: current_user)
     # create time window
     window = time_window(params[:begin_time], params[:end_time])
@@ -11,17 +14,26 @@ class ItinerariesController < ApplicationController
 
     i = 0
     while i < window
-      submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
-      p @itinerary.activities.length
-      if @itinerary.activities.length <= i
-        response = submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], @itinerary)
+      yelp_event_response = submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
+      if yelp_event_response.name != nil
+        i += 1
       end
-      if @itinerary.activities.length <= i
-        submit_google_places_api_call(lat_long, @itinerary)
+      if @itinerary.activities.length < i
+        yelp_business_response = submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], @itinerary)
+        if yelp_business_response != nil
+          i += 1
+        end
       end
-      i += 1
+      if @itinerary.activities.length < i
+        google_places_response = submit_google_places_api_call(lat_long, @itinerary)
+        if google_places_response != nil
+          i += 1
+        end
+      end
     end
-
+    # if @itinerary.activities > window
+    #   # run sort method
+    # end
     redirect_to "/itineraries/#{@itinerary.id}"
   end
 
@@ -29,17 +41,6 @@ class ItinerariesController < ApplicationController
     @itinerary = Itinerary.find(params[:id])
     @activities = @itinerary.activities
     p @activities
-    # y = YelpResponse.new
-    # response = y.get_events_response({location: "chicago", categories: "sports-active-life", start_date: 1512324000, end_date: 1512367199})
-    # handle_events_response(response, y)
-    # y.destroy
-
-    # y = YelpResponse.new
-    # response = y.get_businesses_response({term: "fancy", categories: "restaurants", location: "chicago", price: "3", open_at: 1512345600, limit: 1})
-    # response = y.get_businesses_response()
-    # handle_businesses_response(response, y)
-
-
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
       marker.lat activity.latitude
       marker.lng activity.longitude
