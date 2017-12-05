@@ -14,18 +14,23 @@ class ItinerariesController < ApplicationController
 
     i = 0
     while i < window
+      p window
+      p i
       yelp_event_response = submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
+      p yelp_event_response
       if yelp_event_response.name != nil
         i += 1
       end
       if @itinerary.activities.length < i
         yelp_business_response = submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], @itinerary)
+        p yelp_business_response
         if yelp_business_response != nil
           i += 1
         end
       end
       if @itinerary.activities.length < i
         google_places_response = submit_google_places_api_call(lat_long, @itinerary)
+        p google_places_response
         if google_places_response != nil
           i += 1
         end
@@ -38,7 +43,7 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    @itinerary = Itinerary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
     p @itinerary
     @activities = @itinerary.activities
 
@@ -50,11 +55,11 @@ class ItinerariesController < ApplicationController
   end
 
    def edit
-    @itinerary = Itinerary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
   end
 
   def update
-    @itinerary = Itinerary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
     if request.xhr?
       @itinerary.update(:name => params[:itinerary_name])
       @itinerary.confirmed? == true
@@ -65,7 +70,7 @@ class ItinerariesController < ApplicationController
   end
 
   def destroy
-    @itinerary = Interary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
     @itinerary.destroy
 
     redirect_to root_path

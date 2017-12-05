@@ -10,23 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag    'application',  media: 'all' %>
     <%= javascript_include_tag  'application' %>
-    <!-- Test Styling -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
-    </style>
-
   </head>
 
 
-
-  <body cz-shortcut-listen="true" >
+  <body cz-shortcut-listen="true">
 
     <div class="container">
 
-    <nav class="navbar navbar-expand-md navbar-dark w3-black">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a class="navbar-brand" href="#">PlanDuh</a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -41,8 +32,6 @@
           </li> -->
 
           <li class="nav-item active"><%= link_to "#{current_user.first_name}'s Profile", user_path(current_user.id), class: "nav-link"  %></li>
-
-          <li class="nav-item active"><%= link_to "Home", root_path, class: "nav-link"  %></li>
 
           <li class="nav-item active"><%= link_to "Logout", logout_path, class: "nav-link" %></li>
 
@@ -87,22 +76,9 @@
 
     </main>
 
-<p> </p>
-
-
-<!-- Footer -->
-<footer class="main-footer w3-padding-32 w3-black w3-center">
-  <h5>Find Us On</h5>
-  <div class="w3-xlarge w3-padding-16">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-  </div>
-  <p>Powered by:<br> Adam, Zach, Mitch, Kalier & Nicole <br>PlanDuh © 2017</p>
-</footer>
+  <footer class="footer">
+    <p>© Adam, Zach, Mitch, Kalier & Nicole PlanDuh Company 2017</p>
+  </footer>
 
 </div> <!-- /container -->
 
