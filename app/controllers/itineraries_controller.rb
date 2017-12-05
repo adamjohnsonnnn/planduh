@@ -26,7 +26,7 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    @itinerary = Itinerary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
     @activities = @itinerary.activities
 
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
