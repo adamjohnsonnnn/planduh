@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @itineraries = current_user.itineraries
   end
 
   def index
