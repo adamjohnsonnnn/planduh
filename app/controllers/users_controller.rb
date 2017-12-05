@@ -16,8 +16,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    @itineraries = current_user.itineraries
+    redirect_unless_logged_in
+     @itineraries = current_user.itineraries
+    if find_and_ensure_user(params[:id])
+     return  "users/show"
+    else
+      return '404'
+    end
+
+
   end
+
+
 
   def index
   end

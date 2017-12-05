@@ -49,6 +49,10 @@ class ItinerariesController < ApplicationController
     end
   end
 
+   def edit
+    @itinerary = Itinerary.find(params[:id])
+  end
+
   def update
     @itinerary = Itinerary.find(params[:id])
     if request.xhr?
@@ -61,6 +65,10 @@ class ItinerariesController < ApplicationController
   end
 
   def destroy
+    @itinerary = Interary.find(params[:id])
+    @itinerary.destroy
+
+    redirect_to root_path
   end
 
   def updated
