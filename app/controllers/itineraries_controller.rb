@@ -1,45 +1,39 @@
 class ItinerariesController < ApplicationController
   def new
+    if logged_in?
+      if current_user.preferences.length > 0
+        render 'new'
+      else
+        redirect_to surveys_path
+      end
+    else
+      redirect_to new_user_path
+    end
   end
 
   def create
     # MAKE FIELDS IN SUBMIT FORM **REQUIRED**
     # REMOVE DUPLICATE ACTIVITIES
 
-    @itinerary = Itinerary.create(user: current_user, date: params[:date], begin_time: params[:begin_time], end_time: params[:end_time], budget: params[:budget], location: params[:location])
-    # create time window
-    window = time_window(params[:begin_time], params[:end_time])
-    # get latitude and longitude of location
-    lat_long = create_lat_long_coordinates(params[:location])
-
-    i = 0
-    while i < window
-      yelp_event_response = submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
-      if yelp_event_response.name != nil
-        i += 1
+    if logged_in?
+      if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
+        create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
+        redirect_to "/itineraries/#{@itinerary.id}"
+      else
+        @errors = ["You must fill in all fields completely."]
+        render 'new'
       end
-      if @itinerary.activities.length < i
-        yelp_business_response = submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], @itinerary)
-        if yelp_business_response != nil
-          i += 1
-        end
-      end
-      if @itinerary.activities.length < i
-        google_places_response = submit_google_places_api_call(lat_long, @itinerary)
-        if google_places_response != nil
-          i += 1
-        end
-      end
+    else
+        redirect_to new_user_path
     end
+
     # if @itinerary.activities > window
     #   # run sort method
     # end
-    redirect_to "/itineraries/#{@itinerary.id}"
   end
 
   def show
-    @itinerary = Itinerary.find(params[:id])
-    p @itinerary
+    @itinerary = Itinerary.find_by(id: params[:id])
     @activities = @itinerary.activities
 
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
@@ -50,11 +44,11 @@ class ItinerariesController < ApplicationController
   end
 
    def edit
-    @itinerary = Itinerary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
   end
 
   def update
-    @itinerary = Itinerary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
     if request.xhr?
       @itinerary.update(:name => params[:itinerary_name])
       @itinerary.confirmed? == true
@@ -65,7 +59,7 @@ class ItinerariesController < ApplicationController
   end
 
   def destroy
-    @itinerary = Interary.find(params[:id])
+    @itinerary = Itinerary.find_by(id: params[:id])
     @itinerary.destroy
 
     redirect_to root_path
@@ -220,4 +214,38 @@ class ItinerariesController < ApplicationController
     sample_type << submit_business_api_call(params[:date], params[:begin_time], params[:location], @itinerary)
     sample_type.sample
   end
+
+  def create_itinerary_logged_in(date, begin_time, end_time, budget, location)
+     @itinerary = Itinerary.create(user: current_user, date: date, begin_time: begin_time, end_time: end_time, budget: budget, location: location)
+      # create time window
+      window = time_window(begin_time, end_time)
+      # get latitude and longitude of location
+      lat_long = create_lat_long_coordinates(location)
+      i = 0
+      while i < window
+        yelp_event_response = submit_events_api_call(date, begin_time, end_time, location, @itinerary)
+        if yelp_event_response.name != nil
+          i += 1
+        end
+        if @itinerary.activities.length < i
+          yelp_business_response = submit_business_api_call(date, begin_time, budget, location, @itinerary)
+          if yelp_business_response != nil
+            i += 1
+          end
+        end
+        if @itinerary.activities.length < i
+          google_places_response = submit_google_places_api_call(lat_long, @itinerary)
+          if google_places_response != nil
+            i += 1
+          end
+        end
+      end
+  end
+
+  def params_not_empty(date, begin_time, end_time, budget, location)
+    if date.empty? || begin_time.empty? || end_time.empty? || budget.empty? || location.empty?
+      return false
+    end
+  end
+
 end
