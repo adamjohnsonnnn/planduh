@@ -3,6 +3,9 @@ class ItinerariesController < ApplicationController
   end
 
   def create
+    # MAKE FIELDS IN SUBMIT FORM **REQUIRED**
+    # REMOVE DUPLICATE ACTIVITIES
+
     @itinerary = Itinerary.create(user: current_user)
     # create time window
     window = time_window(params[:begin_time], params[:end_time])
@@ -11,17 +14,26 @@ class ItinerariesController < ApplicationController
 
     i = 0
     while i < window
-      submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
-      p @itinerary.activities.length
-      if @itinerary.activities.length <= i
-        response = submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], @itinerary)
+      yelp_event_response = submit_events_api_call(params[:date], params[:begin_time], params[:end_time], params[:location], @itinerary)
+      if yelp_event_response.name != nil
+        i += 1
       end
-      if @itinerary.activities.length <= i
-        submit_google_places_api_call(lat_long, @itinerary)
+      if @itinerary.activities.length < i
+        yelp_business_response = submit_business_api_call(params[:date], params[:begin_time], params[:budget], params[:location], @itinerary)
+        if yelp_business_response != nil
+          i += 1
+        end
       end
-      i += 1
+      if @itinerary.activities.length < i
+        google_places_response = submit_google_places_api_call(lat_long, @itinerary)
+        if google_places_response != nil
+          i += 1
+        end
+      end
     end
-
+    # if @itinerary.activities > window
+    #   # run sort method
+    # end
     redirect_to "/itineraries/#{@itinerary.id}"
   end
 

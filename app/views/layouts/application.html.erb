@@ -55,8 +55,13 @@
         <center>
           <img src='https://i.imgur.com/W29FmAv.png' width="150px" />
           <!-- <h2>PlanDuh</h2> -->
-          <p>"Oh, I don't know what to do." <br/>- person before PlanDuh</p>
-          <p>"I had a lot of fun." <br />- person after PlanDuh</p>
+          <% if logged_in? %>
+            <p>"Oh, I don't know what to do." <br/>- <span><%= current_user.first_name %></span> before PlanDuh</p>
+            <p>"I had a lot of fun." <br />- <span><%= current_user.first_name %></span> after PlanDuh</p>
+          <% else %>
+            <p>"Oh, I don't know what to do." <br/>- person before PlanDuh</p>
+            <p>"I had a lot of fun." <br />- person after PlanDuh</p>
+          <% end %>
           <!-- <p class="lead">Discover Local Events </p> -->
           <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Learn More</a></p></center> -->
       </div>

@@ -15,7 +15,6 @@ class YelpResponse < ApplicationRecord
     }
 
     headers = {
-      # take the api key out later...
       "Authorization" => ENV["YELP_TOKEN"]
     }
 
@@ -43,7 +42,6 @@ class YelpResponse < ApplicationRecord
     }
 
     headers = {
-      # take the api key out later...
       "Authorization" => ENV["YELP_TOKEN"]
     }
 
