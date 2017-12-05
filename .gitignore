@@ -10,6 +10,13 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+<<<<<<< HEAD
+=======
+!/log/.keep
+!/tmp/.keep
+.pid
+.log
+>>>>>>> master
 
 /node_modules
 /yarn-error.log
