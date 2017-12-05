@@ -245,6 +245,8 @@ class ItinerariesController < ApplicationController
   def params_not_empty(date, begin_time, end_time, budget, location)
     if date.empty? || begin_time.empty? || end_time.empty? || budget.empty? || location.empty?
       return false
+    else
+      return true
     end
   end
 
