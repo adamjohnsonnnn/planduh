@@ -6,7 +6,7 @@ RSpec.describe Itinerary, type: :model do
 
     let(:user) {User.create!(:first_name => "Winnie", :last_name => "Mele", :email=> "winnie@no.com", :password => 'password')}
 
-    let(:itinerary) { Itinerary.create!(name: "Paris", location: "1033 W Van Buren, Chicago IL", :user_id => user.id, :confirmed? => true, :budget => 120, :date => "17/12/11", :begin_time => "22:09", :end_time => "12:00" )}
+    let(:itinerary) { Itinerary.create!(name: "Paris", location: "1033 W Van Buren, Chicago IL", :user_id => user.id, :confirmed? => true, :budget => 120, :date => "17/12/05", :begin_time => "22:09", :end_time => "12:00" )}
 
   describe 'itinerary attributes' do
 
@@ -27,7 +27,9 @@ RSpec.describe Itinerary, type: :model do
     end
 
     it 'an itinerary has a properly formatted date' do
-        expect(itinerary.date).to be_truthy
+        today = Date.today
+        p today
+        expect(itinerary.date).should == today
     end
 
     it 'an itinerary has a properly start and end time' do
