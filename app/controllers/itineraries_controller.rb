@@ -30,6 +30,7 @@ class ItinerariesController < ApplicationController
           i += 1
         end
       end
+
     end
     # if @itinerary.activities > window
     #   # run sort method
@@ -39,7 +40,6 @@ class ItinerariesController < ApplicationController
 
   def show
     @itinerary = Itinerary.find(params[:id])
-    p @itinerary
     @activities = @itinerary.activities
 
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
