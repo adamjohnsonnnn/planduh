@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe SurveyResponse, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:answer) {SurveyAnswer.new(:response => 'Vegan, no salt', :survey_question_id => "1")}
+
+
+
 end

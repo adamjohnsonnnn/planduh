@@ -47,12 +47,17 @@ class PreferencesController < ApplicationController
     grab_responses.include?("Las Vegas")
   end
 
+  def grab_confirmed
+    self.select { |itinerary| itinerary.confirmed? == true }
+  end
+
+  def grab_unconfirmed
+    self.select { |itinerary| itinerary.confirmed? == false }
+  end
+
 end
 
 
-
-  ## Extras - Check back
-    # Preference.create!(:user_id => current_user.id, :keywords => "outdoors-activity") if outdoors_check
 
 
 
