@@ -6,7 +6,7 @@ class PreferencesController < ApplicationController
 
   def create
     set_preferences
-    redirect_to user_path(current_user.id)
+    redirect_to root_path
   end
 
 

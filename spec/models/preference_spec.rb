@@ -10,7 +10,7 @@ let(:preference) {Preference.new(:user_id => 8, :keywords => "night-life", :is_n
 
    describe "preference attributes" do
 
-     it "a preference is tied to a user" do
+    it "a preference is tied to a user" do
       user= User.create!(:first_name => "Mitch", :last_name => "Mele", :email=> "mitch@no.com", :password => 'password')
 
        expect(preference.user_id).to eq 8
