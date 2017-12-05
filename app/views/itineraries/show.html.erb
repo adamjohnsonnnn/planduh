@@ -175,7 +175,7 @@
       //       }
       // calculateAndDisplayRoute(directionsService, directionsDisplay);
 
-</script>
+</script><br>
 
 
 
@@ -188,4 +188,39 @@
     <option value="BICYCLING">Bicycling</option>
     <option value="TRANSIT">Transit</option>
   </select>
-</div>
+</div><br>
+
+<div id="lyft-web-button-parent"></div>
+<script type="text/javascript">
+  var OPTIONS = {
+    // need to include scriptSrc: '' ?
+    scriptSrc: 'lyftWebButton.min.js',
+    namespace: '',
+    clientId: '7lwqyaU3alh7',
+    clientToken: 'geuQUG489NlQgg0cI/0DKPH8yEnHO3JLn4l0obvHprMdkeZDwODuydR7xfcmoLWpQ0Cd1vRXQi8E6SJi66gNsXrESJ9X8uUmBDMRwaFzIKX7+6cKcAmdCio=',
+    location: {
+      pickup: {},
+      destination: {
+        latitude: '37.776503000',
+        longitude: '-122.392038500',
+      },
+    },
+    parentElement: document.getElementById('lyft-web-button-parent'),
+    queryParams: {
+      credits: ''
+    },
+    theme: 'multicolor large',
+  };
+  (function(t) {
+    var n = this.window,
+    e = this.document;
+    n.lyftInstanceIndex = n.lyftInstanceIndex || 0;
+    var a = t.parentElement,
+    c = e.createElement("script");
+    c.async = !0, c.onload = function() {
+    n.lyftInstanceIndex++;
+    var e = t.namespace ? "lyftWebButton" + t.namespace + n.lyftInstanceIndex : "lyftWebButton" + n.lyftInstanceIndex;
+    n[e] = n.lyftWebButton, t.objectName = e, n[e].initialize(t)
+  }, c.src = t.scriptSrc, a.insertBefore(c, a.childNodes[0])
+  }).call(this, OPTIONS);
+</script>
