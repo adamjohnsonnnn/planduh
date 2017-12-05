@@ -18,6 +18,25 @@ class ItinerariesController < ApplicationController
 
   end
 
+  def edit
+    @itinerary = Itinerary.find(params[:id])
+    render 'show'
+  end
+
+  def update
+    @itinerary = Itinerary.find(params[:id])
+    p params
+    p @itinerary
+    if request.xhr?
+      p "im at 33"
+      @itinerary.update(:name => params[:itinerary_name])
+      @itinerary.is_confirmed? = true
+     render json: @itinerary
+    else
+      redirect_to root_path
+    end
+  end
+
   def show
     @itinerary = Itinerary.find(params[:id])
     @activities = @itinerary.activities

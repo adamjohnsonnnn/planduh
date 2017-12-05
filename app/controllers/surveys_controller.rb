@@ -4,7 +4,7 @@ class SurveysController < ApplicationController
     @questions = SurveyQuestion.page(params[:page]).per(1)
     @answers = SurveyResponse.all
 
-    render action: :index, layout: request.xhr? == nil
+    # render action: :index, layout: request.xhr? == nil
   end
 
 

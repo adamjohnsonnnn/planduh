@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
   end
 
   create_table "itineraries", force: :cascade do |t|
+    t.string "name"
     t.boolean "confirmed?"
     t.bigint "user_id"
     t.datetime "created_at", null: false

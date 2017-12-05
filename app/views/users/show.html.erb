@@ -1,1 +1,46 @@
 <h1><%= current_user.first_name %>'s Profile Page</h1>
+
+<div class="container">
+
+<h1>Your Saved Itineraries</h1>
+
+  <%@user.itineraries.each do |it| %>
+    <%= it.name %>
+    <% it.activities.each do |activity| %>
+
+
+ <% if activity.version == "event" %>
+    <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion2" aria-expanded="false" aria-controls="exampleAccordion2">
+      <p> We found <%= @activities.length%> activities for <%= activity.format_date %>
+    </a>
+    <div id="exampleAccordion2" class="collapse" role="tabpanel">
+      <p class="mb-3">
+
+
+        <li>Event: <%= activity.name %> </li>
+        <li>Address: <%= activity.display_address %></li>
+        <li>Date: <%= activity.format_date %></li>
+        <li>Time: <%= activity.format_time %></li>
+        <li><%= link_to "Visit Event Site", activity.event_site_url %></li>
+        <li><%= link_to "Buy Tickets", activity.tickets_url if activity.is_free == false %></li>
+        <li>Cost: $<%= activity.filter_cost %></li><br>
+        <% else %>
+
+        <li>Event: <%= activity.name %> </li>
+        <li>Address: <%= activity.display_address %></li>
+        <li>Phone: <%= activity.display_phone %></li>
+        <li>Rating: <%= activity.rating %></li>
+        <li>Price: <%= activity.price %></li>
+        <li>Type: <%= activity.title %></li>
+        <li><%= link_to "Visit Website", activity.url %></li>
+        <% end %>
+    <% end %>
+    <% end %>
+
+
+    <h1>Your Maybe Itineraries</h1>
+
+
+</div>
+
+
