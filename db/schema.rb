@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
     t.text "end_time"
     t.integer "budget"
     t.string "location"
-    t.boolean "confirmed?"
+    t.boolean "confirmed?", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

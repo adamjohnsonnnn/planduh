@@ -14,6 +14,7 @@ class ItinerariesController < ApplicationController
   def create
     # MAKE FIELDS IN SUBMIT FORM **REQUIRED**
     # REMOVE DUPLICATE ACTIVITIES
+    run_house_cleaner
 
     if logged_in?
       if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
@@ -49,10 +50,10 @@ class ItinerariesController < ApplicationController
 
   def update
     @itinerary = Itinerary.find_by(id: params[:id])
+    @itinerary.update(:name => params[:itinerary_name], :confirmed? => true )
+
     if request.xhr?
-      @itinerary.update(:name => params[:itinerary_name])
-      @itinerary.confirmed? == true
-     render json: @itinerary
+      render json: @itinerary
     else
       redirect_to root_path
     end
@@ -247,6 +248,13 @@ class ItinerariesController < ApplicationController
       return false
     else
       return true
+    end
+  end
+
+  def run_house_cleaner
+    if current_user.itineraries
+      unconfirmed_itineraries = current_user.itineraries.where(confirmed?: false)
+      unconfirmed_itineraries.destroy_all if unconfirmed_itineraries
     end
   end
 
