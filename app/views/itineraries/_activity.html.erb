@@ -13,7 +13,7 @@
     <div id="exampleAccordion2" class="collapse" role="tabpanel">
       <p class="mb-3">
 
-       <%= image_tag(activity.image_url, size: "320x240") %>
+
         <li>Event: <%= activity.name %> </li>
         <li>Address: <%= activity.display_address %></li>
         <li>Date: <%= activity.format_date %></li>
@@ -22,7 +22,7 @@
         <li><%= link_to "Buy Tickets", activity.tickets_url if activity.is_free == false %></li>
         <li>Cost: $<%= activity.filter_cost %></li><br>
         <% else %>
-        <%= image_tag(activity.image_url, size: "320x240") %>
+
         <li>Event: <%= activity.name %> </li>
         <li>Address: <%= activity.display_address %></li>
         <li>Phone: <%= activity.display_phone %></li>
