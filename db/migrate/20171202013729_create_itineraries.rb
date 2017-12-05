@@ -6,7 +6,7 @@ class CreateItineraries < ActiveRecord::Migration[5.1]
       t.text :begin_time
       t.text :end_time
       t.integer :budget
-      t.string	:location
+      t.string  :location
       t.boolean :confirmed?
       t.references :user
 
