@@ -15,7 +15,7 @@ class YelpResponse < ApplicationRecord
 
     headers = {
       # take the api key out later...
-      "Authorization" => "Bearer 1-SKzUHoUM5qUPfnCyYJTGYGfqCA66MtD66A8le4f8QGH8dj1_s_vGpZNxKppBwm8NsasLD72iVoSzCq1G0QGAg2IJezrUToU0EmsGo8rHpEmVcRBzjdTl_wA84gWnYx"
+      "Authorization" => "Bearer LG5c7NZCc7BlhhrsYcmZ0a_HwF2X8Jwy2DfANk8J_2GWP-FQHVguJytJVvW5VZe1slwKvvTS0gxjRgTTLQkU53trae1xT9QdO8bU1emFiL97pDVRLtGjZuyMvOghWnYx"
     }
 
     response = HTTParty.get(
