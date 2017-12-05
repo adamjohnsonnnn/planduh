@@ -30,7 +30,7 @@ class ItinerariesController < ApplicationController
     if request.xhr?
       p "im at 33"
       @itinerary.update(:name => params[:itinerary_name])
-      @itinerary.is_confirmed? = true
+      # @itinerary.is_confirmed? = true
      render json: @itinerary
     else
       redirect_to root_path
