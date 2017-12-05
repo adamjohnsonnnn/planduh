@@ -28,9 +28,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
-gem 'rspec-rails'
-gem 'rails-controller-testing'
-gem 'faker'
 gem 'httparty'
 gem 'dotenv-rails', groups: [:development, :test, :production]
 gem 'gmaps4rails'
