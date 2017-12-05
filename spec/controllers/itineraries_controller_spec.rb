@@ -14,10 +14,7 @@ RSpec.describe ItinerariesController, type: :controller do
  end
 
   describe "GET #show" do
-
-
     it "responds with status code 200" do
-        p itinerary
       get :show, params: {id: itinerary.id }
       expect(response).to have_http_status(200)
   end
