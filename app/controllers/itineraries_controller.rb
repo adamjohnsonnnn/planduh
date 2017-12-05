@@ -14,7 +14,7 @@ class ItinerariesController < ApplicationController
   def create
     # MAKE FIELDS IN SUBMIT FORM **REQUIRED**
     # REMOVE DUPLICATE ACTIVITIES
-
+    
     if logged_in?
       if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
         create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
