@@ -1,7 +1,8 @@
 class YelpResponse < ApplicationRecord
+  BASE_URL="https://api.yelp.com/v3"
 
   def get_events_response(args={})
-    url = "https://api.yelp.com/v3/events"
+    url = "#{BASE_URL}/events"
 
     query = {
       "location" => args.fetch(:location, ""),
@@ -14,8 +15,7 @@ class YelpResponse < ApplicationRecord
     }
 
     headers = {
-      # take the api key out later...
-      "Authorization" => "Bearer LG5c7NZCc7BlhhrsYcmZ0a_HwF2X8Jwy2DfANk8J_2GWP-FQHVguJytJVvW5VZe1slwKvvTS0gxjRgTTLQkU53trae1xT9QdO8bU1emFiL97pDVRLtGjZuyMvOghWnYx"
+      "Authorization" => ENV["YELP_TOKEN"]
     }
 
     response = HTTParty.get(
@@ -29,7 +29,7 @@ class YelpResponse < ApplicationRecord
   end
 
   def get_businesses_response(args={})
-    url = "https://api.yelp.com/v3/businesses/search"
+    url = "#{BASE_URL}/businesses/search"
 
     query = {
       "term" => args.fetch(:term, ""),
@@ -42,8 +42,7 @@ class YelpResponse < ApplicationRecord
     }
 
     headers = {
-      # take the api key out later...
-      "Authorization" => "Bearer 1-SKzUHoUM5qUPfnCyYJTGYGfqCA66MtD66A8le4f8QGH8dj1_s_vGpZNxKppBwm8NsasLD72iVoSzCq1G0QGAg2IJezrUToU0EmsGo8rHpEmVcRBzjdTl_wA84gWnYx"
+      "Authorization" => ENV["YELP_TOKEN"]
     }
 
     response = HTTParty.get(
