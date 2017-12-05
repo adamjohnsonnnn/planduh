@@ -35,7 +35,7 @@ end
 
 
 GoogleMapsService.configure do |config|
-  config.key = 'AIzaSyCo4u77P42L_GTLi8VCa0QoVyOR0WKRJwQ'
+  config.key = ''
   config.retry_timeout = 20
   config.queries_per_second = 10
 end

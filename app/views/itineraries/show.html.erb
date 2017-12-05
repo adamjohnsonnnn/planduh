@@ -1,3 +1,40 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showModal" data-whatever="save">Looks awesome, save it!</button>
+<form action="/itineraries" method="POST" >
+  <input type="hidden" name="date" value="<%= @itinerary.date %>" >
+  <input type="hidden" name="begin_time" value="<%= @itinerary.begin_time %>" >
+  <input type="hidden" name="end_time" value="<%= @itinerary.end_time %>" >
+  <input type="hidden" name="budget" value="<%= @itinerary.budget %>" >
+  <input type="hidden" name="location" value="<%= @itinerary.location %>" >
+  <input type="submit" class="btn btn-primary" value="Hmmmmm... try again">
+</form>
+
+<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="showModalLabel">Save Itinerary</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="itinerary-form" action="/itineraries/<%=@itinerary.id%>">
+          <input type="hidden" name="_method" value="PUT" >
+          <div class="form-group">
+            <label for="itinerary-name" class="col-form-label">Itinerary Name:</label>
+            <input type="text" name="itinerary_name" class="form-control" id="itinerary-name">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button  type="submit" class="btn btn-primary m-save">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <ul style="list-style-type:none">
   <%= render partial: "activity", collection: @activities %>
 </ul>
