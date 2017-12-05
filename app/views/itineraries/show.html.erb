@@ -1,5 +1,12 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showModal" data-whatever="save">Looks awesome, save it!</button>
-<button type="button" class="btn btn-primary" >Hmmmm, try Again.</button>
+<form action="/itineraries" method="POST" >
+  <input type="hidden" name="date" value="<%= @itinerary.date %>" >
+  <input type="hidden" name="begin_time" value="<%= @itinerary.begin_time %>" >
+  <input type="hidden" name="end_time" value="<%= @itinerary.end_time %>" >
+  <input type="hidden" name="budget" value="<%= @itinerary.budget %>" >
+  <input type="hidden" name="location" value="<%= @itinerary.location %>" >
+  <input type="submit" class="btn btn-primary" value="Hmmmmm... try again">
+</form>
 
 <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
