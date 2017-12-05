@@ -6,7 +6,7 @@ class ItinerariesController < ApplicationController
     # MAKE FIELDS IN SUBMIT FORM **REQUIRED**
     # REMOVE DUPLICATE ACTIVITIES
 
-    @itinerary = Itinerary.create(user: current_user)
+    @itinerary = Itinerary.create(user: current_user, date: params[:date], begin_time: params[:begin_time], end_time: params[:end_time], budget: params[:budget], location: params[:location])
     # create time window
     window = time_window(params[:begin_time], params[:end_time])
     # get latitude and longitude of location
@@ -39,6 +39,7 @@ class ItinerariesController < ApplicationController
 
   def show
     @itinerary = Itinerary.find(params[:id])
+    p @itinerary
     @activities = @itinerary.activities
 
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
@@ -48,11 +49,23 @@ class ItinerariesController < ApplicationController
     end
   end
 
+  def update
+    @itinerary = Itinerary.find(params[:id])
+    if request.xhr?
+      @itinerary.update(:name => params[:itinerary_name])
+      @itinerary.confirmed? == true
+     render json: @itinerary
+    else
+      redirect_to root_path
+    end
+  end
+
   def destroy
   end
 
   def updated
   end
+
 
   private
 

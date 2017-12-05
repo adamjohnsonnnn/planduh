@@ -43,6 +43,11 @@ ActiveRecord::Schema.define(version: 20171203001021) do
 
   create_table "itineraries", force: :cascade do |t|
     t.string "name"
+    t.date "date"
+    t.text "begin_time"
+    t.text "end_time"
+    t.integer "budget"
+    t.string "location"
     t.boolean "confirmed?"
     t.bigint "user_id"
     t.datetime "created_at", null: false
