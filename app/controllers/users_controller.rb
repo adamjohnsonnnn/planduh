@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     if find_and_ensure_user(params[:id])
       @user = User.find(params[:id])
       redirect_to "user/show/#{@user.id}"
-
     end
   end
 
