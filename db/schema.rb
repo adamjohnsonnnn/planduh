@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 20171206004821) do
     t.string "last_name", null: false
     t.string "email", null: false
     t.string "password_digest"
-    t.boolean "agreed_to_terms", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "agreed"
