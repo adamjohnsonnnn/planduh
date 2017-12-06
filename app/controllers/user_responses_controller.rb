@@ -12,7 +12,7 @@ class UserResponsesController < ApplicationController
 
     @user_response = UserResponse.create(response: user_answer, survey_question_id: question_id, :user_id => current_user.id)
 
-    redirect_to "/surveys/#{next_page}"
+      redirect_to "/surveys/#{next_page}"
   end
 
 
@@ -20,6 +20,11 @@ class UserResponsesController < ApplicationController
     @user_responses = current_user.user_responses.all
     @user_responses.destroy
   end
+
+
+
+
+
 
 end
 

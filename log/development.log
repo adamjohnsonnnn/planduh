@@ -1,3 +1,4 @@
+<<<<<<< HEAD
   [1m[35m (157.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "planduh_development"[0m
   [1m[35m (162.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "planduh_test"[0m
   [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
@@ -14667,3 +14668,5 @@ Processing by ItinerariesController#create as HTML
 Completed 200 OK in 111ms (Views: 104.9ms | ActiveRecord: 0.9ms)
 
 
+=======
+>>>>>>> 3120fce0ed6ec6bb01e4478ce2c737285b8e77da

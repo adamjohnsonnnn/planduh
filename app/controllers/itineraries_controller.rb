@@ -4,10 +4,10 @@ class ItinerariesController < ApplicationController
       if current_user.preferences.length > 0
         render 'new'
       else
-        redirect_to surveys_path
+        redirect_to surveys_path(1)
       end
     else
-      redirect_to new_user_path
+     redirect_to new_user_path
     end
   end
 
@@ -74,7 +74,7 @@ class ItinerariesController < ApplicationController
   private
 
   # YELP EVENT API METHODS
-  def submit_events_api_call(date, begin_time, end_time, location, itinerary)
+  def submit_events_api_call(budget, date, begin_time, end_time, location, itinerary)
     preferences_request = current_user.supplemental_preferences
     designated_preference = preferences_request.sample
     category_request = designated_preference.events_categories.sample
@@ -82,15 +82,22 @@ class ItinerariesController < ApplicationController
     end_date_time = user_input_to_unix(date, end_time)
     y = YelpResponse.new
     response = y.get_events_response({location: location, categories: category_request, start_date: start_date_time, end_date: end_date_time})
-    handle_events_response(response, y, itinerary)
+    if response["events"]
+      event_budget = budget.to_i * 0.75
+      filtered_response = response["events"].select do |event|
+        event["cost"].to_i < event_budget.to_i || event["cost"] == nil
+      end
+      return_response = filtered_response.sample
+    end
+    handle_events_response(response, return_response, y, itinerary)
     y.destroy
   end
 
-  def handle_events_response(response, y, itinerary)
+  def handle_events_response(response, return_response, y, itinerary)
     if response["error"]
       @error = "Sorry we're having a hard time finding an event for you. Please try again."
     else
-      y.assign_event_values(response)
+      y.assign_event_values(return_response)
       set_event_attributes(y, itinerary)
     end
   end
@@ -123,7 +130,8 @@ class ItinerariesController < ApplicationController
         y = YelpResponse.new
         response = y.get_businesses_response({term: business_search_term, categories: category_request_biz, location: location, price: user_budget, open_at: open_date_time, limit: 20})
         response_container = []
-        response_container << response["businesses"].sample
+        filtered_response = response["businesses"].select { |business| business["rating"] >= 3 }
+        response_container << filtered_response.sample
         response_convert_hash = {}
         response_convert_hash["businesses"] = response_container
         handle_businesses_response(response_convert_hash, y, itinerary, category_request_biz)
@@ -179,16 +187,17 @@ class ItinerariesController < ApplicationController
     # submit GOOGLE PLACES API request
     @client = GooglePlaces::Client.new(ENV["GOOGLE_PLACES_TOKEN"])
     initial_response = @client.spots(lat_long[0], lat_long[1], :types => google_places_request_types, :keywords => query, :radius => 2000)
-    sorted_response = initial_response.sort_by { |response| response.rating || 0 }
+    filtered_response = initial_response.delete_if { |response| response.types.include?("convenience_store") || response.rating == nil }
+    sorted_response = filtered_response.sort_by { |response| response.rating }
     reverse_sorted_response = sorted_response.reverse
     top_five_responses = reverse_sorted_response.slice(0,5)
     if top_five_responses.sample
       full_response = @client.spot(top_five_responses.sample.place_id)
-      set_google_places_attributes(full_response, itinerary)
+      set_google_places_attributes(full_response, itinerary, google_places_request_types)
     end
   end
 
-  def set_google_places_attributes(response, itinerary)
+  def set_google_places_attributes(response, itinerary, category)
       photos = response.photos
       if photos.length > 0
         photo = photos[0].fetch_url(800)
@@ -207,6 +216,7 @@ class ItinerariesController < ApplicationController
       display_address: response.formatted_address || "mystery",
       business_hours: response.opening_hours || "mystery",
       itinerary_id: itinerary.id,
+      category: category,
       version: "google_place"
     )
   end
@@ -226,7 +236,7 @@ class ItinerariesController < ApplicationController
       lat_long = create_lat_long_coordinates(location)
       i = 0
       while i < window
-        yelp_event_response = submit_events_api_call(date, begin_time, end_time, location, @itinerary)
+        yelp_event_response = submit_events_api_call(budget, date, begin_time, end_time, location, @itinerary)
         if yelp_event_response.name != nil
           i += 1
         end
