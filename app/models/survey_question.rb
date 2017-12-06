@@ -4,4 +4,5 @@ class SurveyQuestion < ApplicationRecord
   has_many :responses, class_name: "SurveyResponse"
   has_many  :user_responses
 
+
 end

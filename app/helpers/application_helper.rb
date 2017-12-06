@@ -20,6 +20,13 @@ module ApplicationHelper
       current_user == user
   end
 
+  ##SURVEY COMPLETE HELPERS
+
+  def current_response_count
+    current_user.user_responses.count + 1
+  end
+
+
 # TIME HELPERS (ITINERARIES)
   def slice_time_itinerary(time)
     time[0..1].to_i

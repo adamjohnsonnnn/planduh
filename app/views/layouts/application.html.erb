@@ -25,7 +25,11 @@
     <div class="container">
 
     <nav class="navbar navbar-expand-md navbar-dark w3-black">
-      <%= link_to "PlanDuh", root_path, class: "navbar-brand" %>
+    <% if logged_in? && current_user.user_responses.count < 6  %>
+        <%= link_to "Finish Survey", survey_path(current_response_count), class: "navbar-brand"  %>
+    <% else %>
+        <%= link_to "Planduh", root_path, class: "navbar-brand"  %>
+    <% end %>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,7 +38,9 @@
         <ul class="navbar-nav ml-auto">
           <% if logged_in? %>
             <li class="nav-item active"><%= link_to "#{current_user.first_name}'s PlanDuhs", user_path(current_user.id), class: "nav-link"  %></li>
-            <li class="nav-item active"><%= link_to "create new", new_itinerary_path, class: "nav-link" %></li>
+            <% if current_user.user_responses.count >= 6 %>
+              <li class="nav-item active"><%= link_to "create new", new_itinerary_path, class: "nav-link" %></li>
+            <%end%>
             <li class="nav-item active"><%= link_to "logout", logout_path, class: "nav-link" %></li>
           <% else %>
             <li class="nav-item active"><%= link_to "register", new_user_path, class: "nav-link" %></li>
