@@ -10718,3 +10718,877 @@ Processing by ItinerariesController#show as HTML
 Completed 200 OK in 68ms (Views: 63.2ms | ActiveRecord: 0.8ms)
 
 
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (171.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "planduh_development"[0m
+  [1m[35m (139.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "planduh_test"[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5639883873923918010)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20171201172504)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "first_name" character varying NOT NULL, "last_name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201172504"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePreferences (20171201215824)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "preferences" ("id" bigserial primary key, "user_id" bigint, "keywords" text NOT NULL, "events_categories" text NOT NULL, "business_categories" text NOT NULL, "google_places_types" text NOT NULL, "is_necessary?" boolean DEFAULT 'f', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_preferences_on_user_id" ON "preferences"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215824"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSurveyQuestions (20171201215844)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "survey_questions" ("id" bigserial primary key, "question_text" text, "version" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215844"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSurveyResponses (20171201215936)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "survey_responses" ("id" bigserial primary key, "survey_question_id" integer, "response" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215936"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserResponses (20171201215951)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "user_responses" ("id" bigserial primary key, "user_id" integer, "survey_question_id" integer, "response" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171201215951"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateItineraries (20171202013729)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "itineraries" ("id" bigserial primary key, "name" character varying, "date" date, "begin_time" text, "end_time" text, "budget" integer, "location" character varying, "confirmed?" boolean DEFAULT 'f', "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_itineraries_on_user_id" ON "itineraries"  ("user_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171202013729"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActivities (20171202013738)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "activities" ("id" bigserial primary key, "name" character varying, "display_address" character varying, "business_hours" character varying, "time_start" character varying, "event_site_url" character varying, "tickets_url" character varying, "cost" integer, "cost_max" integer, "is_free" boolean, "is_canceled" boolean, "image_url" character varying, "rating" character varying, "price" character varying, "display_phone" character varying, "title" character varying, "url" character varying, "latitude" decimal, "longitude" decimal, "version" character varying, "itinerary_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_activities_on_itinerary_id" ON "activities"  ("itinerary_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171202013738"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateYelpResponses (20171202152854)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "yelp_responses" ("id" bigserial primary key, "name" character varying, "display_address" character varying, "time_start" character varying, "event_site_url" character varying, "tickets_url" character varying, "cost" integer, "cost_max" integer, "is_free" boolean, "is_canceled" boolean, "image_url" character varying, "rating" character varying, "price" character varying, "display_phone" character varying, "title" character varying, "url" character varying, "latitude" decimal, "longitude" decimal, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171202152854"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRecommenders (20171203001021)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "recommenders" ("id" bigserial primary key, "event_matrix" text, "business_matrix" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171203001021"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAgreedToUsers (20171206004821)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "agreed" boolean[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171206004821"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPhotoUrlToSurveyQuestion (20171206012742)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "survey_questions" ADD "photo_url" character varying[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171206012742"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCategoryToActivities (20171206020053)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "activities" ADD "category" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171206020053"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-12-06 18:00:45.095881"], ["updated_at", "2017-12-06 18:00:45.095881"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5639883873923918010)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "Do you have any dietary restrictions?"], ["version", "Open-ended"], ["created_at", "2017-12-06 18:00:53.691462"], ["updated_at", "2017-12-06 18:00:53.691462"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "Do you like physical activity?"], ["version", "Yes/No"], ["created_at", "2017-12-06 18:00:53.694401"], ["updated_at", "2017-12-06 18:00:53.694401"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "Do you like to drink?"], ["version", "Yes/No"], ["created_at", "2017-12-06 18:00:53.696301"], ["updated_at", "2017-12-06 18:00:53.696301"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "How do you feel about being outdoors?"], ["version", "Multiple Choice"], ["created_at", "2017-12-06 18:00:53.698483"], ["updated_at", "2017-12-06 18:00:53.698483"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "\nWould you visit Paris, the YellowStone, or Las Vegas if given a free trip weekend trip?"], ["version", "Multiple Choice"], ["created_at", "2017-12-06 18:00:53.700306"], ["updated_at", "2017-12-06 18:00:53.700306"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "If you had a free day off of work, which one of these activities would appeal the most to you?"], ["version", "Multiple Choice"], ["created_at", "2017-12-06 18:00:53.702020"], ["updated_at", "2017-12-06 18:00:53.702020"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_questions" ("question_text", "version", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["question_text", "What is your favorite type of music?"], ["version", "Multiple Choice"], ["created_at", "2017-12-06 18:00:53.703684"], ["updated_at", "2017-12-06 18:00:53.703684"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 2], ["response", "Yes, I'm very active!"], ["created_at", "2017-12-06 18:00:53.721575"], ["updated_at", "2017-12-06 18:00:53.721575"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 2], ["response", "No...I don't prefer physical activity for my events"], ["created_at", "2017-12-06 18:00:53.724253"], ["updated_at", "2017-12-06 18:00:53.724253"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 3], ["response", "Yes, pour me a cold one"], ["created_at", "2017-12-06 18:00:53.726378"], ["updated_at", "2017-12-06 18:00:53.726378"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 3], ["response", "No, not much of a drinker these days"], ["created_at", "2017-12-06 18:00:53.728373"], ["updated_at", "2017-12-06 18:00:53.728373"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 4], ["response", "Love it"], ["created_at", "2017-12-06 18:00:53.730514"], ["updated_at", "2017-12-06 18:00:53.730514"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 4], ["response", "ehhh, only if it is nice out"], ["created_at", "2017-12-06 18:00:53.732550"], ["updated_at", "2017-12-06 18:00:53.732550"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 4], ["response", "I prefer to be inside whenever possible"], ["created_at", "2017-12-06 18:00:53.734370"], ["updated_at", "2017-12-06 18:00:53.734370"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Go day drinking at a bar"], ["created_at", "2017-12-06 18:00:53.736068"], ["updated_at", "2017-12-06 18:00:53.736068"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Visit a museum "], ["created_at", "2017-12-06 18:00:53.737808"], ["updated_at", "2017-12-06 18:00:53.737808"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Ride bike or go for a run "], ["created_at", "2017-12-06 18:00:53.739554"], ["updated_at", "2017-12-06 18:00:53.739554"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 6], ["response", "Play board games or work on a puzzle"], ["created_at", "2017-12-06 18:00:53.741340"], ["updated_at", "2017-12-06 18:00:53.741340"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 5], ["response", "Paris"], ["created_at", "2017-12-06 18:00:53.743281"], ["updated_at", "2017-12-06 18:00:53.743281"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 5], ["response", "YellowStone"], ["created_at", "2017-12-06 18:00:53.744953"], ["updated_at", "2017-12-06 18:00:53.744953"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 5], ["response", "Las Vegas"], ["created_at", "2017-12-06 18:00:53.746731"], ["updated_at", "2017-12-06 18:00:53.746731"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Classic Rock"], ["created_at", "2017-12-06 18:00:53.748587"], ["updated_at", "2017-12-06 18:00:53.748587"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Indie"], ["created_at", "2017-12-06 18:00:53.750298"], ["updated_at", "2017-12-06 18:00:53.750298"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Electronic"], ["created_at", "2017-12-06 18:00:53.751998"], ["updated_at", "2017-12-06 18:00:53.751998"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "Hip Hop"], ["created_at", "2017-12-06 18:00:53.753706"], ["updated_at", "2017-12-06 18:00:53.753706"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "I'm down for anything!"], ["created_at", "2017-12-06 18:00:53.755378"], ["updated_at", "2017-12-06 18:00:53.755378"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_question_id", 7], ["response", "N/A"], ["created_at", "2017-12-06 18:00:53.757113"], ["updated_at", "2017-12-06 18:00:53.757113"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "survey_responses" ("survey_question_id", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["survey_question_id", 1], ["created_at", "2017-12-06 18:00:53.758873"], ["updated_at", "2017-12-06 18:00:53.758873"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "recommenders" ("event_matrix", "business_matrix", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["event_matrix", "---\n:hours:\n  1:\n  - food-and-drink\n  - nightlife\n  2:\n  - food-and-drink\n  - nightlife\n  3:\n  - food-and-drink\n  - nightlife\n  4:\n  - food-and-drink\n  - nightlife\n  5:\n  - food-and-drink\n  - nightlife\n  6:\n  - food-and-drink\n  - sports-active-life\n  7:\n  - food-and-drink\n  - sports-active-life\n  8:\n  - food-and-drink\n  - sports-active-life\n  9:\n  - food-and-drink\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  10:\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  11:\n  - food-and-drink\n  - music\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  12:\n  - food-and-drink\n  - sports-active-life\n  - festivals-fairs\n  13:\n  - food-and-drink\n  - sports-active-life\n  - festivals-fairs\n  14:\n  - music\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  15:\n  - film\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  16:\n  - film\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  - sports-active-life\n  - festivals-fairs\n  17:\n  - film\n  - visual-arts\n  - performing-arts\n  - lectures-books\n  - fashion\n  18:\n  - music\n  - film\n  - food-and-drink\n  19:\n  - music\n  - film\n  - food-and-drink\n  20:\n  - music\n  - film\n  - food-and-drink\n  - nightlife\n  21:\n  - music\n  - film\n  - nightlife\n  22:\n  - music\n  - film\n  - nightlife\n  23:\n  - music\n  - film\n  - nightlife\n  24:\n  - music\n  - film\n  - nightlife\n"], ["business_matrix", "---\n:hours:\n  1:\n  - nightlife\n  2:\n  - nightlife\n  3:\n  - nightlife\n  4:\n  - nightlife\n  5:\n  - active\n  - nightlife\n  6:\n  - active\n  7:\n  - active\n  - restaurants\n  - massage_therapy\n  8:\n  - active\n  - restaurants\n  9:\n  - active\n  - arts\n  - beautysvc\n  - localflavor\n  10:\n  - active\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  11:\n  - active\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  12:\n  - restaurants\n  - localflavor\n  13:\n  - restaurants\n  - active\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  14:\n  - active\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  15:\n  - active\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  16:\n  - active\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  17:\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  18:\n  - arts\n  - beautysvc\n  - localflavor\n  - shopping\n  19:\n  - arts\n  - beautysvc\n  - restaurants\n  - localflavor\n  20:\n  - restaurants\n  - localflavor\n  - nightlife\n  21:\n  - restaurants\n  - localflavor\n  - nightlife\n  22:\n  - localflavor\n  - nightlife\n  23:\n  - nightlife\n  24:\n  - nightlife\n"], ["created_at", "2017-12-06 18:00:53.770293"], ["updated_at", "2017-12-06 18:00:53.770293"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/logout" for 127.0.0.1 at 2017-12-06 12:01:05 -0600
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-06 12:01:06 -0600
+Processing by ItinerariesController#new as HTML
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 12:01:06 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 9367ms (Views: 9337.0ms | ActiveRecord: 4.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-12-06 12:01:45 -0600
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"X3bdvnDH+1r1Sb1lc5HsIXToAqkKZjWjdQKHrq3Sr2ut0+m67BANoyLxROTnv7wbr+P29txRpV1RGyAGzX2Wvg==", "user"=>{"first_name"=>"adam", "last_name"=>"johnson", "email"=>"adam@adam.com", "password"=>"[FILTERED]", "agreed"=>"true"}, "commit"=>"Sign up!"}
+  [1m[36mSurveyQuestion Load (0.4ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "adam@adam.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at", "agreed") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["first_name", "adam"], ["last_name", "johnson"], ["email", "adam@adam.com"], ["password_digest", "$2a$10$U6Hk99eO9MyOFxOvsnjzGugY8SKv5IdXTnJoIZfTiFOEdswOLNzai"], ["created_at", "2017-12-06 18:01:45.111883"], ["updated_at", "2017-12-06 18:01:45.111883"], ["agreed", "t"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys/1
+Completed 302 Found in 100ms (ActiveRecord: 6.9ms)
+
+
+Started GET "/surveys/1" for 127.0.0.1 at 2017-12-06 12:01:45 -0600
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurveyQuestion Load (0.2ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering surveys/show.html.erb within layouts/application
+  Rendered surveys/_open_ended_question.html.erb (0.4ms)
+  Rendered surveys/_open_ended_response.html.erb (0.3ms)
+  Rendered surveys/show.html.erb within layouts/application (5.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 96ms (Views: 93.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/survey_questions/1/user_responses" for 127.0.0.1 at 2017-12-06 12:01:52 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"pizza\r\n", "survey_question_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "pizza\r\n"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["survey_question_id", 1], ["response", "pizza\r\n"], ["created_at", "2017-12-06 18:01:52.141357"], ["updated_at", "2017-12-06 18:01:52.141357"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys/2
+Completed 302 Found in 29ms (ActiveRecord: 6.0ms)
+
+
+Started GET "/surveys/2" for 127.0.0.1 at 2017-12-06 12:01:52 -0600
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering surveys/show.html.erb within layouts/application
+  Rendered surveys/_yes_no_question.html.erb (0.4ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 2]]
+  Rendered surveys/_yes_no_response.html.erb (30.3ms)
+  Rendered surveys/show.html.erb within layouts/application (33.5ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 118ms (Views: 110.8ms | ActiveRecord: 3.7ms)
+
+
+Started POST "/survey_questions/2/user_responses" for 127.0.0.1 at 2017-12-06 12:01:54 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Yes, I'm very active!", "survey_question_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Yes, I'm very active!"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["survey_question_id", 2], ["response", "Yes, I'm very active!"], ["created_at", "2017-12-06 18:01:54.528269"], ["updated_at", "2017-12-06 18:01:54.528269"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys/3
+Completed 302 Found in 5ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/surveys/3" for 127.0.0.1 at 2017-12-06 12:01:54 -0600
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mSurveyQuestion Load (0.2ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering surveys/show.html.erb within layouts/application
+  Rendered surveys/_yes_no_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 3]]
+  Rendered surveys/_yes_no_response.html.erb (2.2ms)
+  Rendered surveys/show.html.erb within layouts/application (6.3ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 78ms (Views: 74.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/survey_questions/3/user_responses" for 127.0.0.1 at 2017-12-06 12:01:55 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Yes, pour me a cold one", "survey_question_id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Yes, pour me a cold one"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["survey_question_id", 3], ["response", "Yes, pour me a cold one"], ["created_at", "2017-12-06 18:01:55.791829"], ["updated_at", "2017-12-06 18:01:55.791829"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys/4
+Completed 302 Found in 5ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/surveys/4" for 127.0.0.1 at 2017-12-06 12:01:55 -0600
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mSurveyQuestion Load (0.2ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering surveys/show.html.erb within layouts/application
+  Rendered surveys/_multiple_choice_question.html.erb (0.3ms)
+  [1m[36mSurveyResponse Load (0.5ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 4]]
+  Rendered surveys/_multiple_choice_response.html.erb (2.6ms)
+  Rendered surveys/show.html.erb within layouts/application (5.8ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 99ms (Views: 96.0ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/survey_questions/4/user_responses" for 127.0.0.1 at 2017-12-06 12:01:57 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Love it", "page"=>"1", "survey_question_id"=>"4"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Love it"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["survey_question_id", 4], ["response", "Love it"], ["created_at", "2017-12-06 18:01:57.295019"], ["updated_at", "2017-12-06 18:01:57.295019"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys/5
+Completed 302 Found in 5ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/surveys/5" for 127.0.0.1 at 2017-12-06 12:01:57 -0600
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSurveyQuestion Load (0.2ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering surveys/show.html.erb within layouts/application
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 5]]
+  Rendered surveys/_multiple_choice_response.html.erb (3.7ms)
+  Rendered surveys/show.html.erb within layouts/application (7.7ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 95ms (Views: 91.3ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/survey_questions/5/user_responses" for 127.0.0.1 at 2017-12-06 12:01:58 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Paris", "page"=>"1", "survey_question_id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Paris"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["survey_question_id", 5], ["response", "Paris"], ["created_at", "2017-12-06 18:01:58.792090"], ["updated_at", "2017-12-06 18:01:58.792090"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys/6
+Completed 302 Found in 5ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/surveys/6" for 127.0.0.1 at 2017-12-06 12:01:58 -0600
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSurveyQuestion Load (0.2ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering surveys/show.html.erb within layouts/application
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 6]]
+  Rendered surveys/_multiple_choice_response.html.erb (3.3ms)
+  Rendered surveys/show.html.erb within layouts/application (6.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 99ms (Views: 95.6ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/survey_questions/6/user_responses" for 127.0.0.1 at 2017-12-06 12:02:00 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Go day drinking at a bar", "page"=>"1", "survey_question_id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Go day drinking at a bar"], ["user_id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 1], ["survey_question_id", 6], ["response", "Go day drinking at a bar"], ["created_at", "2017-12-06 18:02:00.215951"], ["updated_at", "2017-12-06 18:02:00.215951"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys/7
+Completed 302 Found in 6ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/surveys/7" for 127.0.0.1 at 2017-12-06 12:02:00 -0600
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mSurveyQuestion Load (0.2ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" WHERE "survey_questions"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering surveys/show.html.erb within layouts/application
+  Rendered surveys/_multiple_choice_question.html.erb (0.4ms)
+  [1m[36mSurveyResponse Load (0.4ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 7]]
+  Rendered surveys/_multiple_choice_response.html.erb (3.8ms)
+  Rendered surveys/show.html.erb within layouts/application (7.6ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 108ms (Views: 105.5ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/preferences" for 127.0.0.1 at 2017-12-06 12:02:01 -0600
+Processing by PreferencesController#create as HTML
+  Parameters: {"answer"=>"Classic Rock", "page"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUserResponse Load (0.2ms)[0m  [1m[34mSELECT "user_responses".* FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "is_necessary?", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 1], ["keywords", "---\n- restaurants\n"], ["events_categories", "---\n- \"pizza\\r\\n\"\n"], ["business_categories", "---\n- \"pizza\\r\\n\"\n"], ["google_places_types", "---\n- restaurant\n- cafe\n"], ["is_necessary?", "t"], ["created_at", "2017-12-06 18:02:01.522912"], ["updated_at", "2017-12-06 18:02:01.522912"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 1], ["keywords", "---\n- outside\n- experience\n- best\n- games\n"], ["events_categories", "---\n- sports-active-life\n- performing-arts\n- festivals-fairs\n"], ["business_categories", "---\n- active\n- arts\n- massage_therapy\n"], ["google_places_types", "---\n- amusement parks\n- art_gallery\n- aquarium\n- bowling_alley\n- gym\n- park\n- spa\n- zoo\n"], ["created_at", "2017-12-06 18:02:01.529478"], ["updated_at", "2017-12-06 18:02:01.529478"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 1], ["keywords", "---\n- fun\n- great\n- happy\n"], ["events_categories", "---\n- music\n- festivals-fairs\n- fashion\n- film\n"], ["business_categories", "---\n- nightlife\n- arts\n"], ["google_places_types", "---\n- movie_theater\n- beauty_salon\n- book_store\n- clothing_store\n- shopping_mall\n- museum\n"], ["created_at", "2017-12-06 18:02:01.535770"], ["updated_at", "2017-12-06 18:02:01.535770"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 1], ["keywords", "---\n- delicious\n- inspired\n- atmosphere\n- creative\n"], ["events_categories", "---\n- food-and-drink\n"], ["business_categories", "---\n- restaurants\n- nightlife\n"], ["google_places_types", "---\n- restaurant\n- bakery\n- cafe\n"], ["created_at", "2017-12-06 18:02:01.546471"], ["updated_at", "2017-12-06 18:02:01.546471"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/itineraries/new
+Completed 302 Found in 66ms (ActiveRecord: 9.8ms)
+
+
+Started GET "/itineraries/new" for 127.0.0.1 at 2017-12-06 12:02:01 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 82ms (Views: 77.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:02:47 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "location"=>"2052 N Larrabees St chicago", "begin_time"=>"14:00", "end_time"=>"18:00", "budget"=>"100"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.7ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "14:00"], ["end_time", "18:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 18:02:47.332955"], ["updated_at", "2017-12-06 18:02:47.332955"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+Completed 500 Internal Server Error in 370ms (ActiveRecord: 7.9ms)
+
+
+  
+NoMethodError (undefined method `strip' for nil:NilClass):
+  
+app/services/yelp_response.rb:21:in `get_events_response'
+app/controllers/itineraries_controller.rb:82:in `submit_events_api_call'
+app/controllers/itineraries_controller.rb:237:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:20:in `create'
+Started GET "/" for 127.0.0.1 at 2017-12-06 12:04:34 -0600
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 474ms (Views: 381.6ms | ActiveRecord: 7.5ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:04:53 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "location"=>"2052 N Larrabees St chicago", "begin_time"=>"14:00", "end_time"=>"21:00", "budget"=>"100"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "14:00"], ["end_time", "21:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 18:04:53.574649"], ["updated_at", "2017-12-06 18:04:53.574649"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Safehouse Chicago Leaks Intel on New Bond Brunch with Bottomless Mimosas"], ["display_address", "60 E Ontario St Chicago, IL 60611"], ["time_start", "2017-11-19 19:00"], ["event_site_url", "https://www.yelp.com/events/chicago-safehouse-chicago-leaks-intel-on-new-bond-brunch-with-bottomless-mimosas?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/F5LLGaH1wNdUoO1F4ignvQ/o.jpg"], ["latitude", "41.8934761420147"], ["longitude", "-87.6259666423279"], ["version", "event"], ["itinerary_id", 2], ["created_at", "2017-12-06 18:04:54.298485"], ["updated_at", "2017-12-06 18:04:54.298485"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Holiday Season Cocktails Wine Party Sponsored by Yelp Elite"], ["display_address", "323 East Upper Wacker Drive Chicago, IL 60601"], ["time_start", "2017-12-10 05:00"], ["event_site_url", "https://www.yelp.com/events/chicago-holiday-season-cocktails-wine-party-sponsored-by-yelp-elite?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.eventbrite.com/e/happy-holidays-wine-social-swissotel-tickets-39549998109"], ["cost", 21], ["cost_max", 58], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/UkudEuiqaOO2ic5cs-WKxQ/o.jpg"], ["latitude", "41.8866362355827"], ["longitude", "-87.6196431474958"], ["version", "event"], ["itinerary_id", 2], ["created_at", "2017-12-06 18:04:54.555828"], ["updated_at", "2017-12-06 18:04:54.555828"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Dana Cruz, LMT"], ["display_address", "3717 N Ravenswood Ste 214 Chicago, IL 60613"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/DOel3ub1OFRcT43q6bTOIg/o.jpg"], ["rating", "5.0"], ["price", "$$"], ["display_phone", "(773) 398-3886"], ["title", "Massage"], ["url", "https://www.yelp.com/biz/dana-cruz-lmt-chicago-2?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.953643676201"], ["longitude", "-87.6634576137695"], ["version", "business"], ["itinerary_id", 2], ["created_at", "2017-12-06 18:04:55.048734"], ["updated_at", "2017-12-06 18:04:55.048734"], ["category", "massage_therapy"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Lincoln Central Park"], ["display_address", "2100 N Lincoln Ave, Chicago, IL 60614, USA"], ["business_hours", "mystery"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipO7fq0wbRB5qFPE1uFoKDzIM4LE-EK8u_SzzPdo=s1600-w800"], ["rating", "5"], ["price", "mystery"], ["display_phone", "mystery"], ["url", "#"], ["latitude", "41.920208"], ["longitude", "-87.6419307"], ["version", "google_place"], ["itinerary_id", 2], ["created_at", "2017-12-06 18:04:55.697289"], ["updated_at", "2017-12-06 18:04:55.697289"], ["category", "museum"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Safehouse Chicago Leaks Intel on New Bond Brunch with Bottomless Mimosas"], ["display_address", "60 E Ontario St Chicago, IL 60611"], ["time_start", "2017-11-19 19:00"], ["event_site_url", "https://www.yelp.com/events/chicago-safehouse-chicago-leaks-intel-on-new-bond-brunch-with-bottomless-mimosas?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/F5LLGaH1wNdUoO1F4ignvQ/o.jpg"], ["latitude", "41.8934761420147"], ["longitude", "-87.6259666423279"], ["version", "event"], ["itinerary_id", 2], ["created_at", "2017-12-06 18:04:55.947359"], ["updated_at", "2017-12-06 18:04:55.947359"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Yefseis Cafe"], ["display_address", "3344 N Halsted St Chicago, IL 60657"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/7ZAsG-8cCGXfH5K10AHprg/o.jpg"], ["rating", "4.5"], ["price", "$"], ["display_phone", "(773) 857-3002"], ["title", "Coffee & Tea"], ["url", "https://www.yelp.com/biz/yefseis-cafe-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.943147"], ["longitude", "-87.649694"], ["version", "business"], ["itinerary_id", 2], ["created_at", "2017-12-06 18:04:56.603866"], ["updated_at", "2017-12-06 18:04:56.603866"], ["category", "restaurants"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Lincoln Park Zoo Administration Office"], ["display_address", "2001 N Clark St, Chicago, IL 60614, USA"], ["business_hours", "mystery"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipP1yB2zc6A4EK97ijSANioeqA6UAuJq46eOG4Rs=s1600-w800"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(312) 742-2000"], ["url", "http://www.lpzoo.org/"], ["latitude", "41.918712"], ["longitude", "-87.6353727"], ["version", "google_place"], ["itinerary_id", 2], ["created_at", "2017-12-06 18:04:57.481638"], ["updated_at", "2017-12-06 18:04:57.481638"], ["category", "zoo"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 2[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 1]]
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/itineraries/2
+Completed 302 Found in 3964ms (ActiveRecord: 33.2ms)
+
+
+Started GET "/itineraries/2" for 127.0.0.1 at 2017-12-06 12:04:57 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mItinerary Load (0.1ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 2]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [6 times] (2.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (7.3ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 138ms (Views: 131.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2017-12-06 12:05:44 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1[0m  [["user_id", 1]]
+  Rendered users/_list.html.erb (4.2ms)
+  Rendered users/show.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 86ms (Views: 81.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/itineraries/2" for 127.0.0.1 at 2017-12-06 12:05:46 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 2]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [6 times] (1.6ms)
+  Rendered itineraries/show.html.erb within layouts/application (5.2ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 81ms (Views: 76.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:06:02 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "begin_time"=>"14:00", "end_time"=>"21:00", "budget"=>"100", "location"=>"2052 N Larrabees St chicago"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 2]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 7]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 6]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 5]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 4]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 3]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 2]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "14:00"], ["end_time", "21:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 18:06:02.759814"], ["updated_at", "2017-12-06 18:06:02.759814"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Safehouse Chicago Leaks Intel on New Bond Brunch with Bottomless Mimosas"], ["display_address", "60 E Ontario St Chicago, IL 60611"], ["time_start", "2017-11-19 19:00"], ["event_site_url", "https://www.yelp.com/events/chicago-safehouse-chicago-leaks-intel-on-new-bond-brunch-with-bottomless-mimosas?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/F5LLGaH1wNdUoO1F4ignvQ/o.jpg"], ["latitude", "41.8934761420147"], ["longitude", "-87.6259666423279"], ["version", "event"], ["itinerary_id", 3], ["created_at", "2017-12-06 18:06:03.440309"], ["updated_at", "2017-12-06 18:06:03.440309"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 3]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Holiday Season Cocktails Wine Party Sponsored by Yelp Elite"], ["display_address", "323 East Upper Wacker Drive Chicago, IL 60601"], ["time_start", "2017-12-10 05:00"], ["event_site_url", "https://www.yelp.com/events/chicago-holiday-season-cocktails-wine-party-sponsored-by-yelp-elite?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.eventbrite.com/e/happy-holidays-wine-social-swissotel-tickets-39549998109"], ["cost", 21], ["cost_max", 58], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/UkudEuiqaOO2ic5cs-WKxQ/o.jpg"], ["latitude", "41.8866362355827"], ["longitude", "-87.6196431474958"], ["version", "event"], ["itinerary_id", 3], ["created_at", "2017-12-06 18:06:03.677403"], ["updated_at", "2017-12-06 18:06:03.677403"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "The Allis"], ["display_address", "113-125 N Green St Chicago, IL 60607"], ["image_url", "https://s3-media4.fl.yelpcdn.com/bphoto/AF1PVOvyBcvbyuxFA3Of8A/o.jpg"], ["rating", "4.0"], ["price", "$$"], ["display_phone", "(312) 521-8000"], ["title", "Bars"], ["url", "https://www.yelp.com/biz/the-allis-chicago-3?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.883746"], ["longitude", "-87.648281"], ["version", "business"], ["itinerary_id", 3], ["created_at", "2017-12-06 18:06:04.270073"], ["updated_at", "2017-12-06 18:06:04.270073"], ["category", "nightlife"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Ada Street"], ["display_address", "1664 N Ada St, Chicago, IL 60642, USA"], ["business_hours", "{\"open_now\"=>false, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1730\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1730\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1730\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1730\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1730\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1730\"}}], \"weekday_text\"=>[\"Monday: Closed\", \"Tuesday: 5:30 – 10:00 PM\", \"Wednesday: 5:30 – 10:00 PM\", \"Thursday: 5:30 – 10:00 PM\", \"Friday: 5:30 – 11:00 PM\", \"Saturday: 5:30 – 11:00 PM\", \"Sunday: 5:30 – 10:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOuySQ3i3z8kWKIqW1IUBZ_pQ86BodvfwgucboJ=s1600-w800"], ["rating", "4.6"], ["price", "2"], ["display_phone", "(773) 697-7069"], ["url", "http://www.adastreetchicago.com/"], ["latitude", "41.9124417"], ["longitude", "-87.6624316"], ["version", "google_place"], ["itinerary_id", 3], ["created_at", "2017-12-06 18:06:05.170314"], ["updated_at", "2017-12-06 18:06:05.170314"], ["category", "restaurant"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Best of 2017: The Infinite Wrench"], ["display_address", "5153 N Ashland Ave Chicago, IL 60640"], ["time_start", "2017-12-02 07:30"], ["event_site_url", "https://www.yelp.com/events/chicago-best-of-2017-the-infinite-wrench?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["cost", 9], ["cost_max", 20], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/jynH8QT_KlQgF-T74MGNow/o.jpg"], ["latitude", "41.9759407"], ["longitude", "-87.669322"], ["version", "event"], ["itinerary_id", 3], ["created_at", "2017-12-06 18:06:05.527330"], ["updated_at", "2017-12-06 18:06:05.527330"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Sherwood Community Music School"], ["display_address", "1312 S Michigan Ave Columbia College Chicago Chicago, IL 60605"], ["image_url", "https://s3-media3.fl.yelpcdn.com/bphoto/CipM16jZF8ZaWBFYjiqMFQ/o.jpg"], ["rating", "4.5"], ["price", "$$"], ["display_phone", "(312) 369-3100"], ["title", "Performing Arts"], ["url", "https://www.yelp.com/biz/sherwood-community-music-school-chicago-2?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.8659814747096"], ["longitude", "-87.6259231567383"], ["version", "business"], ["itinerary_id", 3], ["created_at", "2017-12-06 18:06:05.964044"], ["updated_at", "2017-12-06 18:06:05.964044"], ["category", "arts"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Facets"], ["display_address", "1517 W Fullerton Ave, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1200\"}}], \"weekday_text\"=>[\"Monday: 12:00 – 9:00 PM\", \"Tuesday: 12:00 – 9:00 PM\", \"Wednesday: 12:00 – 9:00 PM\", \"Thursday: 12:00 – 9:00 PM\", \"Friday: 12:00 – 9:00 PM\", \"Saturday: 12:00 – 9:00 PM\", \"Sunday: 12:00 – 8:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipPHFItA0vqQS0pDwAgMyTq-QFGwKJW7VkgtqnAL=s1600-w800"], ["rating", "4.4"], ["price", "2"], ["display_phone", "(773) 281-9075"], ["url", "http://www.facets.org/"], ["latitude", "41.9250529"], ["longitude", "-87.6665264"], ["version", "google_place"], ["itinerary_id", 3], ["created_at", "2017-12-06 18:06:06.610731"], ["updated_at", "2017-12-06 18:06:06.610731"], ["category", "movie_theater"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 3[0m
+Redirected to http://localhost:3000/itineraries/3
+Completed 302 Found in 3869ms (ActiveRecord: 14.6ms)
+
+
+Started GET "/itineraries/3" for 127.0.0.1 at 2017-12-06 12:06:06 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mItinerary Load (0.1ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 3]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [7 times] (2.6ms)
+  Rendered itineraries/show.html.erb within layouts/application (6.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 70ms (Views: 65.3ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:10:05 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "begin_time"=>"14:00", "end_time"=>"21:00", "budget"=>"100", "location"=>"2052 N Larrabees St chicago"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:10:05 -0600
+  [1m[36mItinerary Load (1.2ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 3]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 14]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 13]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 12]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 11]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 10]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 9]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 8]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "14:00"], ["end_time", "21:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 18:10:05.959026"], ["updated_at", "2017-12-06 18:10:05.959026"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Safehouse Chicago Leaks Intel on New Bond Brunch with Bottomless Mimosas"], ["display_address", "60 E Ontario St Chicago, IL 60611"], ["time_start", "2017-11-19 19:00"], ["event_site_url", "https://www.yelp.com/events/chicago-safehouse-chicago-leaks-intel-on-new-bond-brunch-with-bottomless-mimosas?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/F5LLGaH1wNdUoO1F4ignvQ/o.jpg"], ["latitude", "41.8934761420147"], ["longitude", "-87.6259666423279"], ["version", "event"], ["itinerary_id", 4], ["created_at", "2017-12-06 18:10:06.933164"], ["updated_at", "2017-12-06 18:10:06.933164"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 4]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "The 22nd Annual 12 Bars of Xmas Bar Crawl, #TBOX2017, Wrigleyville, Chicago"], ["display_address", "1059 W Addison St Chicago, IL 60613"], ["time_start", "2017-12-09 18:00"], ["event_site_url", "https://www.yelp.com/events/chicago-the-22nd-annual-12-bars-of-xmas-bar-crawl-tbox2017-wrigleyville-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "http://www.tbox.org/tickets"], ["cost", 26], ["cost_max", 34], ["image_url", "https://s3-media4.fl.yelpcdn.com/ephoto/gYB4RIDN9xoJKpzCMOg2ow/o.jpg"], ["latitude", "41.946939"], ["longitude", "-87.656736"], ["version", "event"], ["itinerary_id", 4], ["created_at", "2017-12-06 18:10:07.573667"], ["updated_at", "2017-12-06 18:10:07.573667"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "The Crepe Shop"], ["display_address", "2928 N Broadway Chicago, IL 60657"], ["image_url", "https://s3-media2.fl.yelpcdn.com/bphoto/2yecLdl9PdKasaVGCg7fdQ/o.jpg"], ["rating", "5.0"], ["price", "$$"], ["display_phone", "(773) 857-0018"], ["title", "Desserts"], ["url", "https://www.yelp.com/biz/the-crepe-shop-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.93587"], ["longitude", "-87.64457"], ["version", "business"], ["itinerary_id", 4], ["created_at", "2017-12-06 18:10:08.257559"], ["updated_at", "2017-12-06 18:10:08.257559"], ["category", "restaurants"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Hotel Lincoln"], ["display_address", "1816 N Clark St, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"open\"=>{\"day\"=>0, \"time\"=>\"0000\"}}], \"weekday_text\"=>[\"Monday: Open 24 hours\", \"Tuesday: Open 24 hours\", \"Wednesday: Open 24 hours\", \"Thursday: Open 24 hours\", \"Friday: Open 24 hours\", \"Saturday: Open 24 hours\", \"Sunday: Open 24 hours\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipNCE72Hy6hJoOp22pZiL7UKq8tx-Epn_W0q1WLp=s1600-w800"], ["rating", "4.3"], ["price", "mystery"], ["display_phone", "(312) 254-4700"], ["url", "https://www.jdvhotels.com/hotels/illinois/chicago/hotel-lincoln?utm_source=local&utm_campaign=gmb&utm_medium=organic"], ["latitude", "41.9153368"], ["longitude", "-87.6346161"], ["version", "google_place"], ["itinerary_id", 4], ["created_at", "2017-12-06 18:10:09.514330"], ["updated_at", "2017-12-06 18:10:09.514330"], ["category", "amusement parks"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Best of 2017: The Infinite Wrench"], ["display_address", "5153 N Ashland Ave Chicago, IL 60640"], ["time_start", "2017-12-02 07:30"], ["event_site_url", "https://www.yelp.com/events/chicago-best-of-2017-the-infinite-wrench?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["cost", 9], ["cost_max", 20], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/jynH8QT_KlQgF-T74MGNow/o.jpg"], ["latitude", "41.9759407"], ["longitude", "-87.669322"], ["version", "event"], ["itinerary_id", 4], ["created_at", "2017-12-06 18:10:09.977238"], ["updated_at", "2017-12-06 18:10:09.977238"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Rooks Corner"], ["display_address", "625 S Ashland Ave Chicago, IL 60607"], ["image_url", "https://s3-media3.fl.yelpcdn.com/bphoto/ZoQDr8lqXf7OpeJEPV-rkQ/o.jpg"], ["rating", "3.5"], ["price", "$$"], ["display_phone", "(312) 529-6050"], ["title", "Bars"], ["url", "https://www.yelp.com/biz/rooks-corner-chicago-2?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.8738837"], ["longitude", "-87.6660615"], ["version", "business"], ["itinerary_id", 4], ["created_at", "2017-12-06 18:10:10.626112"], ["updated_at", "2017-12-06 18:10:10.626112"], ["category", "nightlife"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Lincoln Park Zoo Helen Brach Primate House"], ["display_address", "2058-2156 N Cannon Dr, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1000\"}}], \"weekday_text\"=>[\"Monday: 10:00 AM – 5:00 PM\", \"Tuesday: 10:00 AM – 5:00 PM\", \"Wednesday: 10:00 AM – 5:00 PM\", \"Thursday: 10:00 AM – 5:00 PM\", \"Friday: 10:00 AM – 5:00 PM\", \"Saturday: 10:00 AM – 5:00 PM\", \"Sunday: 10:00 AM – 5:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOPhVXoXpoUAUToquVTD06v8p4fISn-wBJTOZa_=s1600-w800"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(312) 742-2000"], ["url", "http://www.lpzoo.org/exhibit/helen-brach-primate-house"], ["latitude", "41.920802"], ["longitude", "-87.6324818"], ["version", "google_place"], ["itinerary_id", 4], ["created_at", "2017-12-06 18:10:11.722442"], ["updated_at", "2017-12-06 18:10:11.722442"], ["category", "zoo"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 4[0m
+Redirected to http://localhost:3000/itineraries/4
+Completed 302 Found in 5869ms (ActiveRecord: 36.1ms)
+
+
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "begin_time"=>"14:00", "end_time"=>"21:00", "budget"=>"100", "location"=>"2052 N Larrabees St chicago"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 4]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 21]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 20]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 19]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 18]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 17]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 16]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 15]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 4]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "14:00"], ["end_time", "21:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 18:10:11.837992"], ["updated_at", "2017-12-06 18:10:11.837992"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 5]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Fade"], ["display_address", "2433 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-02 03:30"], ["event_site_url", "https://www.yelp.com/events/chicago-fade?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "http://boxoffice.printtixusa.com/victorygardens/eventcalendar?v=0&i=0&g=0&g2=0&m=11&y=2017"], ["cost", 15], ["cost_max", 75], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/Lk1Udb_VyGQdvfuJsuFczg/o.jpg"], ["latitude", "41.926524"], ["longitude", "-87.649773"], ["version", "event"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:20.144972"], ["updated_at", "2017-12-06 18:10:20.144972"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Summer House Santa Monica"], ["display_address", "1954 N Halsted St Chicago, IL 60614"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/iLRPbdgnw_n9dVDVw-O7lg/o.jpg"], ["rating", "4.0"], ["price", "$$"], ["display_phone", "(773) 634-4100"], ["title", "American (Traditional)"], ["url", "https://www.yelp.com/biz/summer-house-santa-monica-chicago-4?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.9174315"], ["longitude", "-87.6486675"], ["version", "business"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:21.666763"], ["updated_at", "2017-12-06 18:10:21.666763"], ["category", "restaurants"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Facets' Chicago International Children's Film Festival"], ["display_address", "1517 W Fullerton Ave, Chicago, IL 60614, USA"], ["business_hours", "mystery"], ["image_url", "https://i.imgur.com/W29FmAv.png"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(773) 281-2166"], ["url", "#"], ["latitude", "41.9248859"], ["longitude", "-87.666474"], ["version", "google_place"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:22.387234"], ["updated_at", "2017-12-06 18:10:22.387234"], ["category", "movie_theater"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Bobby's Bike Hike Tours & Rentals"], ["display_address", "540 N Lake Shore Dr Chicago, IL 60611"], ["image_url", "https://s3-media3.fl.yelpcdn.com/bphoto/56fKEHIJreDfbe7N6FAl7g/o.jpg"], ["rating", "5.0"], ["price", "$$"], ["display_phone", "(312) 245-9300"], ["title", "Bike Rentals"], ["url", "https://www.yelp.com/biz/bobbys-bike-hike-tours-and-rentals-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.8924395839824"], ["longitude", "-87.6151605702225"], ["version", "business"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:28.593945"], ["updated_at", "2017-12-06 18:10:28.593945"], ["category", "active"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Chicago Costume"], ["display_address", "1120 W Fullerton Ave, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1000\"}}], \"weekday_text\"=>[\"Monday: 10:00 AM – 8:00 PM\", \"Tuesday: 10:00 AM – 8:00 PM\", \"Wednesday: 10:00 AM – 8:00 PM\", \"Thursday: 10:00 AM – 8:00 PM\", \"Friday: 10:00 AM – 8:00 PM\", \"Saturday: 10:00 AM – 7:00 PM\", \"Sunday: 11:00 AM – 6:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipPNatKT3iZb1N81Een25wbAlY8W4OoFAWHgkag=s1600-w800"], ["rating", "4.5"], ["price", "mystery"], ["display_phone", "(773) 528-1264"], ["url", "http://www.chicagocostume.com/"], ["latitude", "41.925616"], ["longitude", "-87.656901"], ["version", "google_place"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:30.132724"], ["updated_at", "2017-12-06 18:10:30.132724"], ["category", "clothing_store"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Safehouse Chicago Leaks Intel on New Bond Brunch with Bottomless Mimosas"], ["display_address", "60 E Ontario St Chicago, IL 60611"], ["time_start", "2017-11-19 19:00"], ["event_site_url", "https://www.yelp.com/events/chicago-safehouse-chicago-leaks-intel-on-new-bond-brunch-with-bottomless-mimosas?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/F5LLGaH1wNdUoO1F4ignvQ/o.jpg"], ["latitude", "41.8934761420147"], ["longitude", "-87.6259666423279"], ["version", "event"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:30.701625"], ["updated_at", "2017-12-06 18:10:30.701625"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Troquet River North"], ["display_address", "111 W Huron St Chicago, IL 60654"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/De7-6H3re45R5Sy0Sp4mcw/o.jpg"], ["rating", "4.0"], ["price", "$$"], ["display_phone", "(312) 202-9900"], ["title", "Bars"], ["url", "https://www.yelp.com/biz/troquet-river-north-chicago-2?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.8946376"], ["longitude", "-87.6313526"], ["version", "business"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:31.594397"], ["updated_at", "2017-12-06 18:10:31.594397"], ["category", "nightlife"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Core Chicago Pilates"], ["display_address", "2549 N Racine Ave, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1400\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0800\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1200\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0700\"}}], \"weekday_text\"=>[\"Monday: 5:00 AM – 9:00 PM\", \"Tuesday: 5:00 AM – 9:00 PM\", \"Wednesday: 5:00 AM – 9:00 PM\", \"Thursday: 5:00 AM – 9:00 PM\", \"Friday: 5:00 AM – 9:00 PM\", \"Saturday: 7:00 AM – 12:00 PM\", \"Sunday: 8:00 AM – 2:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOr3X5AEN688vZcCmMGuyW0WqV2NKPuFFDfjNGg=s1600-w800"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(773) 296-9660"], ["url", "http://www.corechicagopilates.com/"], ["latitude", "41.928529"], ["longitude", "-87.658337"], ["version", "google_place"], ["itinerary_id", 5], ["created_at", "2017-12-06 18:10:33.146888"], ["updated_at", "2017-12-06 18:10:33.146888"], ["category", "gym"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 5[0m
+Redirected to http://localhost:3000/itineraries/5
+Completed 302 Found in 21375ms (ActiveRecord: 16.6ms)
+
+
+Started GET "/itineraries/5" for 127.0.0.1 at 2017-12-06 12:10:33 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 5]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [8 times] (2.8ms)
+  Rendered itineraries/show.html.erb within layouts/application (7.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 71ms (Views: 65.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:10:50 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "begin_time"=>"14:00", "end_time"=>"21:00", "budget"=>"100", "location"=>"2052 N Larrabees St chicago"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 5]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 29]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 28]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 27]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 26]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 25]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 24]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 23]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 22]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 5]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "14:00"], ["end_time", "21:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 18:10:50.360253"], ["updated_at", "2017-12-06 18:10:50.360253"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Hellcab"], ["display_address", "1333 N Milwaukee Fl 2 Chicago, IL 60622"], ["time_start", "2017-11-12 03:30"], ["event_site_url", "https://www.yelp.com/events/chicago-hellcab?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["cost", 0], ["cost_max", 50], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/ERyHKqHfe3_TOxbMrNARDA/o.jpg"], ["latitude", "41.9061835345111"], ["longitude", "-87.6706943808808"], ["version", "event"], ["itinerary_id", 6], ["created_at", "2017-12-06 18:10:51.119646"], ["updated_at", "2017-12-06 18:10:51.119646"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 6]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["name", "Chicago Wine Fest"], ["display_address", "155 W Kinzie St Chicago, IL 60654"], ["time_start", "2017-12-09 20:00"], ["event_site_url", "https://www.yelp.com/events/chicago-chicago-wine-fest-2?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.eventbrite.com/e/chicago-wine-fest-formerly-river-north-wine-fest-tickets-38089874841"], ["cost", 50], ["image_url", "https://s3-media4.fl.yelpcdn.com/ephoto/ALM2q74Zn91MqsPP5X1Ltg/o.jpg"], ["latitude", "41.88884"], ["longitude", "-87.6331884"], ["version", "event"], ["itinerary_id", 6], ["created_at", "2017-12-06 18:10:51.359183"], ["updated_at", "2017-12-06 18:10:51.359183"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "The Globe Pub"], ["display_address", "1934 W Irving Park Rd Chicago, IL 60613"], ["image_url", "https://s3-media4.fl.yelpcdn.com/bphoto/wZ8DFKub72WHefVTDiOXtA/o.jpg"], ["rating", "4.0"], ["price", "$$"], ["display_phone", "(773) 871-3757"], ["title", "Sports Bars"], ["url", "https://www.yelp.com/biz/the-globe-pub-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.954487"], ["longitude", "-87.677776"], ["version", "business"], ["itinerary_id", 6], ["created_at", "2017-12-06 18:10:51.814617"], ["updated_at", "2017-12-06 18:10:51.814617"], ["category", "nightlife"]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Peet's Coffee"], ["display_address", "1000 W North Ave, Chicago, IL 60622, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0600\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0600\"}}], \"weekday_text\"=>[\"Monday: 5:30 AM – 8:00 PM\", \"Tuesday: 5:30 AM – 8:00 PM\", \"Wednesday: 5:30 AM – 8:00 PM\", \"Thursday: 5:30 AM – 8:00 PM\", \"Friday: 5:30 AM – 8:00 PM\", \"Saturday: 6:00 AM – 8:00 PM\", \"Sunday: 6:00 AM – 8:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOVEYgVuOJ8KCVTSIxjl68amr7WqeAz85zaq8TO=s1600-w800"], ["rating", "4.5"], ["price", "1"], ["display_phone", "(312) 475-9782"], ["url", "http://www.peets.com/"], ["latitude", "41.9111137"], ["longitude", "-87.6537368"], ["version", "google_place"], ["itinerary_id", 6], ["created_at", "2017-12-06 18:10:53.475953"], ["updated_at", "2017-12-06 18:10:53.475953"], ["category", "cafe"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Fade"], ["display_address", "2433 N Lincoln Ave Chicago, IL 60614"], ["time_start", "2017-12-02 03:30"], ["event_site_url", "https://www.yelp.com/events/chicago-fade?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "http://boxoffice.printtixusa.com/victorygardens/eventcalendar?v=0&i=0&g=0&g2=0&m=11&y=2017"], ["cost", 15], ["cost_max", 75], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/Lk1Udb_VyGQdvfuJsuFczg/o.jpg"], ["latitude", "41.926524"], ["longitude", "-87.649773"], ["version", "event"], ["itinerary_id", 6], ["created_at", "2017-12-06 18:10:53.748377"], ["updated_at", "2017-12-06 18:10:53.748377"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Baptiste & Bottle"], ["display_address", "101 E Erie St Fl 20 Chicago, IL 60611"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/nChUAWp8q2skPy4YYrhB6A/o.jpg"], ["rating", "4.0"], ["price", "$$"], ["display_phone", "(312) 667-6793"], ["title", "American (New)"], ["url", "https://www.yelp.com/biz/baptiste-and-bottle-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.893975"], ["longitude", "-87.6252358"], ["version", "business"], ["itinerary_id", 6], ["created_at", "2017-12-06 18:10:54.299076"], ["updated_at", "2017-12-06 18:10:54.299076"], ["category", "nightlife"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Alfred Caldwell Lily Pool"], ["display_address", "125 W Fullerton Pkwy, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0730\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0730\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0730\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0730\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0730\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0730\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0730\"}}], \"weekday_text\"=>[\"Monday: 7:30 AM – 7:00 PM\", \"Tuesday: 7:30 AM – 7:00 PM\", \"Wednesday: 7:30 AM – 7:00 PM\", \"Thursday: 7:30 AM – 7:00 PM\", \"Friday: 7:30 AM – 7:00 PM\", \"Saturday: 7:30 AM – 7:00 PM\", \"Sunday: 7:30 AM – 7:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipPi-monLQpiML6phHe2lGOutVDz3IuP0kW36dKA=s1600-w800"], ["rating", "4.8"], ["price", "mystery"], ["display_phone", "(773) 883-7275"], ["url", "http://lincolnparkconservancy.org/projects/alfred-caldwell-lily-pool/"], ["latitude", "41.9249576"], ["longitude", "-87.6339077"], ["version", "google_place"], ["itinerary_id", 6], ["created_at", "2017-12-06 18:10:55.614169"], ["updated_at", "2017-12-06 18:10:55.614169"], ["category", "park"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 6[0m
+Redirected to http://localhost:3000/itineraries/6
+Completed 302 Found in 5276ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/itineraries/6" for 127.0.0.1 at 2017-12-06 12:10:55 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 6]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [7 times] (1.8ms)
+  Rendered itineraries/show.html.erb within layouts/application (5.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 64ms (Views: 58.7ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:11:20 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "begin_time"=>"14:00", "end_time"=>"21:00", "budget"=>"100", "location"=>"2052 N Larrabees St chicago"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 6]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 36]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 35]]
+  [1m[35mSQL (0.8ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 34]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 33]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 32]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 31]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 30]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 6]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "14:00"], ["end_time", "21:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 18:11:20.402317"], ["updated_at", "2017-12-06 18:11:20.402317"]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "The 22nd Annual 12 Bars of Xmas Bar Crawl, #TBOX2017, Wrigleyville, Chicago"], ["display_address", "1059 W Addison St Chicago, IL 60613"], ["time_start", "2017-12-09 18:00"], ["event_site_url", "https://www.yelp.com/events/chicago-the-22nd-annual-12-bars-of-xmas-bar-crawl-tbox2017-wrigleyville-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "http://www.tbox.org/tickets"], ["cost", 26], ["cost_max", 34], ["image_url", "https://s3-media4.fl.yelpcdn.com/ephoto/gYB4RIDN9xoJKpzCMOg2ow/o.jpg"], ["latitude", "41.946939"], ["longitude", "-87.656736"], ["version", "event"], ["itinerary_id", 7], ["created_at", "2017-12-06 18:11:20.895166"], ["updated_at", "2017-12-06 18:11:20.895166"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 7]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["name", "Chicago Wine Fest"], ["display_address", "155 W Kinzie St Chicago, IL 60654"], ["time_start", "2017-12-09 20:00"], ["event_site_url", "https://www.yelp.com/events/chicago-chicago-wine-fest-2?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.eventbrite.com/e/chicago-wine-fest-formerly-river-north-wine-fest-tickets-38089874841"], ["cost", 50], ["image_url", "https://s3-media4.fl.yelpcdn.com/ephoto/ALM2q74Zn91MqsPP5X1Ltg/o.jpg"], ["latitude", "41.88884"], ["longitude", "-87.6331884"], ["version", "event"], ["itinerary_id", 7], ["created_at", "2017-12-06 18:11:21.144715"], ["updated_at", "2017-12-06 18:11:21.144715"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Jay Pritzker Pavilion"], ["display_address", "201 E Randolph St Millennium Park Chicago, IL 60601"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/3w8A9qWayvpKI3s-yc_3tg/o.jpg"], ["rating", "4.5"], ["price", "$"], ["display_phone", "(312) 742-1168"], ["title", "Music Venues"], ["url", "https://www.yelp.com/biz/jay-pritzker-pavilion-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.883396"], ["longitude", "-87.622459"], ["version", "business"], ["itinerary_id", 7], ["created_at", "2017-12-06 18:11:21.524050"], ["updated_at", "2017-12-06 18:11:21.524050"], ["category", "arts"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Alinea"], ["display_address", "1723 N Halsted St, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>false, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2130\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1700\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2130\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1700\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2130\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1700\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2130\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1700\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2130\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1700\"}}], \"weekday_text\"=>[\"Monday: Closed\", \"Tuesday: Closed\", \"Wednesday: 5:00 – 9:30 PM\", \"Thursday: 5:00 – 9:30 PM\", \"Friday: 5:00 – 9:30 PM\", \"Saturday: 5:00 – 9:30 PM\", \"Sunday: 5:00 – 9:30 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipPbfaODuokPAwDYjMGbpMk2tJvk22p6pvPAbXRU=s1600-w800"], ["rating", "4.6"], ["price", "4"], ["display_phone", "(312) 867-0110"], ["url", "http://alinea.tocktix.com/"], ["latitude", "41.9134555"], ["longitude", "-87.648164"], ["version", "google_place"], ["itinerary_id", 7], ["created_at", "2017-12-06 18:11:22.771227"], ["updated_at", "2017-12-06 18:11:22.771227"], ["category", "restaurant"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Hellcab"], ["display_address", "1333 N Milwaukee Fl 2 Chicago, IL 60622"], ["time_start", "2017-11-12 03:30"], ["event_site_url", "https://www.yelp.com/events/chicago-hellcab?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["cost", 0], ["cost_max", 50], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/ERyHKqHfe3_TOxbMrNARDA/o.jpg"], ["latitude", "41.9061835345111"], ["longitude", "-87.6706943808808"], ["version", "event"], ["itinerary_id", 7], ["created_at", "2017-12-06 18:11:23.027121"], ["updated_at", "2017-12-06 18:11:23.027121"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Cup & Spoon"], ["display_address", "2415 W North Ave Chicago, IL 60647"], ["image_url", "https://s3-media3.fl.yelpcdn.com/bphoto/BMPI__wc7jzhq74MhImS2w/o.jpg"], ["rating", "4.5"], ["price", "$"], ["display_phone", "(773) 697-4421"], ["title", "Coffee & Tea"], ["url", "https://www.yelp.com/biz/cup-and-spoon-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.9101546945704"], ["longitude", "-87.6877036943947"], ["version", "business"], ["itinerary_id", 7], ["created_at", "2017-12-06 18:11:23.478962"], ["updated_at", "2017-12-06 18:11:23.478962"], ["category", "arts"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Glazed and Infused"], ["display_address", "939 W Armitage Ave, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1500\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0700\"}}], \"weekday_text\"=>[\"Monday: 7:00 AM – 6:00 PM\", \"Tuesday: 7:00 AM – 6:00 PM\", \"Wednesday: 7:00 AM – 6:00 PM\", \"Thursday: 7:00 AM – 6:00 PM\", \"Friday: 7:00 AM – 6:00 PM\", \"Saturday: 7:00 AM – 5:00 PM\", \"Sunday: 7:00 AM – 3:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipPArXqKvX4zZqRa9qK7odeZGzWE3EbFfw6-D3Uq=s1600-w800"], ["rating", "4.5"], ["price", "1"], ["display_phone", "(312) 226-5556"], ["url", "http://goglazed.com/"], ["latitude", "41.9179568"], ["longitude", "-87.6524022"], ["version", "google_place"], ["itinerary_id", 7], ["created_at", "2017-12-06 18:11:24.892619"], ["updated_at", "2017-12-06 18:11:24.892619"], ["category", "bakery"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 7[0m
+Redirected to http://localhost:3000/itineraries/7
+Completed 302 Found in 4513ms (ActiveRecord: 18.8ms)
+
+
+Started GET "/itineraries/7" for 127.0.0.1 at 2017-12-06 12:11:24 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 7]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [7 times] (1.5ms)
+  Rendered itineraries/show.html.erb within layouts/application (4.7ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 64ms (Views: 59.5ms | ActiveRecord: 0.7ms)
+
+
