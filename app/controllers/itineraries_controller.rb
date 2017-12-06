@@ -62,7 +62,7 @@ class ItinerariesController < ApplicationController
     @itinerary = Itinerary.find_by(id: params[:id])
     @itinerary.destroy
 
-    redirect_to root_path
+    redirect_to user_path(current_user)
   end
 
   def updated
