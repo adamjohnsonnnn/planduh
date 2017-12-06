@@ -17,8 +17,8 @@ class ItinerariesController < ApplicationController
 
     if logged_in?
       if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
-        api_response = create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
-        destroy_duplicate_activities(api_response)
+          api_response = create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
+          destroy_duplicate_activities(api_response)
 
         redirect_to "/itineraries/#{@itinerary.id}"
       else
@@ -191,11 +191,11 @@ class ItinerariesController < ApplicationController
     top_five_responses = reverse_sorted_response.slice(0,5)
     if top_five_responses.sample
       full_response = @client.spot(top_five_responses.sample.place_id)
-      set_google_places_attributes(full_response, itinerary)
+      set_google_places_attributes(full_response, itinerary, google_places_request_types)
     end
   end
 
-  def set_google_places_attributes(response, itinerary)
+  def set_google_places_attributes(response, itinerary, category)
       photos = response.photos
       if photos.length > 0
         photo = photos[0].fetch_url(800)
@@ -214,6 +214,7 @@ class ItinerariesController < ApplicationController
       display_address: response.formatted_address || "mystery",
       business_hours: response.opening_hours || "mystery",
       itinerary_id: itinerary.id,
+      category: category,
       version: "google_place"
     )
   end
