@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
 	has_secure_password
 
-	validates :first_name, :last_name, :email, :agreed_to_terms, presence: true
+	validates :first_name, :last_name, :email, :agreed, presence: true
   validates_uniqueness_of :email
 
   has_many :preferences
