@@ -36,6 +36,7 @@ class ItinerariesController < ApplicationController
   def show
     @itinerary = Itinerary.find_by(id: params[:id])
     @activities = @itinerary.activities
+    @promo_code = "PLANDUHFUN"
 
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
       marker.lat activity.latitude
@@ -205,7 +206,7 @@ class ItinerariesController < ApplicationController
       display_address: response.formatted_address || "mystery",
       business_hours: response.opening_hours || "mystery",
       itinerary_id: itinerary.id,
-      version: "google_places"
+      version: "google_place"
     )
   end
 
