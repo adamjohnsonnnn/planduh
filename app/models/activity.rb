@@ -23,6 +23,20 @@ class Activity < ApplicationRecord
     end
   end
 
+  def google_place_show_price
+    if self.price == "1"
+      return "$"
+    elsif self.price == "2"
+      return "$$"
+    elsif self.price == "3"
+      return "$$$"
+    elsif self.price == "4"
+      return "$$$$"
+    else
+      return "mystery"
+    end
+  end
+
   def build_info_window
     if self.version == "business" || self.version == "google_place"
       activity_info = "<h5>#{self.name}</h5>
