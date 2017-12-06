@@ -7,7 +7,7 @@ class CreateItineraries < ActiveRecord::Migration[5.1]
       t.text :end_time
       t.integer :budget
       t.string  :location
-      t.boolean :confirmed?
+      t.boolean :confirmed?, :default => false
       t.references :user
 
       t.timestamps
