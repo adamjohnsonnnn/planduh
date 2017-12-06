@@ -26,12 +26,6 @@ RSpec.describe Itinerary, type: :model do
         expect(itinerary.budget).to be_a(Integer)
     end
 
-    # it 'an itinerary has a properly formatted date' do
-    #     today = Date.today
-    #     p today
-    #     expect(itinerary.date).should == today
-    # end
-
     it 'an itinerary has a properly start and end time' do
         expect(itinerary.begin_time).to be_truthy
     end
