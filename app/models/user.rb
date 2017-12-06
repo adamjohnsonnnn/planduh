@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
 	has_secure_password
 
-	validates :first_name, :last_name, :email, presence: true
+	validates :first_name, :last_name, :email, :agreed, presence: true
   validates_uniqueness_of :email
 
   has_many :preferences
@@ -20,7 +20,7 @@ class User < ApplicationRecord
   	self.preferences.select { |preference| preference.is_necessary? == false }
   end
 
-  def submitted_preferences 
+  def submitted_preferences
   	supplemental_preferences = self.supplemental_preferences
   	submitted_preferences = supplemental_preferences.sample(rand(supplemental_preferences.length))
   	submitted_preferences = submitted_preferences + self.necessary_preferences
