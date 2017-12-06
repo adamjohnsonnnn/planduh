@@ -1,7 +1,10 @@
 
 <div>
   <form class="js--form" action="/survey_questions/<%= question.id %>/user_responses" method="POST">
-      <input type="text"  name="answer" placeholder="Enter all restrictions here:" >
-      <input type="submit" value="submit">
+      <textarea class="form-control" rows="4" id="comment" name="answer" placeholder="Enter all restrictions here:"></textarea>
+
+
+        <button class="w3-btn w3-black open-question-button" type="submit"><i class="fa "></i> NEXT</button>
+     <!--  <input type="submit" value="NEXT"> -->
     </form>
 </div>
