@@ -15,6 +15,9 @@ class ItinerariesController < ApplicationController
     run_house_cleaner
     window = time_window(params[:begin_time], params[:end_time])
 
+    # Returns num of activities for given time window
+    num_of_activities = calc_num_of_activities(window)
+
     if logged_in?
       if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
         api_response = create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
@@ -266,6 +269,15 @@ class ItinerariesController < ApplicationController
         first_one = duplicates.shift
         duplicates.each { |repeated_activity| repeated_activity.destroy }
       end
+  end
+
+  def calc_num_of_activities(window)
+    return 1 if window <= 2
+    return 2 if window > 2 && window <= 4
+    return 3 if window > 4 && window <= 6
+    return 4 if window > 6 && window <= 8
+    return 5 if window > 8 && window <= 10
+    return 6
   end
 
 end
