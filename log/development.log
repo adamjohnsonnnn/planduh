@@ -10264,3 +10264,457 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 74ms (Views: 66.8ms | ActiveRecord: 0.8ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-12-06 11:30:03 -0600
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 439ms (Views: 361.5ms | ActiveRecord: 7.8ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:31:19 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "location"=>"charleston NC", "begin_time"=>"13:00", "end_time"=>"17:00", "budget"=>"100"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.7ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 74]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 74]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "13:00"], ["end_time", "17:00"], ["budget", 100], ["location", "charleston NC"], ["user_id", 1], ["created_at", "2017-12-06 17:31:29.577103"], ["updated_at", "2017-12-06 17:31:29.577103"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+Completed 500 Internal Server Error in 1079ms (ActiveRecord: 13.2ms)
+
+
+  
+Timeout::Error (execution expired):
+  
+app/services/yelp_response.rb:21:in `get_events_response'
+app/controllers/itineraries_controller.rb:84:in `submit_events_api_call'
+app/controllers/itineraries_controller.rb:238:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:21:in `block in create'
+app/controllers/itineraries_controller.rb:20:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:32:24 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "location"=>"charleston NC", "begin_time"=>"13:00", "end_time"=>"17:00", "budget"=>"100"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 75]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 75]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "13:00"], ["end_time", "17:00"], ["budget", 100], ["location", "charleston NC"], ["user_id", 1], ["created_at", "2017-12-06 17:32:24.921439"], ["updated_at", "2017-12-06 17:32:24.921439"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 76]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/logout" for 127.0.0.1 at 2017-12-06 11:33:32 -0600
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-06 11:33:32 -0600
+Processing by ItinerariesController#new as HTML
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 11:33:32 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 422ms (Views: 389.1ms | ActiveRecord: 4.0ms)
+
+
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT  "activities".* FROM "activities" ORDER BY "activities"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT  "activities".* FROM "activities" ORDER BY "activities"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/logout" for 127.0.0.1 at 2017-12-06 11:46:45 -0600
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-06 11:46:45 -0600
+Processing by ItinerariesController#new as HTML
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 11:46:45 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 438ms (Views: 406.8ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/sessions/new" for 127.0.0.1 at 2017-12-06 11:46:47 -0600
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 78ms (Views: 76.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2017-12-06 11:46:48 -0600
+Processing by SessionsController#create as HTML
+  Parameters: {"email"=>"adam@adam.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "adam@adam.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 77ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-06 11:46:48 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.6ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 163ms (Views: 102.7ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2017-12-06 11:46:50 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1[0m  [["user_id", 1]]
+  Rendered users/_list.html.erb (1.1ms)
+  Rendered users/show.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 86ms (Views: 74.1ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/itineraries/76" for 127.0.0.1 at 2017-12-06 11:46:53 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"76"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 76], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 76]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [0 times] (0.0ms)
+  Rendered itineraries/show.html.erb within layouts/application (7.4ms)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 2.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for nil:NilClass):
+    158:     location: {
+    159:       pickup: {},
+    160:       destination: {
+    161:         latitude: '<%= @markers_hash[0][:lat] %>',
+    162:         longitude: '<%= @markers_hash[0][:lng] %>',
+    163:       },
+    164:     },
+  
+app/views/itineraries/show.html.erb:161:in `_app_views_itineraries_show_html_erb___3486232285188327949_70325281325300'
+Started GET "/itineraries/76" for 127.0.0.1 at 2017-12-06 11:47:26 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"76"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 76], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 76]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [0 times] (0.0ms)
+  Rendered itineraries/show.html.erb within layouts/application (4.9ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for nil:NilClass):
+    158:     location: {
+    159:       pickup: {},
+    160:       destination: {
+    161:         latitude: '<%= @markers_hash[0][:lat] %>',
+    162:         longitude: '<%= @markers_hash[0][:lng] %>',
+    163:       },
+    164:     },
+  
+app/views/itineraries/show.html.erb:161:in `_app_views_itineraries_show_html_erb___3486232285188327949_70325273310060'
+Started GET "/itineraries/76/delete" for 127.0.0.1 at 2017-12-06 11:47:54 -0600
+Processing by ItinerariesController#destroy as HTML
+  Parameters: {"id"=>"76"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 76], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 76]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 76]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 7ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2017-12-06 11:47:54 -0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1[0m  [["user_id", 1]]
+  Rendered users/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 64ms (Views: 60.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/itineraries/new" for 127.0.0.1 at 2017-12-06 11:47:55 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 79ms (Views: 76.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:48:12 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-09", "location"=>"2052 N Larrabees St chicago", "begin_time"=>"13:00", "end_time"=>"18:00", "budget"=>"100"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-09"], ["begin_time", "13:00"], ["end_time", "18:00"], ["budget", 100], ["location", "2052 N Larrabees St chicago"], ["user_id", 1], ["created_at", "2017-12-06 17:48:12.540455"], ["updated_at", "2017-12-06 17:48:12.540455"]]
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 77]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Holiday Season Cocktails Wine Party Sponsored by Yelp Elite"], ["display_address", "323 East Upper Wacker Drive Chicago, IL 60601"], ["time_start", "2017-12-10 05:00"], ["event_site_url", "https://www.yelp.com/events/chicago-holiday-season-cocktails-wine-party-sponsored-by-yelp-elite?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.eventbrite.com/e/happy-holidays-wine-social-swissotel-tickets-39549998109"], ["cost", 21], ["cost_max", 58], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/UkudEuiqaOO2ic5cs-WKxQ/o.jpg"], ["latitude", "41.8866362355827"], ["longitude", "-87.6196431474958"], ["version", "event"], ["itinerary_id", 77], ["created_at", "2017-12-06 17:48:14.022564"], ["updated_at", "2017-12-06 17:48:14.022564"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Jay Pritzker Pavilion"], ["display_address", "201 E Randolph St Millennium Park Chicago, IL 60601"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/3w8A9qWayvpKI3s-yc_3tg/o.jpg"], ["rating", "4.5"], ["price", "$"], ["display_phone", "(312) 742-1168"], ["title", "Music Venues"], ["url", "https://www.yelp.com/biz/jay-pritzker-pavilion-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.883396"], ["longitude", "-87.622459"], ["version", "business"], ["itinerary_id", 77], ["created_at", "2017-12-06 17:48:14.334101"], ["updated_at", "2017-12-06 17:48:14.334101"], ["category", "arts"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Jay Pritzker Pavilion"], ["display_address", "201 E Randolph St Millennium Park Chicago, IL 60601"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/3w8A9qWayvpKI3s-yc_3tg/o.jpg"], ["rating", "4.5"], ["price", "$"], ["display_phone", "(312) 742-1168"], ["title", "Music Venues"], ["url", "https://www.yelp.com/biz/jay-pritzker-pavilion-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.883396"], ["longitude", "-87.622459"], ["version", "business"], ["itinerary_id", 77], ["created_at", "2017-12-06 17:48:15.191626"], ["updated_at", "2017-12-06 17:48:15.191626"], ["category", "arts"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "DePaul University Bookstore - Lincoln Park Campus"], ["display_address", "2425 N Sheffield Ave, Chicago, IL 60614, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1500\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1000\"}}], \"weekday_text\"=>[\"Monday: 9:00 AM – 6:00 PM\", \"Tuesday: 9:00 AM – 6:00 PM\", \"Wednesday: 9:00 AM – 6:00 PM\", \"Thursday: 9:00 AM – 6:00 PM\", \"Friday: 9:00 AM – 5:00 PM\", \"Saturday: 10:00 AM – 3:00 PM\", \"Sunday: Closed\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipMpIGbMu-U9jR195dPN3qjQ0CI2VXG2zmJv08_E=s1600-w800"], ["rating", "4.2"], ["price", "mystery"], ["display_phone", "(773) 325-7700"], ["url", "http://www.depaul.bncollege.com/"], ["latitude", "41.9260743"], ["longitude", "-87.6532609"], ["version", "google_place"], ["itinerary_id", 77], ["created_at", "2017-12-06 17:48:15.836027"], ["updated_at", "2017-12-06 17:48:15.836027"], ["category", "book_store"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Jay Pritzker Pavilion"], ["display_address", "201 E Randolph St Millennium Park Chicago, IL 60601"], ["image_url", "https://s3-media1.fl.yelpcdn.com/bphoto/3w8A9qWayvpKI3s-yc_3tg/o.jpg"], ["rating", "4.5"], ["price", "$"], ["display_phone", "(312) 742-1168"], ["title", "Music Venues"], ["url", "https://www.yelp.com/biz/jay-pritzker-pavilion-chicago?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "41.883396"], ["longitude", "-87.622459"], ["version", "business"], ["itinerary_id", 77], ["created_at", "2017-12-06 17:48:16.473114"], ["updated_at", "2017-12-06 17:48:16.473114"], ["category", "arts"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Firecakes Donuts"], ["display_address", "2453 N Clark St, Chicago, IL 60657, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0700\"}}], \"weekday_text\"=>[\"Monday: 7:00 AM – 10:00 PM\", \"Tuesday: 7:00 AM – 10:00 PM\", \"Wednesday: 7:00 AM – 10:00 PM\", \"Thursday: 7:00 AM – 10:00 PM\", \"Friday: 7:00 AM – 11:00 PM\", \"Saturday: 7:00 AM – 11:00 PM\", \"Sunday: 7:00 AM – 10:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipP5XN2ToiEgUR4BXZ2QonQLQRAgJYLgCS-q_yoa=s1600-w800"], ["rating", "4.6"], ["price", "1"], ["display_phone", "(773) 666-5277"], ["url", "http://www.firecakesdonuts.com/"], ["latitude", "41.926942"], ["longitude", "-87.6411857"], ["version", "google_place"], ["itinerary_id", 77], ["created_at", "2017-12-06 17:48:17.214546"], ["updated_at", "2017-12-06 17:48:17.214546"], ["category", "bakery"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 77[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 310]]
+  [1m[35m (3.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 309]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/itineraries/77
+Completed 302 Found in 4689ms (ActiveRecord: 58.9ms)
+
+
+Started GET "/itineraries/77" for 127.0.0.1 at 2017-12-06 11:48:17 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"77"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 77], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 77]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [4 times] (1.4ms)
+  Rendered itineraries/show.html.erb within layouts/application (4.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 68ms (Views: 63.2ms | ActiveRecord: 0.8ms)
+
+
