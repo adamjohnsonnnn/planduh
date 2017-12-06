@@ -1181,3 +1181,331 @@ Migrating to CreateRecommenders (20171203001021)
   [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5639883873923918010)[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2017-12-05 21:19:45 -0600
+  [1m[35m (55.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.1.4) lib/active_record/migration.rb:576:in `check_pending!'
+activerecord (5.1.4) lib/active_record/migration.rb:553:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.4) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.11.0) lib/puma/configuration.rb:225:in `call'
+puma (3.11.0) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.0) lib/puma/server.rb:438:in `process_client'
+puma (3.11.0) lib/puma/server.rb:302:in `block in run'
+puma (3.11.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5639883873923918010)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddPhotoUrlToSurveyQuestion (20171206012742)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "survey_questions" ADD "photo_url" character varying[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171206012742"]]
+  [1m[35m (39.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5639883873923918010)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2017-12-05 21:20:28 -0600
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.6ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 1130ms (Views: 989.7ms | ActiveRecord: 8.9ms)
+
+
+Started GET "/logout" for 127.0.0.1 at 2017-12-05 21:20:33 -0600
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-05 21:20:33 -0600
+Processing by ItinerariesController#new as HTML
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-05 21:20:33 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (27.9ms)
+Completed 200 OK in 168ms (Views: 162.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-05 21:20:35 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 103ms (Views: 100.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-12-05 21:20:48 -0600
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XK5FMvOgye4I0Cf/YLCd24Ddo9+ZZBAQTM7HkC+X6mr3LtLui+Bj1vrc3U2RydrPyIc4jth4dNXr0zQk7dVcyQ==", "user"=>{"first_name"=>"Mitch", "last_name"=>"Mele", "email"=>"mitch@no.com", "password"=>"[FILTERED]"}, "commit"=>"Sign up!"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "mitch@no.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["first_name", "Mitch"], ["last_name", "Mele"], ["email", "mitch@no.com"], ["password_digest", "$2a$10$JyuBNzVuzcrL.HgBvmoyPOcXt90EeuhVGSmrbHIZjuofVe7Ol6E5u"], ["created_at", "2017-12-06 03:20:48.413803"], ["updated_at", "2017-12-06 03:20:48.413803"]]
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys
+Completed 302 Found in 162ms (ActiveRecord: 48.6ms)
+
+
+Started GET "/surveys" for 127.0.0.1 at 2017-12-05 21:20:48 -0600
+Processing by SurveysController#index as HTML
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.7ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 0]]
+  Rendered surveys/_open_ended_question.html.erb (0.5ms)
+  Rendered surveys/_open_ended_response.html.erb (0.8ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (55.4ms)
+Completed 200 OK in 177ms (Views: 144.3ms | ActiveRecord: 9.2ms)
+
+
+Started POST "/survey_questions/1/user_responses" for 127.0.0.1 at 2017-12-05 21:20:56 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Vegan ", "survey_question_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Vegan "], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (13.7ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["survey_question_id", 1], ["response", "Vegan "], ["created_at", "2017-12-06 03:20:56.768497"], ["updated_at", "2017-12-06 03:20:56.768497"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=2
+Completed 302 Found in 33ms (ActiveRecord: 16.7ms)
+
+
+Started GET "/surveys?page=2" for 127.0.0.1 at 2017-12-05 21:20:56 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"2"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.4ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  Rendered surveys/_yes_no_question.html.erb (0.7ms)
+  [1m[36mSurveyResponse Load (0.4ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 2]]
+  Rendered surveys/_yes_no_response.html.erb (15.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (38.4ms)
+Completed 200 OK in 125ms (Views: 119.6ms | ActiveRecord: 4.7ms)
+
+
+Started POST "/survey_questions/2/user_responses" for 127.0.0.1 at 2017-12-05 21:20:58 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"No...I don't prefer physical activity for my events", "survey_question_id"=>"2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "No...I don't prefer physical activity for my events"], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["survey_question_id", 2], ["response", "No...I don't prefer physical activity for my events"], ["created_at", "2017-12-06 03:20:58.749048"], ["updated_at", "2017-12-06 03:20:58.749048"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=3
+Completed 302 Found in 8ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/surveys?page=3" for 127.0.0.1 at 2017-12-05 21:20:58 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"3"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  Rendered surveys/_yes_no_question.html.erb (0.4ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 3]]
+  Rendered surveys/_yes_no_response.html.erb (11.8ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 117ms (Views: 115.1ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/survey_questions/3/user_responses" for 127.0.0.1 at 2017-12-05 21:21:01 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Yes, pour me a cold one", "survey_question_id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Yes, pour me a cold one"], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["survey_question_id", 3], ["response", "Yes, pour me a cold one"], ["created_at", "2017-12-06 03:21:01.805986"], ["updated_at", "2017-12-06 03:21:01.805986"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=4
+Completed 302 Found in 8ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/surveys?page=4" for 127.0.0.1 at 2017-12-05 21:21:01 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"4"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.5ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 3]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.6ms)
+  [1m[36mSurveyResponse Load (0.4ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 4]]
+  Rendered surveys/_multiple_choice_response.html.erb (3.1ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (66.3ms)
+Completed 200 OK in 157ms (Views: 154.2ms | ActiveRecord: 1.9ms)
+
+
+Started POST "/survey_questions/4/user_responses" for 127.0.0.1 at 2017-12-05 21:21:02 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Love it", "page"=>"1", "survey_question_id"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Love it"], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["survey_question_id", 4], ["response", "Love it"], ["created_at", "2017-12-06 03:21:02.993671"], ["updated_at", "2017-12-06 03:21:02.993671"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=5
+Completed 302 Found in 10ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/surveys?page=5" for 127.0.0.1 at 2017-12-05 21:21:03 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"5"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 4]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.4ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 5]]
+  Rendered surveys/_multiple_choice_response.html.erb (2.4ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 113ms (Views: 110.8ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/survey_questions/5/user_responses" for 127.0.0.1 at 2017-12-05 21:21:04 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Paris", "page"=>"1", "survey_question_id"=>"5"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Paris"], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["survey_question_id", 5], ["response", "Paris"], ["created_at", "2017-12-06 03:21:04.459225"], ["updated_at", "2017-12-06 03:21:04.459225"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=6
+Completed 302 Found in 9ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/surveys?page=6" for 127.0.0.1 at 2017-12-05 21:21:04 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"6"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.4ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 5]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 6]]
+  Rendered surveys/_multiple_choice_response.html.erb (2.6ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 104ms (Views: 102.4ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/survey_questions/6/user_responses" for 127.0.0.1 at 2017-12-05 21:21:05 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Go day drinking at a bar", "page"=>"1", "survey_question_id"=>"6"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Go day drinking at a bar"], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["survey_question_id", 6], ["response", "Go day drinking at a bar"], ["created_at", "2017-12-06 03:21:05.581634"], ["updated_at", "2017-12-06 03:21:05.581634"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=7
+Completed 302 Found in 8ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/surveys?page=7" for 127.0.0.1 at 2017-12-05 21:21:05 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"7"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 6]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 7]]
+  Rendered surveys/_multiple_choice_response.html.erb (2.6ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 97ms (Views: 95.5ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/survey_questions/7/user_responses" for 127.0.0.1 at 2017-12-05 21:21:09 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Classic Rock", "page"=>"1", "survey_question_id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Classic Rock"], ["user_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 2], ["survey_question_id", 7], ["response", "Classic Rock"], ["created_at", "2017-12-06 03:21:09.251566"], ["updated_at", "2017-12-06 03:21:09.251566"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=8
+Completed 302 Found in 8ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/surveys?page=8" for 127.0.0.1 at 2017-12-05 21:21:09 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"8"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 7]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  Rendered surveys/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 94ms (Views: 92.0ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/preferences" for 127.0.0.1 at 2017-12-05 21:21:13 -0600
+Processing by PreferencesController#create as HTML
+  Parameters: {"authenticity_token"=>"srcdrkG6SZpHSSHJ2/xtTCX9MH22YkP9ihIZSo2QjTEZN4pyOfrjorVF23sqhSpYbaerLPd+JzgtD+r+T9I7kg=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUserResponse Load (0.4ms)[0m  [1m[34mSELECT "user_responses".* FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "is_necessary?", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 2], ["keywords", "---\n- restaurants\n"], ["events_categories", "---\n- 'Vegan '\n"], ["business_categories", "---\n- 'Vegan '\n"], ["google_places_types", "---\n- restaurant\n- cafe\n"], ["is_necessary?", "t"], ["created_at", "2017-12-06 03:21:13.865141"], ["updated_at", "2017-12-06 03:21:13.865141"]]
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 2], ["keywords", "---\n- outside\n- experience\n- best\n- games\n"], ["events_categories", "---\n- sports-active-life\n- performing-arts\n- festivals-fairs\n"], ["business_categories", "---\n- active\n- arts\n- massage_therapy\n"], ["google_places_types", "---\n- amusement parks\n- art_gallery\n- aquarium\n- bowling_alley\n- gym\n- park\n- spa\n- zoo\n"], ["created_at", "2017-12-06 03:21:13.913486"], ["updated_at", "2017-12-06 03:21:13.913486"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 2], ["keywords", "---\n- fun\n- great\n- happy\n"], ["events_categories", "---\n- music\n- festivals-fairs\n- fashion\n- film\n"], ["business_categories", "---\n- nightlife\n- arts\n"], ["google_places_types", "---\n- movie_theater\n- beauty_salon\n- book_store\n- clothing_store\n- shopping_mall\n- museum\n"], ["created_at", "2017-12-06 03:21:13.921169"], ["updated_at", "2017-12-06 03:21:13.921169"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 2], ["keywords", "---\n- delicious\n- inspired\n- atmosphere\n- creative\n"], ["events_categories", "---\n- food-and-drink\n"], ["business_categories", "---\n- restaurants\n- nightlife\n"], ["google_places_types", "---\n- restaurant\n- bakery\n- cafe\n"], ["created_at", "2017-12-06 03:21:13.930374"], ["updated_at", "2017-12-06 03:21:13.930374"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 84ms (ActiveRecord: 45.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-05 21:21:13 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mPreference Load (1.1ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 2]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 95ms (Views: 89.2ms | ActiveRecord: 1.5ms)
+
+
