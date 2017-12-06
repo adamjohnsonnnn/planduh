@@ -23,10 +23,6 @@ class UserResponsesController < ApplicationController
 
 
 
-  def self.incomplete_survey?(survey)
-    survey.user_responses.count < 7
-  end
-
 
 
 
