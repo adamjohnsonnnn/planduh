@@ -1,11 +1,12 @@
 
-<div>
-  <form class="js--form" action="/survey_questions/<%= question.id %>/user_responses" method="POST">
-      <select name="answer">
+<div class="pag-links">
+  <form class="js--form w3-container w3-card-4" action="/survey_questions/<%= question.id %>/user_responses" method="POST">
+      <select class="w3-select" name="answer">
         <% question.responses.each do |response| %>
-         <li> <option value="<%= response.response %>"  ><%= response.response %></option></li>
+        <option value="<%= response.response %>"  ><%= response.response %></option>
         <% end %>
       </select>
-      <input type="submit" value="submit">
+       <button class="w3-btn w3-black multi-button" type="submit"><i class="fa "></i> NEXT</button>
+      <!-- <input type="submit" value="submit"> -->
     </form>
 </div>

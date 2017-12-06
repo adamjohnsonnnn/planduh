@@ -108,3 +108,14 @@
 <!-- <div class="w3-display-container w3-content" style="max-width:1500px;">
   <img class="w3-image" src="https://i.imgur.com/W29FmAv.png" alt="The Hotel" style="min-width:1000px" width="1500" height="800" opacity="50%"> -->
   <!-- <div class="w3-display-left w3-padding w3-col l6 m8"> -->
+
+
+
+
+  <!-- pagination -->
+
+
+<div id="pag-links">
+  <%= link_to_prev_page @questions, "previous" %>
+  <%= link_to_next_page @questions, "next" %>
+ </div>
