@@ -56,6 +56,7 @@ class YelpResponse < ApplicationRecord
   end
 
   def assign_event_values(response)
+    p response
     self.name = response["name"] || ""
     self.time_start = response["time_start"] || ""
     self.event_site_url = response["event_site_url"] || ""
