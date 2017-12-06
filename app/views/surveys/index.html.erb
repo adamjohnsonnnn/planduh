@@ -5,12 +5,8 @@
 <div class="w3-container w3-white w3-padding-16">
   </div>
 
-<div id="pag-links">
-  <%= link_to_prev_page @questions, "previous" %>
-  <%= link_to_next_page @questions, "next" %>
- </div>
 
-    <%= render partial: "shared/errors", locals: {errors: @errors} if @errors %>
+<%= render partial: "shared/errors", locals: {errors: @errors} if @errors %>
 
   <div id="js--questions">
 
