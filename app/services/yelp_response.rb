@@ -68,6 +68,7 @@ class YelpResponse < ApplicationRecord
     self.latitude = response["events"][0]["latitude"] || ""
     self.longitude = response["events"][0]["longitude"] || ""
     format_and_set_address(response)
+    handle_image_url(response)
   end
 
   def assign_business_values(response)
@@ -81,6 +82,7 @@ class YelpResponse < ApplicationRecord
       self.image_url = response["businesses"][0]["image_url"] || ""
       self.display_phone = response["businesses"][0]["display_phone"] || ""
       format_and_set_address(response)
+      handle_image_url(response)
   end
 
   def format_and_set_address(response)
@@ -92,6 +94,12 @@ class YelpResponse < ApplicationRecord
     address_string = ""
     address_array.each { |part| address_string += part + " "}
     self.display_address = address_string.strip
+  end
+
+  def handle_image_url(response)
+    if self.image_url == ""
+      self.image_url = "https://i.imgur.com/W29FmAv.png"
+    end
   end
 
 end

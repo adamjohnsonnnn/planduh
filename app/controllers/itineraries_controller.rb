@@ -151,7 +151,7 @@ class ItinerariesController < ApplicationController
       url: y.url,
       latitude: y.latitude,
       longitude: y.longitude,
-      image_url: y.image_url,
+      image_url: y.image_url || "https://i.imgur.com/W29FmAv.png",
       display_address: y.display_address,
       itinerary_id: itinerary.id,
       category: category,
