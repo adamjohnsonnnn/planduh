@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    p "in show"
     redirect_unless_logged_in
      @itineraries = current_user.itineraries.where(confirmed?: true)
     if find_and_ensure_user(params[:id])
