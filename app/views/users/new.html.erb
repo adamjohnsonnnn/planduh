@@ -14,7 +14,7 @@
 </style>
 
 <!-- <div class="alert alert-warning" role="alert"> -->
-<div class="container>
+<div class="container">
 <h2 class = "form-signin-heading">Sign Up</h2>
 
 <% if @errors %>
@@ -27,26 +27,29 @@
 
 <%= form_for @user, :html => {class: "form-signin"} do |form| %>
 
-<p>
-  <%= form.text_field :first_name, placeholder: "first name", class: "form-control"%>
-</p>
-<p>
-  <%= form.text_field :last_name, placeholder: "last name", class: "form-control" %>
-</p>
-<p>
-  <%= form.text_field :email, placeholder: "email", class: "form-control" %>
-</p>
-<p>
-  <%= form.password_field :password, placeholder: "password", class: "form-control" %>
-</p>
-<div class="checkbox">
-          <label>
-            <input type="checkbox" value="terms_conditions"> I Agree To Terms of Use
-          </label>
-        </div>
-<p>
-  <%= form.submit "Sign up!", class: "btn btn-lg btn-primary btn-block" %>
-</p>
+  <p>
+    <%= form.text_field :first_name, placeholder: "first name", class: "form-control"%>
+  </p>
+  <p>
+    <%= form.text_field :last_name, placeholder: "last name", class: "form-control" %>
+  </p>
+  <p>
+    <%= form.text_field :email, placeholder: "email", class: "form-control" %>
+  </p>
+  <p>
+    <%= form.password_field :password, placeholder: "password", class: "form-control" %>
+  </p>
+  <div class="checkbox">
+    <div class="terms-agree">
+      <%= form.check_box :agreed_to_terms, {}, 'true', nil %>
+    </div>
+    <div class="terms-agree">
+      <label for="terms-agree-button">I Agree To <a href="/terms-of-use" >Terms of Use</a>.</label>
+    </div>
+  </div>
+  <p>
+    <%= form.submit "Sign up!", class: "btn btn-lg btn-primary btn-block" %>
+  </p>
 
 <% end %>
 </div>

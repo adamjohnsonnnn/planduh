@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20171206004821) do
     t.text "end_time"
     t.integer "budget"
     t.string "location"
-    t.boolean "confirmed?"
+    t.boolean "confirmed?", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20171206004821) do
     t.string "last_name", null: false
     t.string "email", null: false
     t.string "password_digest"
+    t.boolean "agreed_to_terms", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "agreed"

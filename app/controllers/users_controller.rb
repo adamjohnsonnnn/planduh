@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    p params
     @user = User.new(secure_params)
     if @user.save
       session[:user_id] = @user.id
@@ -23,11 +24,7 @@ class UsersController < ApplicationController
     else
       return '404'
     end
-
-
   end
-
-
 
   def index
   end
