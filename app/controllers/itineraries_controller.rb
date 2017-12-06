@@ -15,18 +15,17 @@ class ItinerariesController < ApplicationController
     run_house_cleaner
     window = time_window(params[:begin_time], params[:end_time])
 
-    # Returns num of activities for given time window
-    num_of_activities = calc_num_of_activities(window)
-
     if logged_in?
-      if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
+      if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location]) && window != nil
+        num_of_activities = calc_num_of_activities(window)
         api_response = create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
         destroy_duplicate_activities(api_response)
 
         redirect_to "/itineraries/#{@itinerary.id}"
       else
-        @errors = ["You must fill in all fields completely."]
-        render 'new'
+        # @errors = ["Please fill in all fields completely."]
+        @errors = ["Please enter a time window of 1-12 hours."]
+        render new_itinerary_path
       end
     else
         redirect_to new_user_path
@@ -46,7 +45,7 @@ class ItinerariesController < ApplicationController
     end
   end
 
-   def edit
+  def edit
     @itinerary = Itinerary.find_by(id: params[:id])
   end
 

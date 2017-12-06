@@ -14008,3 +14008,662 @@ Processing by ItinerariesController#show as HTML
 Completed 200 OK in 163ms (Views: 156.8ms | ActiveRecord: 0.8ms)
 
 
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:31:46 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-08", "begin_time"=>"10:00", "end_time"=>"14:00", "budget"=>"100", "location"=>"denver"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 42]]
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 216]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 217]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 218]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 219]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 42]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 247ms (ActiveRecord: 13.2ms)
+
+
+  
+NoMethodError (undefined method `time_window' for #<ItinerariesController:0x007fe7281d1de0>):
+  
+app/controllers/itineraries_controller.rb:16:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:32:00 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-08", "begin_time"=>"10:00", "end_time"=>"14:00", "budget"=>"100", "location"=>"denver"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (2.1ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+Completed 500 Internal Server Error in 216ms (ActiveRecord: 12.3ms)
+
+
+  
+NoMethodError (undefined method `time_window' for #<ItinerariesController:0x007fe728500228>):
+  
+app/controllers/itineraries_controller.rb:16:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:34:02 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-08", "begin_time"=>"10:00", "end_time"=>"14:00", "budget"=>"100", "location"=>"denver"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-08"], ["begin_time", "10:00"], ["end_time", "14:00"], ["budget", 100], ["location", "denver"], ["user_id", 1], ["created_at", "2017-12-06 17:34:02.408698"], ["updated_at", "2017-12-06 17:34:02.408698"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 43]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "Cherry Creek Theatre Company presents Beau Jest"], ["display_address", "350 S Dahlia St Denver, CO 80246"], ["time_start", "2017-11-12 03:00"], ["event_site_url", "https://www.yelp.com/events/denver-cherry-creek-theatre-company-presents-beau-jest?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://i.imgur.com/W29FmAv.png"], ["latitude", "39.710028"], ["longitude", "-104.930515"], ["version", "event"], ["itinerary_id", 43], ["created_at", "2017-12-06 17:34:06.543751"], ["updated_at", "2017-12-06 17:34:06.543751"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "image_url", "rating", "price", "display_phone", "title", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Tom's Diner"], ["display_address", "601 E Colfax Ave Denver, CO 80203"], ["image_url", "https://s3-media4.fl.yelpcdn.com/bphoto/E9SamQhBIq9MWfvifOV4Ng/o.jpg"], ["rating", "3.5"], ["price", "$"], ["display_phone", "(303) 861-7493"], ["title", "Diners"], ["url", "https://www.yelp.com/biz/toms-diner-denver?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["latitude", "39.7403564453125"], ["longitude", "-104.979614257812"], ["version", "business"], ["itinerary_id", 43], ["created_at", "2017-12-06 17:34:07.352947"], ["updated_at", "2017-12-06 17:34:07.352947"], ["category", "restaurants"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Lane Gardens"], ["display_address", "775 Lipan St, Denver, CO 80204, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0800\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0800\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0800\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0800\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0800\"}}], \"weekday_text\"=>[\"Monday: 8:00 AM – 4:00 PM\", \"Tuesday: 8:00 AM – 4:00 PM\", \"Wednesday: 8:00 AM – 4:00 PM\", \"Thursday: 8:00 AM – 4:00 PM\", \"Friday: 8:00 AM – 4:00 PM\", \"Saturday: Closed\", \"Sunday: Closed\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipPjh8mw4c5XNDfy1rwbcQyE_rGJYqnCkBQhSOQb=s1600-w576"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(303) 945-9744"], ["url", "http://lanegardens.com/"], ["latitude", "39.7287077"], ["longitude", "-105.0018569"], ["version", "google_place"], ["itinerary_id", 43], ["created_at", "2017-12-06 17:34:08.383958"], ["updated_at", "2017-12-06 17:34:08.383958"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Four Seasons Hotel Denver"], ["display_address", "1111 14th St, Denver, CO 80202, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"open\"=>{\"day\"=>0, \"time\"=>\"0000\"}}], \"weekday_text\"=>[\"Monday: Open 24 hours\", \"Tuesday: Open 24 hours\", \"Wednesday: Open 24 hours\", \"Thursday: Open 24 hours\", \"Friday: Open 24 hours\", \"Saturday: Open 24 hours\", \"Sunday: Open 24 hours\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOEnGYMRv8oA2LbCMYxfKHR4XKUUp804DRc4dkR=s1600-w800"], ["rating", "4.6"], ["price", "3"], ["display_phone", "(303) 389-3000"], ["url", "https://www.fourseasons.com/denver/"], ["latitude", "39.746699"], ["longitude", "-104.998012"], ["version", "google_place"], ["itinerary_id", 43], ["created_at", "2017-12-06 17:34:10.439407"], ["updated_at", "2017-12-06 17:34:10.439407"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.7ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 43[0m
+Redirected to http://localhost:3000/itineraries/43
+Completed 302 Found in 8088ms (ActiveRecord: 31.7ms)
+
+
+Started GET "/itineraries/43" for 127.0.0.1 at 2017-12-06 11:34:10 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"43"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 43], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 43]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [4 times] (1.6ms)
+  Rendered itineraries/show.html.erb within layouts/application (7.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 98ms (Views: 91.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/itineraries/new" for 127.0.0.1 at 2017-12-06 11:34:18 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 104ms (Views: 99.0ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:34:40 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"14:00", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 43]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 220]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 221]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 222]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 223]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 43]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "14:00"], ["budget", 120], ["location", "denver"], ["user_id", 1], ["created_at", "2017-12-06 17:34:40.902443"], ["updated_at", "2017-12-06 17:34:40.902443"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 44]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 44], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["name", "Life or Death"], ["display_address", "2132 Market St Denver, CO 80205"], ["time_start", "2017-12-08 04:00"], ["event_site_url", "https://www.yelp.com/events/denver-life-or-death?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://chooselifeordeath.eventbrite.com/"], ["cost", 20], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/WoD3G6KWSvrx_C27kQs_dw/o.jpg"], ["latitude", "39.7552430870446"], ["longitude", "-104.99186779696"], ["version", "event"], ["itinerary_id", 44], ["created_at", "2017-12-06 17:34:45.498360"], ["updated_at", "2017-12-06 17:34:45.498360"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 44], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Sam's No. 3"], ["display_address", "1500 Curtis Street, Denver, CO 80202, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0530\"}}, {\"close\"=>{\"day\"=>0, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0700\"}}], \"weekday_text\"=>[\"Monday: 5:30 AM – 10:00 PM\", \"Tuesday: 5:30 AM – 10:00 PM\", \"Wednesday: 5:30 AM – 10:00 PM\", \"Thursday: 5:30 AM – 11:00 PM\", \"Friday: 5:30 AM – 12:00 AM\", \"Saturday: 7:00 AM – 12:00 AM\", \"Sunday: 7:00 AM – 10:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipM8VUkR3Mo6OmfY_p-Vi88aPgjDs6te_DADfSko=s1600-w800"], ["rating", "4.5"], ["price", "2"], ["display_phone", "(303) 534-1927"], ["url", "http://samsno3.com/"], ["latitude", "39.7463414"], ["longitude", "-104.9956632"], ["version", "google_place"], ["itinerary_id", 44], ["created_at", "2017-12-06 17:34:48.154503"], ["updated_at", "2017-12-06 17:34:48.154503"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 44[0m
+Redirected to http://localhost:3000/itineraries/44
+Completed 302 Found in 7273ms (ActiveRecord: 13.6ms)
+
+
+Started GET "/itineraries/44" for 127.0.0.1 at 2017-12-06 11:34:48 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"44"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 44], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 44]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [2 times] (1.5ms)
+  Rendered itineraries/show.html.erb within layouts/application (5.9ms)
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 100ms (Views: 94.5ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 11:35:00 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.8ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 44]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 224]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 225]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 44]]
+  [1m[35m (40.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "12:30"], ["budget", 120], ["location", "denver"], ["user_id", 1], ["created_at", "2017-12-06 17:35:00.189356"], ["updated_at", "2017-12-06 17:35:00.189356"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 45[0m
+Redirected to http://localhost:3000/itineraries/45
+Completed 302 Found in 260ms (ActiveRecord: 44.9ms)
+
+
+Started GET "/itineraries/45" for 127.0.0.1 at 2017-12-06 11:35:00 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"45"}
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 45], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 45]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [0 times] (0.0ms)
+  Rendered itineraries/show.html.erb within layouts/application (7.9ms)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for nil:NilClass):
+    158:     location: {
+    159:       pickup: {},
+    160:       destination: {
+    161:         latitude: '<%= @markers_hash[0][:lat] %>',
+    162:         longitude: '<%= @markers_hash[0][:lng] %>',
+    163:       },
+    164:     },
+  
+app/views/itineraries/show.html.erb:161:in `_app_views_itineraries_show_html_erb___3924383250655862283_70315384157520'
+Started GET "/itineraries/new" for 127.0.0.1 at 2017-12-06 12:03:18 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 154ms (Views: 93.6ms | ActiveRecord: 6.3ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:05:21 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 45]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 45]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 61ms (ActiveRecord: 9.5ms)
+
+
+  
+NoMethodError (undefined method `<=' for nil:NilClass
+Did you mean?  <=>):
+  
+app/controllers/itineraries_controller.rb:276:in `calc_num_of_activities'
+app/controllers/itineraries_controller.rb:19:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:05:57 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 42ms (ActiveRecord: 5.4ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 12:05:57 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.6ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 119ms (Views: 116.0ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:07:38 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 30ms (ActiveRecord: 5.5ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 12:07:38 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.5ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 140ms (Views: 136.6ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:08:03 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 34ms (ActiveRecord: 4.8ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 12:08:03 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.6ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 85ms (Views: 82.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:09:22 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 130ms (Views: 96.9ms | ActiveRecord: 5.2ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:09:48 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 129ms (Views: 95.5ms | ActiveRecord: 5.7ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:17:22 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.9ms)
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 4.6ms)
+
+
+  
+SyntaxError (/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end
+app/controllers/itineraries_controller.rb:30:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:18:19 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.8ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.6ms)
+
+
+  
+SyntaxError (/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end
+app/controllers/itineraries_controller.rb:30:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:18:39 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 95ms (Views: 91.1ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:19:05 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.9ms)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.6ms)
+
+
+  
+SyntaxError (/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end
+app/controllers/itineraries_controller.rb:30:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:20:24 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.4ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.9ms)
+
+
+  
+SyntaxError (/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/apprentice/planduh/planduh/app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+app/views/itineraries/new.html.erb:53: syntax error, unexpected keyword_ensure, expecting keyword_end
+app/views/itineraries/new.html.erb:55: syntax error, unexpected end-of-input, expecting keyword_end
+app/controllers/itineraries_controller.rb:30:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:21:23 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.6ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (5.4ms)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `full_messages' for ["Please enter a time window of 1-12 hours."]:Array):
+     5:     <div class="w3-container w3-white w3-padding-16">
+     6:       <% if @errors %>
+     7:         <ul class="error-message">
+     8:           <% @errors.full_messages.each do |msg| %>
+     9:           <li><%= msg %></li>
+    10:           <% end %>
+    11:         </ul>
+  
+app/views/itineraries/new.html.erb:8:in `_app_views_itineraries_new_html_erb___4508642209170555297_70315381867220'
+app/controllers/itineraries_controller.rb:30:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:21:35 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 90ms (Views: 86.1ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:22:38 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 3156ms (Views: 3152.0ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:24:25 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 112ms (Views: 77.5ms | ActiveRecord: 5.9ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:24:59 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 120ms (Views: 87.0ms | ActiveRecord: 5.0ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:25:07 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.7ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 126ms (Views: 120.3ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:25:49 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 121ms (Views: 85.4ms | ActiveRecord: 5.8ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:26:00 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"00:30", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-15"], ["begin_time", "12:00"], ["end_time", "00:30"], ["budget", 120], ["location", "denver"], ["user_id", 1], ["created_at", "2017-12-06 18:26:00.812387"], ["updated_at", "2017-12-06 18:26:00.812387"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.2ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 46]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["name", "Life is Dope: 90's Holiday Party at The Walnut Room"], ["display_address", "3131 Walnut St Denver, CO 80205"], ["time_start", "2017-12-16 03:30"], ["event_site_url", "https://www.yelp.com/events/denver-life-is-dope-90s-holiday-party-at-the-walnut-room?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.ticketfly.com/purchase/event/1593963?utm_medium=ampOfficialEvent&utm_source=fbTfly"], ["cost", 5], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/BudMS92YtCLqm6GuflVKFw/o.jpg"], ["latitude", "39.7644023"], ["longitude", "-104.9797261"], ["version", "event"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:07.815322"], ["updated_at", "2017-12-06 18:26:07.815322"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "LaMar's Donuts and Coffee"], ["display_address", "990 W 6th Ave, Denver, CO 80204, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0600\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0500\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1600\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0500\"}}], \"weekday_text\"=>[\"Monday: 5:00 AM – 4:00 PM\", \"Tuesday: 5:00 AM – 4:00 PM\", \"Wednesday: 5:00 AM – 4:00 PM\", \"Thursday: 5:00 AM – 4:00 PM\", \"Friday: 5:00 AM – 4:00 PM\", \"Saturday: 5:00 AM – 4:00 PM\", \"Sunday: 6:00 AM – 4:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipMpOCs53477RSA-1fxhxM-QJBKf1iiqLLQOwRxN=s1600-w800"], ["rating", "4.5"], ["price", "mystery"], ["display_phone", "(720) 904-5792"], ["url", "http://www.lamars.com/"], ["latitude", "39.725581"], ["longitude", "-104.999455"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:09.002448"], ["updated_at", "2017-12-06 18:26:09.002448"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Hyatt Regency Denver at Colorado Convention Center"], ["display_address", "650 15th St, Denver, CO 80202, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"open\"=>{\"day\"=>0, \"time\"=>\"0000\"}}], \"weekday_text\"=>[\"Monday: Open 24 hours\", \"Tuesday: Open 24 hours\", \"Wednesday: Open 24 hours\", \"Thursday: Open 24 hours\", \"Friday: Open 24 hours\", \"Saturday: Open 24 hours\", \"Sunday: Open 24 hours\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipMWXbiI-s6rxVBhOWlp1e8maq1cxfXIKZJIQzYU=s1600-w800"], ["rating", "4.5"], ["price", "mystery"], ["display_phone", "(303) 436-1234"], ["url", "https://denver.regency.hyatt.com/en/hotel/home.html"], ["latitude", "39.7433868"], ["longitude", "-104.993591"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:10.346171"], ["updated_at", "2017-12-06 18:26:10.346171"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Tattered Cover Book Store"], ["display_address", "1628 16th St, Denver, CO 80202, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0630\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0630\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0630\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0630\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0630\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2100\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0900\"}}], \"weekday_text\"=>[\"Monday: 6:30 AM – 9:00 PM\", \"Tuesday: 6:30 AM – 9:00 PM\", \"Wednesday: 6:30 AM – 9:00 PM\", \"Thursday: 6:30 AM – 9:00 PM\", \"Friday: 6:30 AM – 9:00 PM\", \"Saturday: 9:00 AM – 9:00 PM\", \"Sunday: 10:00 AM – 6:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipP1pTFVf10vzFrse3niys6B7cZhoochev9dBxEg=s1600-w800"], ["rating", "4.7"], ["price", "mystery"], ["display_phone", "(303) 436-1070"], ["url", "http://www.tatteredcover.com/"], ["latitude", "39.7515198"], ["longitude", "-105.0009377"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:11.633086"], ["updated_at", "2017-12-06 18:26:11.633086"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Parking for Aveda $5 weekends"], ["display_address", "609 18th St, Denver, CO 80202, USA"], ["business_hours", "mystery"], ["image_url", "https://i.imgur.com/W29FmAv.png"], ["rating", "5"], ["price", "mystery"], ["display_phone", "mystery"], ["url", "#"], ["latitude", "39.747022"], ["longitude", "-104.988541"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:12.911844"], ["updated_at", "2017-12-06 18:26:12.911844"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["name", "Life or Death"], ["display_address", "2132 Market St Denver, CO 80205"], ["time_start", "2017-12-08 04:00"], ["event_site_url", "https://www.yelp.com/events/denver-life-or-death?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://chooselifeordeath.eventbrite.com/"], ["cost", 20], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/WoD3G6KWSvrx_C27kQs_dw/o.jpg"], ["latitude", "39.7552430870446"], ["longitude", "-104.99186779696"], ["version", "event"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:14.929117"], ["updated_at", "2017-12-06 18:26:14.929117"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "The Denver Bicycle Cafe"], ["display_address", "1308 E 17th Ave, Denver, CO 80218, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"0800\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>0, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0700\"}}], \"weekday_text\"=>[\"Monday: Closed\", \"Tuesday: 7:00 AM – 12:00 AM\", \"Wednesday: 7:00 AM – 12:00 AM\", \"Thursday: 7:00 AM – 12:00 AM\", \"Friday: 7:00 AM – 12:00 AM\", \"Saturday: 7:00 AM – 12:00 AM\", \"Sunday: 8:00 AM – 12:00 AM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipM66rnM59PnKXdUVHQ5Gs319SET5okzGPciWu5I=s1600-w800"], ["rating", "4.6"], ["price", "2"], ["display_phone", "(720) 446-8029"], ["url", "http://denverbicyclecafe.com/"], ["latitude", "39.7431071"], ["longitude", "-104.970548"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:15.738322"], ["updated_at", "2017-12-06 18:26:15.738322"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["name", "Life is Dope: 90's Holiday Party at The Walnut Room"], ["display_address", "3131 Walnut St Denver, CO 80205"], ["time_start", "2017-12-16 03:30"], ["event_site_url", "https://www.yelp.com/events/denver-life-is-dope-90s-holiday-party-at-the-walnut-room?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.ticketfly.com/purchase/event/1593963?utm_medium=ampOfficialEvent&utm_source=fbTfly"], ["cost", 5], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/BudMS92YtCLqm6GuflVKFw/o.jpg"], ["latitude", "39.7644023"], ["longitude", "-104.9797261"], ["version", "event"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:15.984898"], ["updated_at", "2017-12-06 18:26:15.984898"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "National Ballpark Museum"], ["display_address", "1940 Blake St, Denver, CO 80202, USA"], ["business_hours", "{\"open_now\"=>false, \"periods\"=>[{\"close\"=>{\"day\"=>2, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1100\"}}], \"weekday_text\"=>[\"Monday: Closed\", \"Tuesday: 12:00 – 5:00 PM\", \"Wednesday: 12:00 – 5:00 PM\", \"Thursday: 12:00 – 5:00 PM\", \"Friday: 12:00 – 5:00 PM\", \"Saturday: 11:00 AM – 5:00 PM\", \"Sunday: Closed\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipNYMOM27IJszDhSzbflip6otxLAQDT_GzoYk9fg=s1600-w800"], ["rating", "4.9"], ["price", "mystery"], ["display_phone", "(303) 974-5835"], ["url", "http://www.ballparkmuseum.com/"], ["latitude", "39.753768"], ["longitude", "-104.99451"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:17.249797"], ["updated_at", "2017-12-06 18:26:17.249797"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "United Artists Denver Pavilions 15"], ["display_address", "Pavilions, 500 #310,, 500 16th St, Denver, CO 80202, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1100\"}}], \"weekday_text\"=>[\"Monday: 11:00 AM – 11:30 PM\", \"Tuesday: 11:00 AM – 11:30 PM\", \"Wednesday: 11:00 AM – 11:30 PM\", \"Thursday: 11:00 AM – 11:30 PM\", \"Friday: 11:00 AM – 11:30 PM\", \"Saturday: 11:00 AM – 11:30 PM\", \"Sunday: 11:00 AM – 11:30 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOYh3nbkBZ5hWKkO4niKX_szyxkIW9AKr1sYGo=s1600-w800"], ["rating", "3.9"], ["price", "mystery"], ["display_phone", "(844) 462-7342"], ["url", "https://www.regmovies.com/theaters/ua-denver-pavilions-stadium-15/C0069469294"], ["latitude", "39.7428544"], ["longitude", "-104.9905279"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:19.256631"], ["updated_at", "2017-12-06 18:26:19.256631"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Bodies By Perseverance"], ["display_address", "2209 Larimer St, Denver, CO 80205, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0600\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0600\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0600\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0600\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1300\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0700\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1300\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"0700\"}}], \"weekday_text\"=>[\"Monday: 6:00 AM – 8:00 PM\", \"Tuesday: 6:00 AM – 8:00 PM\", \"Wednesday: 6:00 AM – 8:00 PM\", \"Thursday: 6:00 AM – 8:00 PM\", \"Friday: 7:00 AM – 1:00 PM\", \"Saturday: 7:00 AM – 1:00 PM\", \"Sunday: Closed\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipNz7jBcButJw9d-KpUt_pzg4scfYcJqLzXgZ0za=s1600-w800"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(303) 506-3253"], ["url", "http://www.mybbp.com/"], ["latitude", "39.755177"], ["longitude", "-104.9899804"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:20.701516"], ["updated_at", "2017-12-06 18:26:20.701516"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "villas de barela 901 10th avew"], ["display_address", "Denver, CO 80204, USA"], ["business_hours", "mystery"], ["image_url", "https://i.imgur.com/W29FmAv.png"], ["rating", "unrated"], ["price", "mystery"], ["display_phone", "mystery"], ["url", "#"], ["latitude", "39.7324359"], ["longitude", "-104.9991006"], ["version", "google_place"], ["itinerary_id", 46], ["created_at", "2017-12-06 18:26:21.678599"], ["updated_at", "2017-12-06 18:26:21.678599"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 46[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 233]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/itineraries/46
+Completed 302 Found in 20899ms (ActiveRecord: 47.7ms)
+
+
+Started GET "/itineraries/46" for 127.0.0.1 at 2017-12-06 12:26:21 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"46"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 46], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 46]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [11 times] (2.9ms)
+  Rendered itineraries/show.html.erb within layouts/application (8.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 107ms (Views: 99.9ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:26:33 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"01:00", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.6ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.8ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 46]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 226]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 227]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 228]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 229]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 230]]
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 231]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 232]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 234]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 235]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 236]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 237]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 46]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 126ms (Views: 97.4ms | ActiveRecord: 7.5ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:26:43 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:00", "budget"=>"120"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 140ms (Views: 136.0ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:26:59 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"11:00", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 134ms (Views: 130.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:28:27 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:30", "budget"=>"120"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 203ms (Views: 140.4ms | ActiveRecord: 5.5ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 12:28:46 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-15", "location"=>"denver", "begin_time"=>"12:00", "end_time"=>"12:00", "budget"=>"120"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.7ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 111ms (Views: 104.9ms | ActiveRecord: 0.9ms)
+
+
