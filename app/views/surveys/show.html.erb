@@ -1,15 +1,15 @@
 <div class="w3-container w3-black">
-      <h2><i class="fa w3-margin-center"></i>Get Started</h2><p>Getting started with PlanDuh is easy
-    </div>
-    <div class="w3-container w3-white w3-padding-16">
-      <!-- <h3><strong>Step 2: Set Preferences</strong></h3> -->
+  <h2><i class="fa w3-margin-center"></i>Get Started</h2>
+  <p>By answering a few questions, you'll help us make your PlanDuh amazing.</p>
+</div>
+<div class="w3-container w3-white w3-padding-16">
 
 <%= render partial: "shared/errors", locals: {errors: @errors} if @errors %>
 
+
   <div id="js--questions">
 
-    <% @questions.each do |question| %>
-      <% if question.version == "Yes/No" %>
+      <% if @question.version == "Yes/No" %>
         <div class="w3-container w3-center">
             <hr>
           </div>
@@ -19,15 +19,14 @@
                 <div class="w3-card">
                   <img src="https://images.pexels.com/photos/7753/sun-ball-tennis-court.jpg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="physical" style="width:100%" class="survey-image">
                 <div class="w3-container survey-form">
-                  <%= render partial: "yes_no_question", locals: {question: question} %>
-                  <%= render partial: 'yes_no_response', locals: {question: question} %>
+                  <%= render partial: "yes_no_question", locals: {question: @question} %>
+                  <%= render partial: 'yes_no_response', locals: {question: @question} %>
                 </div>
               </div>
             </div>
         </div>
 
-
-      <% elsif question.version == "Multiple Choice" %>
+      <% elsif @question.version == "Multiple Choice" %>
           <div class="w3-container w3-center">
             <hr>
           </div>
@@ -37,14 +36,14 @@
                 <div class="w3-card">
                   <img src="https://images.pexels.com/photos/7753/sun-ball-tennis-court.jpg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="physical" style="width:100%" class="survey-image">
                 <div class="w3-container survey-form">
-                 <%= render partial: "multiple_choice_question", locals: {question: question} %>
-                <%= render partial: 'multiple_choice_response', locals: {question: question} %>
+                 <%= render partial: "multiple_choice_question", locals: {question: @question} %>
+                <%= render partial: 'multiple_choice_response', locals: {question: @question, page: @page} %>
                 </div>
               </div>
             </div>
         </div>
-      <!-- </hr> -->
-      <% elsif question.version == "Open-ended" %>
+
+      <% elsif @question.version == "Open-ended" %>
        <div class="w3-container w3-center">
             <hr>
           </div>
@@ -54,26 +53,14 @@
                 <div class="w3-card">
                   <img src="https://www.weddingbee.com/wp-content/uploads/2017/03/food-allergy-214771.jpg" alt="physical" style="width:100%" class="survey-image">
                 <div class="w3-container survey-form">
-                 <p> <%= render partial: "open_ended_question", locals: {question: question} %></p>
-                 <p> <%= render partial: "open_ended_response", locals: {question: question} %></p>
+                 <p> <%= render partial: "open_ended_question", locals: {question: @question} %></p>
+                 <p> <%= render partial: "open_ended_response", locals: {question: @question} %></p>
                 </div>
               </div>
             </div>
         </div>
      <% end  %>
-    <% end %>
-  </div>
 
+
+  </div>
 </div>
-
-
-  <div id="js--save-pref-button">
-      <% if logged_in? && current_user.user_responses.count == 7  %>
-        <!-- how to remove step2: set preferences and render new text -->
-       <center> <%= button_to "Now Go Planduh!", preferences_path, method: 'POST', class: "w3-btn w3-green btn btn-lg btn-success" %> </center>
-      <% end %>
-  </div>
-
-
-
-
