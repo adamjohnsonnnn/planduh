@@ -33,11 +33,12 @@
       <div class="navbar-collapse collapse" id="navbarsExample04" style="">
         <ul class="navbar-nav ml-auto">
           <% if logged_in? %>
-            <li class="nav-item active"><%= link_to "#{current_user.first_name}'s Profile", user_path(current_user.id), class: "nav-link"  %></li>
-            <li class="nav-item active"><%= link_to "Logout", logout_path, class: "nav-link" %></li>
+            <li class="nav-item active"><%= link_to "#{current_user.first_name}'s PlanDuhs", user_path(current_user.id), class: "nav-link"  %></li>
+            <li class="nav-item active"><%= link_to "create new", new_itinerary_path, class: "nav-link" %></li>
+            <li class="nav-item active"><%= link_to "logout", logout_path, class: "nav-link" %></li>
           <% else %>
-            <li class="nav-item active"><%= link_to "Register", new_user_path, class: "nav-link" %></li>
-            <li class="nav-item active"><%= link_to "Login", new_session_path, class: "nav-link" %></li>
+            <li class="nav-item active"><%= link_to "register", new_user_path, class: "nav-link" %></li>
+            <li class="nav-item active"><%= link_to "login", new_session_path, class: "nav-link" %></li>
           <% end %>
         </ul>
 
