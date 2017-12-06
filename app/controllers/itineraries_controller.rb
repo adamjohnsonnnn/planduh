@@ -94,7 +94,7 @@ class ItinerariesController < ApplicationController
   end
 
   def handle_events_response(response, return_response, y, itinerary)
-    if response["error"]
+    if response["error"] || return_response == nil
       @error = "Sorry we're having a hard time finding an event for you. Please try again."
     else
       y.assign_event_values(return_response)

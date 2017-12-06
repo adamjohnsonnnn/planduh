@@ -15703,3 +15703,426 @@ app/controllers/itineraries_controller.rb:100:in `handle_events_response'
 app/controllers/itineraries_controller.rb:92:in `submit_events_api_call'
 app/controllers/itineraries_controller.rb:239:in `create_itinerary_logged_in'
 app/controllers/itineraries_controller.rb:21:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 13:32:02 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"oakland, ca", "begin_time"=>"12:00", "end_time"=>"18:00", "budget"=>"40"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.6ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 56]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 56]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "18:00"], ["budget", 40], ["location", "oakland, ca"], ["user_id", 1], ["created_at", "2017-12-06 19:32:02.796406"], ["updated_at", "2017-12-06 19:32:02.796406"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.8ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 57]]
+Completed 500 Internal Server Error in 2328ms (ActiveRecord: 5.0ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/services/yelp_response.rb:60:in `assign_event_values'
+app/controllers/itineraries_controller.rb:100:in `handle_events_response'
+app/controllers/itineraries_controller.rb:92:in `submit_events_api_call'
+app/controllers/itineraries_controller.rb:239:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:21:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 13:39:43 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"oakland, ca", "begin_time"=>"12:00", "end_time"=>"18:00", "budget"=>"40"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 57]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 57]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "18:00"], ["budget", 40], ["location", "oakland, ca"], ["user_id", 1], ["created_at", "2017-12-06 19:39:43.614628"], ["updated_at", "2017-12-06 19:39:43.614628"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.3ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 58]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 58], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "tony! toni! toné!"], ["display_address", "510 Embarcadero W Oakland, CA 94607"], ["time_start", "2017-12-14 08:00"], ["event_site_url", "https://www.yelp.com/events/oakland-tony-toni-ton%C3%A9-7?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/xQl5OR6ZrcFn_yZ1VsA8tQ/o.jpg"], ["latitude", "37.7962862981851"], ["longitude", "-122.278667539358"], ["version", "event"], ["itinerary_id", 58], ["created_at", "2017-12-06 19:39:52.224566"], ["updated_at", "2017-12-06 19:39:52.224566"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 58], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Oakland Chinese Book Store"], ["display_address", "388 9th St #102, Oakland, CA 94607, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1000\"}}], \"weekday_text\"=>[\"Monday: 10:00 AM – 6:00 PM\", \"Tuesday: 10:00 AM – 6:00 PM\", \"Wednesday: 10:00 AM – 6:00 PM\", \"Thursday: 10:00 AM – 6:00 PM\", \"Friday: 10:00 AM – 6:00 PM\", \"Saturday: 10:00 AM – 6:00 PM\", \"Sunday: 10:00 AM – 6:00 PM\"]}"], ["image_url", "https://i.imgur.com/W29FmAv.png"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(510) 465-9865"], ["url", "#"], ["latitude", "37.8003066"], ["longitude", "-122.2709686"], ["version", "google_place"], ["itinerary_id", 58], ["created_at", "2017-12-06 19:39:53.394659"], ["updated_at", "2017-12-06 19:39:53.394659"], ["category", "book_store"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 58], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "The New Parkway Theater"], ["display_address", "474 24th St, Oakland, CA 94612, USA"], ["business_hours", "{\"open_now\"=>false, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2230\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2230\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1600\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2230\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1600\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2230\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1600\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2230\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1600\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1330\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"2330\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1200\"}}], \"weekday_text\"=>[\"Monday: 4:00 – 10:30 PM\", \"Tuesday: 4:00 – 10:30 PM\", \"Wednesday: 4:00 – 10:30 PM\", \"Thursday: 4:00 – 10:30 PM\", \"Friday: 1:30 – 11:00 PM\", \"Saturday: 12:00 – 11:30 PM\", \"Sunday: 12:00 – 10:30 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipMDcuZT07yVkUs1vW7mPArSoA6sWmIzcH2ZMQoc=s1600-w800"], ["rating", "4.7"], ["price", "mystery"], ["display_phone", "(510) 658-7900"], ["url", "http://thenewparkway.com/"], ["latitude", "37.8138043"], ["longitude", "-122.267448"], ["version", "google_place"], ["itinerary_id", 58], ["created_at", "2017-12-06 19:39:55.305158"], ["updated_at", "2017-12-06 19:39:55.305158"], ["category", "restaurant"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 13209ms (ActiveRecord: 39.8ms)
+
+
+  
+GooglePlaces::OverQueryLimitError ({
+   "error_message" : "You have exceeded your daily request quota for this API.",
+   "html_attributions" : [],
+   "status" : "OVER_QUERY_LIMIT"
+}
+):
+  
+app/controllers/itineraries_controller.rb:195:in `submit_google_places_api_call'
+app/controllers/itineraries_controller.rb:250:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:21:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 14:09:38 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"oakland, ca", "begin_time"=>"12:00", "end_time"=>"18:00", "budget"=>"40"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 58]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 252]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 253]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 254]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 58]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "18:00"], ["budget", 40], ["location", "oakland, ca"], ["user_id", 1], ["created_at", "2017-12-06 20:09:38.250146"], ["updated_at", "2017-12-06 20:09:38.250146"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+Completed 500 Internal Server Error in 1417ms (ActiveRecord: 4.7ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/services/yelp_response.rb:60:in `assign_event_values'
+app/controllers/itineraries_controller.rb:100:in `handle_events_response'
+app/controllers/itineraries_controller.rb:92:in `submit_events_api_call'
+app/controllers/itineraries_controller.rb:239:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:21:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 14:10:01 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"oakland, ca", "begin_time"=>"12:00", "end_time"=>"18:00", "budget"=>"40"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 59]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 59]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "18:00"], ["budget", 40], ["location", "oakland, ca"], ["user_id", 1], ["created_at", "2017-12-06 20:10:01.567969"], ["updated_at", "2017-12-06 20:10:01.567969"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 60]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 60], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "tony! toni! toné!"], ["display_address", "510 Embarcadero W Oakland, CA 94607"], ["time_start", "2017-12-14 08:00"], ["event_site_url", "https://www.yelp.com/events/oakland-tony-toni-ton%C3%A9-7?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/xQl5OR6ZrcFn_yZ1VsA8tQ/o.jpg"], ["latitude", "37.7962862981851"], ["longitude", "-122.278667539358"], ["version", "event"], ["itinerary_id", 60], ["created_at", "2017-12-06 20:10:11.581976"], ["updated_at", "2017-12-06 20:10:11.581976"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 10451ms (ActiveRecord: 18.4ms)
+
+
+  
+GooglePlaces::OverQueryLimitError ({
+   "error_message" : "You have exceeded your daily request quota for this API.",
+   "html_attributions" : [],
+   "results" : [],
+   "status" : "OVER_QUERY_LIMIT"
+}
+):
+  
+app/controllers/itineraries_controller.rb:189:in `submit_google_places_api_call'
+app/controllers/itineraries_controller.rb:250:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:21:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 14:11:45 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"oakland, ca", "begin_time"=>"12:00", "end_time"=>"18:00", "budget"=>"40"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.2ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 60]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 255]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 60]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "18:00"], ["budget", 40], ["location", "oakland, ca"], ["user_id", 1], ["created_at", "2017-12-06 20:11:45.701279"], ["updated_at", "2017-12-06 20:11:45.701279"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 61]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 61], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "tony! toni! toné!"], ["display_address", "510 Embarcadero W Oakland, CA 94607"], ["time_start", "2017-12-14 08:00"], ["event_site_url", "https://www.yelp.com/events/oakland-tony-toni-ton%C3%A9-7?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/xQl5OR6ZrcFn_yZ1VsA8tQ/o.jpg"], ["latitude", "37.7962862981851"], ["longitude", "-122.278667539358"], ["version", "event"], ["itinerary_id", 61], ["created_at", "2017-12-06 20:11:48.111017"], ["updated_at", "2017-12-06 20:11:48.111017"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 2782ms (ActiveRecord: 8.2ms)
+
+
+  
+GooglePlaces::OverQueryLimitError ({
+   "error_message" : "You have exceeded your daily request quota for this API.",
+   "html_attributions" : [],
+   "results" : [],
+   "status" : "OVER_QUERY_LIMIT"
+}
+):
+  
+app/controllers/itineraries_controller.rb:189:in `submit_google_places_api_call'
+app/controllers/itineraries_controller.rb:250:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:21:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 14:12:10 -0600
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "location"=>"oakland, ca", "begin_time"=>"12:00", "end_time"=>"18:00", "budget"=>"40"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (1.1ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.7ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 61]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 256]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 61]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "18:00"], ["budget", 40], ["location", "oakland, ca"], ["user_id", 1], ["created_at", "2017-12-06 20:12:11.322390"], ["updated_at", "2017-12-06 20:12:11.322390"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.5ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 62]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "tony! toni! toné!"], ["display_address", "510 Embarcadero W Oakland, CA 94607"], ["time_start", "2017-12-14 08:00"], ["event_site_url", "https://www.yelp.com/events/oakland-tony-toni-ton%C3%A9-7?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/xQl5OR6ZrcFn_yZ1VsA8tQ/o.jpg"], ["latitude", "37.7962862981851"], ["longitude", "-122.278667539358"], ["version", "event"], ["itinerary_id", 62], ["created_at", "2017-12-06 20:12:12.020181"], ["updated_at", "2017-12-06 20:12:12.020181"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Cupcake Cove"], ["display_address", "500 12th St #136, Oakland, CA 94607, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1100\"}}], \"weekday_text\"=>[\"Monday: 11:00 AM – 6:00 PM\", \"Tuesday: 11:00 AM – 6:00 PM\", \"Wednesday: 11:00 AM – 6:00 PM\", \"Thursday: 11:00 AM – 6:00 PM\", \"Friday: 11:00 AM – 6:00 PM\", \"Saturday: Closed\", \"Sunday: Closed\"]}"], ["image_url", "https://i.imgur.com/W29FmAv.png"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(510) 444-4401"], ["url", "http://www.thecupcakecove.com/"], ["latitude", "37.8041594"], ["longitude", "-122.2731338"], ["version", "google_place"], ["itinerary_id", 62], ["created_at", "2017-12-06 20:12:13.164264"], ["updated_at", "2017-12-06 20:12:13.164264"], ["category", "bakery"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "E. M. Wolfman General Interest Small Bookstore"], ["display_address", "410 13th St, Oakland, CA 94612, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1200\"}}], \"weekday_text\"=>[\"Monday: 12:00 – 6:00 PM\", \"Tuesday: 12:00 – 6:00 PM\", \"Wednesday: 12:00 – 6:00 PM\", \"Thursday: 12:00 – 6:00 PM\", \"Friday: 12:00 – 6:00 PM\", \"Saturday: 12:00 – 6:00 PM\", \"Sunday: 12:00 – 6:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipMnDSzpCQYXmMpqANPkdZ3rjk_WsH1C4IKP7RuV=s1600-w800"], ["rating", "4.8"], ["price", "mystery"], ["display_phone", "(415) 250-5527"], ["url", "http://wolfmanhomerepair.com/"], ["latitude", "37.8033966"], ["longitude", "-122.2706427"], ["version", "google_place"], ["itinerary_id", 62], ["created_at", "2017-12-06 20:12:14.873629"], ["updated_at", "2017-12-06 20:12:14.873629"], ["category", "book_store"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "The Trappist"], ["display_address", "460 8th St, Oakland, CA 94607, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"0030\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"0030\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"0030\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"0030\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"0030\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"0130\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>0, \"time\"=>\"0130\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1200\"}}], \"weekday_text\"=>[\"Monday: 12:00 PM – 12:30 AM\", \"Tuesday: 12:00 PM – 12:30 AM\", \"Wednesday: 12:00 PM – 12:30 AM\", \"Thursday: 12:00 PM – 12:30 AM\", \"Friday: 12:00 PM – 1:30 AM\", \"Saturday: 12:00 PM – 1:30 AM\", \"Sunday: 12:00 PM – 12:30 AM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOMFfbyiEABCxT_HaFljJXyJmdXJlgLMb7bXbfA=s1600-w800"], ["rating", "4.5"], ["price", "1"], ["display_phone", "(510) 238-8900"], ["url", "http://www.thetrappist.com/"], ["latitude", "37.8005481"], ["longitude", "-122.2741687"], ["version", "google_place"], ["itinerary_id", 62], ["created_at", "2017-12-06 20:12:16.393784"], ["updated_at", "2017-12-06 20:12:16.393784"], ["category", "restaurant"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "tony! toni! toné!"], ["display_address", "510 Embarcadero W Oakland, CA 94607"], ["time_start", "2017-12-14 08:00"], ["event_site_url", "https://www.yelp.com/events/oakland-tony-toni-ton%C3%A9-7?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/xQl5OR6ZrcFn_yZ1VsA8tQ/o.jpg"], ["latitude", "37.7962862981851"], ["longitude", "-122.278667539358"], ["version", "event"], ["itinerary_id", 62], ["created_at", "2017-12-06 20:12:16.650514"], ["updated_at", "2017-12-06 20:12:16.650514"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Ajuda Day Spa"], ["display_address", "807 Washington St, Oakland, CA 94607, USA"], ["business_hours", "mystery"], ["image_url", "https://i.imgur.com/W29FmAv.png"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(510) 835-5634"], ["url", "#"], ["latitude", "37.8008345"], ["longitude", "-122.2749155"], ["version", "google_place"], ["itinerary_id", 62], ["created_at", "2017-12-06 20:12:18.033458"], ["updated_at", "2017-12-06 20:12:18.033458"], ["category", "beauty_salon"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.6ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 62[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 261]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/itineraries/62
+Completed 302 Found in 6894ms (ActiveRecord: 41.0ms)
+
+
+Started GET "/itineraries/62" for 127.0.0.1 at 2017-12-06 14:12:18 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"62"}
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 62], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 62]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [5 times] (2.1ms)
+  Rendered itineraries/show.html.erb within layouts/application (307.0ms)
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 1]]
+Completed 200 OK in 561ms (Views: 549.9ms | ActiveRecord: 4.6ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-06 14:19:30 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-14", "begin_time"=>"12:00", "end_time"=>"18:00", "budget"=>"40", "location"=>"oakland, ca"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT "itineraries".* FROM "itineraries" WHERE "itineraries"."user_id" = $1 AND "itineraries"."confirmed?" = $2[0m  [["user_id", 1], ["confirmed?", "f"]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 62]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 257]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 258]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 259]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 260]]
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "activities" WHERE "activities"."id" = $1[0m  [["id", 262]]
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "itineraries" WHERE "itineraries"."id" = $1[0m  [["id", 62]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-14"], ["begin_time", "12:00"], ["end_time", "18:00"], ["budget", 40], ["location", "oakland, ca"], ["user_id", 1], ["created_at", "2017-12-06 20:19:30.536901"], ["updated_at", "2017-12-06 20:19:30.536901"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 63]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "tony! toni! toné!"], ["display_address", "510 Embarcadero W Oakland, CA 94607"], ["time_start", "2017-12-14 08:00"], ["event_site_url", "https://www.yelp.com/events/oakland-tony-toni-ton%C3%A9-7?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", ""], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/xQl5OR6ZrcFn_yZ1VsA8tQ/o.jpg"], ["latitude", "37.7962862981851"], ["longitude", "-122.278667539358"], ["version", "event"], ["itinerary_id", 63], ["created_at", "2017-12-06 20:19:33.434081"], ["updated_at", "2017-12-06 20:19:33.434081"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Showcase Wigs"], ["display_address", "372 17th St, Oakland, CA 94612, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>2, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1000\"}}], \"weekday_text\"=>[\"Monday: Closed\", \"Tuesday: 10:00 AM – 6:00 PM\", \"Wednesday: 10:00 AM – 6:00 PM\", \"Thursday: 10:00 AM – 6:00 PM\", \"Friday: 10:00 AM – 6:00 PM\", \"Saturday: 10:00 AM – 6:00 PM\", \"Sunday: Closed\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOCysGmihinYCmMtC9kBZKrnLlQrugMdW4qQdIQ=s1600-w800"], ["rating", "5"], ["price", "mystery"], ["display_phone", "(510) 763-0795"], ["url", "http://www.showcasewigs.com/"], ["latitude", "37.8060168"], ["longitude", "-122.2676485"], ["version", "google_place"], ["itinerary_id", 63], ["created_at", "2017-12-06 20:19:34.544336"], ["updated_at", "2017-12-06 20:19:34.544336"], ["category", "beauty_salon"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.6ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Fortune Cookie Factory"], ["display_address", "261 12th St, Oakland, CA 94607, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"1730\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1730\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1730\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1730\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"0900\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1730\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"0900\"}}], \"weekday_text\"=>[\"Monday: 9:00 AM – 5:30 PM\", \"Tuesday: 9:00 AM – 5:30 PM\", \"Wednesday: 9:00 AM – 5:30 PM\", \"Thursday: 9:00 AM – 5:30 PM\", \"Friday: 9:00 AM – 5:30 PM\", \"Saturday: Closed\", \"Sunday: Closed\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipMvg6TzfzQWWNGF_XacBPJPPNryshDDftp7HDUX=s1600-w800"], ["rating", "4.8"], ["price", "mystery"], ["display_phone", "(510) 832-5552"], ["url", "http://www.oaklandcookiefactory.com/"], ["latitude", "37.8011"], ["longitude", "-122.267793"], ["version", "google_place"], ["itinerary_id", 63], ["created_at", "2017-12-06 20:19:36.106296"], ["updated_at", "2017-12-06 20:19:36.106296"], ["category", "bakery"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Mua Oakland"], ["display_address", "2442a Webster St, Oakland, CA 94612, USA"], ["business_hours", "{\"open_now\"=>false, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"2200\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1630\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1630\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1630\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1630\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2300\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1630\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1630\"}}, {\"close\"=>{\"day\"=>0, \"time\"=>\"0000\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1630\"}}], \"weekday_text\"=>[\"Monday: 4:30 – 11:00 PM\", \"Tuesday: 4:30 – 11:00 PM\", \"Wednesday: 4:30 – 11:00 PM\", \"Thursday: 4:30 – 11:00 PM\", \"Friday: 4:30 PM – 12:00 AM\", \"Saturday: 4:30 PM – 12:00 AM\", \"Sunday: 4:30 – 10:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipOoPdiSjXiUhfqr0gr0LDzjYTpVBlg8wcB70QTc=s1600-w800"], ["rating", "4.3"], ["price", "2"], ["display_phone", "(510) 238-1100"], ["url", "http://www.muaoakland.com/"], ["latitude", "37.814082"], ["longitude", "-122.264354"], ["version", "google_place"], ["itinerary_id", 63], ["created_at", "2017-12-06 20:19:37.721000"], ["updated_at", "2017-12-06 20:19:37.721000"], ["category", "restaurant"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Sunrise Co"], ["display_address", "822 Franklin St # 10, Oakland, CA 94607, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>1, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1000\"}}], \"weekday_text\"=>[\"Monday: 10:00 AM – 5:00 PM\", \"Tuesday: 10:00 AM – 5:00 PM\", \"Wednesday: 10:00 AM – 5:00 PM\", \"Thursday: 10:00 AM – 5:00 PM\", \"Friday: 10:00 AM – 5:00 PM\", \"Saturday: 10:00 AM – 5:00 PM\", \"Sunday: Closed\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipPbWQtYVvlPaOcsnmzhtry30-2Tj0al8B0aWMlL=s1600-w800"], ["rating", "4.5"], ["price", "mystery"], ["display_phone", "(510) 763-9899"], ["url", "#"], ["latitude", "37.8000397"], ["longitude", "-122.2720453"], ["version", "google_place"], ["itinerary_id", 63], ["created_at", "2017-12-06 20:19:39.172877"], ["updated_at", "2017-12-06 20:19:39.172877"], ["category", "shopping_mall"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.3ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "business_hours", "image_url", "rating", "price", "display_phone", "url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at", "category") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"[0m  [["name", "Cape and Cowl Comics"], ["display_address", "1601 Clay St, Oakland, CA 94612, USA"], ["business_hours", "{\"open_now\"=>true, \"periods\"=>[{\"close\"=>{\"day\"=>0, \"time\"=>\"1700\"}, \"open\"=>{\"day\"=>0, \"time\"=>\"1200\"}}, {\"close\"=>{\"day\"=>1, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>1, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>2, \"time\"=>\"1900\"}, \"open\"=>{\"day\"=>2, \"time\"=>\"1100\"}}, {\"close\"=>{\"day\"=>3, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>3, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>4, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>4, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>5, \"time\"=>\"2000\"}, \"open\"=>{\"day\"=>5, \"time\"=>\"1000\"}}, {\"close\"=>{\"day\"=>6, \"time\"=>\"1800\"}, \"open\"=>{\"day\"=>6, \"time\"=>\"1100\"}}], \"weekday_text\"=>[\"Monday: 11:00 AM – 7:00 PM\", \"Tuesday: 11:00 AM – 7:00 PM\", \"Wednesday: 10:00 AM – 8:00 PM\", \"Thursday: 10:00 AM – 8:00 PM\", \"Friday: 10:00 AM – 8:00 PM\", \"Saturday: 11:00 AM – 6:00 PM\", \"Sunday: 12:00 – 5:00 PM\"]}"], ["image_url", "https://lh3.googleusercontent.com/p/AF1QipNbAF_6X7Q1VMsl7CfEjV3uKgEjn-qVvemzMJO-=s1600-w800"], ["rating", "4.9"], ["price", "mystery"], ["display_phone", "(510) 907-0678"], ["url", "http://www.capeandcowlcomics.com/"], ["latitude", "37.8068346"], ["longitude", "-122.2727933"], ["version", "google_place"], ["itinerary_id", 63], ["created_at", "2017-12-06 20:19:40.572536"], ["updated_at", "2017-12-06 20:19:40.572536"], ["category", "book_store"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.6ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = 63[0m
+Redirected to http://localhost:3000/itineraries/63
+Completed 302 Found in 10059ms (ActiveRecord: 21.3ms)
+
+
+Started GET "/itineraries/63" for 127.0.0.1 at 2017-12-06 14:19:40 -0600
+Processing by ItinerariesController#show as HTML
+  Parameters: {"id"=>"63"}
+  [1m[36mItinerary Load (0.2ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 63]]
+  Rendering itineraries/show.html.erb within layouts/application
+  Rendered collection of itineraries/_activity.html.erb [6 times] (3.6ms)
+  Rendered itineraries/show.html.erb within layouts/application (9.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 1]]
+Completed 200 OK in 119ms (Views: 112.2ms | ActiveRecord: 1.7ms)
+
+
