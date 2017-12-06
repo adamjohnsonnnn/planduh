@@ -33,19 +33,11 @@
       <div class="navbar-collapse collapse" id="navbarsExample04" style="">
         <ul class="navbar-nav ml-auto">
           <% if logged_in? %>
-
-          <li class="nav-item active"><%= link_to "#{current_user.first_name}'s Profile", user_path(current_user.id), class: "nav-link"  %></li>
-
-          <li class="nav-item active"><%= link_to "Home", root_path, class: "nav-link"  %></li>
-
-          <li class="nav-item active"><%= link_to "Logout", logout_path, class: "nav-link" %></li>
-
+            <li class="nav-item active"><%= link_to "#{current_user.first_name}'s Profile", user_path(current_user.id), class: "nav-link"  %></li>
+            <li class="nav-item active"><%= link_to "Logout", logout_path, class: "nav-link" %></li>
           <% else %>
-          <li class="nav-item active"><%= link_to "Home", root_path, class: "nav-link"  %></li>
-
-          <li class="nav-item active"><%= link_to "Register", new_user_path, class: "nav-link" %></li>
-
-          <li class="nav-item active"><%= link_to "Login", new_session_path, class: "nav-link" %></li>
+            <li class="nav-item active"><%= link_to "Register", new_user_path, class: "nav-link" %></li>
+            <li class="nav-item active"><%= link_to "Login", new_session_path, class: "nav-link" %></li>
           <% end %>
         </ul>
 
@@ -56,8 +48,10 @@
 
       <div class="jumbotron">
         <center>
+          <p>
           <img src='https://i.imgur.com/W29FmAv.png' width="150px" />
-          <!-- <h2>PlanDuh</h2> -->
+          </p>
+          <br/>
           <% if logged_in? %>
             <p>"Oh, I don't know what to do." <br/>- <span><%= current_user.first_name %></span> before PlanDuh</p>
             <p>"I had a lot of fun." <br />- <span><%= current_user.first_name %></span> after PlanDuh</p>
@@ -82,16 +76,9 @@
 
 <!-- Footer -->
 <footer class="main-footer w3-padding-32 w3-black w3-center">
-  <h5>Find Us On</h5>
-  <div class="w3-xlarge w3-padding-16">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-  </div>
-  <p>Powered by:<br> Adam, Zach, Mitch, Kalier & Nicole <br>PlanDuh © 2017</p>
+  <h5 class="footer-question" >What is PlanDuh?</h5>
+
+  <p class="footer-powered-by">Powered by:<br> Adam, Zach, Mitch, Kalier & Nicole <br>PlanDuh Bear, Inc. © 2017</p>
 </footer>
 
 </div> <!-- /container -->

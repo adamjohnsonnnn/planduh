@@ -15,28 +15,29 @@
 <% end %>
 
 <%= form_for @user, :html => {class: "form-signin"} do |form| %>
-
-<p>
-  <%= form.text_field :first_name, placeholder: "first name", class: "form-control"%>
-</p>
-<p>
-  <%= form.text_field :last_name, placeholder: "last name", class: "form-control" %>
-</p>
-<p>
-  <%= form.text_field :email, placeholder: "email", class: "form-control" %>
-</p>
-<p>
-  <%= form.password_field :password, placeholder: "password", class: "form-control" %>
-</p>
-<div class="checkbox">
-          <label>
-            <input type="checkbox" value="terms_conditions"> I Agree To Terms of Use
-          </label>
-        </div>
-<p>
-  <%= form.submit "Sign up!", class: "w3-button w3-black" %>
-</p>
-
+  <p>
+    <%= form.text_field :first_name, placeholder: "first name", class: "form-control"%>
+  </p>
+  <p>
+    <%= form.text_field :last_name, placeholder: "last name", class: "form-control" %>
+  </p>
+  <p>
+    <%= form.text_field :email, placeholder: "email", class: "form-control" %>
+  </p>
+  <p>
+    <%= form.password_field :password, placeholder: "password", class: "form-control" %>
+  </p>
+    <div class="checkbox">
+      <div class="terms-agree">
+        <%= form.check_box :agreed, {}, 'true', nil %>
+      </div>
+      <div class="terms-agree">
+        <label for="terms-agree-button">I Agree To <a href="/terms-of-use" >Terms of Use</a>.</label>
+      </div>
+    </div>
+  <p>
+    <%= form.submit "Sign up!", class: "w3-button w3-black" %>
+  </p>
 <% end %>
 </div>
 

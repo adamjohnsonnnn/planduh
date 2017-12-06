@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203001021) do
+
+ActiveRecord::Schema.define(version: 20171206012742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
     t.bigint "itinerary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
     t.index ["itinerary_id"], name: "index_activities_on_itinerary_id"
   end
 
@@ -48,7 +50,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
     t.text "end_time"
     t.integer "budget"
     t.string "location"
-    t.boolean "confirmed?"
+    t.boolean "confirmed?", default: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
     t.string "version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo_url"
   end
 
   create_table "survey_responses", force: :cascade do |t|
@@ -103,6 +106,7 @@ ActiveRecord::Schema.define(version: 20171203001021) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "agreed"
   end
 
   create_table "yelp_responses", force: :cascade do |t|

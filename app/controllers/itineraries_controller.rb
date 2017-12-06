@@ -12,12 +12,14 @@ class ItinerariesController < ApplicationController
   end
 
   def create
-    # MAKE FIELDS IN SUBMIT FORM **REQUIRED**
-    # REMOVE DUPLICATE ACTIVITIES
+    run_house_cleaner
+    window = time_window(params[:begin_time], params[:end_time])
 
     if logged_in?
       if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
-        create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
+        api_response = create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
+        destroy_duplicate_activities(api_response)
+
         redirect_to "/itineraries/#{@itinerary.id}"
       else
         @errors = ["You must fill in all fields completely."]
@@ -27,14 +29,12 @@ class ItinerariesController < ApplicationController
         redirect_to new_user_path
     end
 
-    # if @itinerary.activities > window
-    #   # run sort method
-    # end
   end
 
   def show
     @itinerary = Itinerary.find_by(id: params[:id])
     @activities = @itinerary.activities
+    @promo_code = "PLANDUHFUN"
 
     @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
       marker.lat activity.latitude
@@ -49,10 +49,10 @@ class ItinerariesController < ApplicationController
 
   def update
     @itinerary = Itinerary.find_by(id: params[:id])
+    @itinerary.update(:name => params[:itinerary_name], :confirmed? => true )
+
     if request.xhr?
-      @itinerary.update(:name => params[:itinerary_name])
-      @itinerary.confirmed? == true
-     render json: @itinerary
+      render json: @itinerary
     else
       redirect_to root_path
     end
@@ -124,21 +124,21 @@ class ItinerariesController < ApplicationController
         response_container << response["businesses"].sample
         response_convert_hash = {}
         response_convert_hash["businesses"] = response_container
-        handle_businesses_response(response_convert_hash, y, itinerary)
+        handle_businesses_response(response_convert_hash, y, itinerary, category_request_biz)
   end
 
-  def handle_businesses_response(response, y, itinerary)
+  def handle_businesses_response(response, y, itinerary, category)
     if response["businesses"][0] != nil
       if response["error"]
         @error = "Sorry we're having a hard time finding a business for you. Please try again."
       else
         y.assign_business_values(response)
-        set_business_attributes(y, itinerary)
+        set_business_attributes(y, itinerary, category)
       end
     end
   end
 
-  def set_business_attributes(y, itinerary)
+  def set_business_attributes(y, itinerary, category)
       Activity.create!(
       name: y.name,
       rating: y.rating,
@@ -151,6 +151,7 @@ class ItinerariesController < ApplicationController
       image_url: y.image_url,
       display_address: y.display_address,
       itinerary_id: itinerary.id,
+      category: category,
       version: "business"
     )
   end
@@ -204,7 +205,7 @@ class ItinerariesController < ApplicationController
       display_address: response.formatted_address || "mystery",
       business_hours: response.opening_hours || "mystery",
       itinerary_id: itinerary.id,
-      version: "google_places"
+      version: "google_place"
     )
   end
 
@@ -240,6 +241,7 @@ class ItinerariesController < ApplicationController
           end
         end
       end
+      return @itinerary
   end
 
   def params_not_empty(date, begin_time, end_time, budget, location)
@@ -248,6 +250,22 @@ class ItinerariesController < ApplicationController
     else
       return true
     end
+  end
+
+  def run_house_cleaner
+    if current_user.itineraries
+      unconfirmed_itineraries = current_user.itineraries.where(confirmed?: false)
+      unconfirmed_itineraries.destroy_all if unconfirmed_itineraries
+    end
+  end
+
+  def destroy_duplicate_activities(itinerary)
+      activities = Activity.where(itinerary: itinerary)
+      grouped_activities = activities.group_by { |activity| activity.name}
+      grouped_activities.values.each do |duplicates|
+        first_one = duplicates.shift
+        duplicates.each { |repeated_activity| repeated_activity.destroy }
+      end
   end
 
 end
