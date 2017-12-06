@@ -6,9 +6,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(secure_params)
+    @survey = SurveyQuestion.find(1)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to surveys_path
+      redirect_to survey_path(@survey)
     else
       @errors = @user.errors.full_messages
       render 'new'

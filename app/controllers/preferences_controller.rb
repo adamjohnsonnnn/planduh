@@ -6,10 +6,8 @@ class PreferencesController < ApplicationController
 
   def create
     set_preferences
-    redirect_to root_path
+    redirect_to new_itinerary_path  
   end
-
-
 
   def destroy
   end
@@ -36,7 +34,7 @@ class PreferencesController < ApplicationController
   end
 
   def music_check
-    !grab_responses.include?("N/A")
+    true
   end
 
   def active_lifestyle_check
@@ -49,10 +47,6 @@ class PreferencesController < ApplicationController
 
 end
 
-
-
-  ## Extras - Check back
-    # Preference.create!(:user_id => current_user.id, :keywords => "outdoors-activity") if outdoors_check
 
 
 
