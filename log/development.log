@@ -4160,3 +4160,390 @@ Processing by ItinerariesController#new as HTML
 Completed 200 OK in 111ms (Views: 106.5ms | ActiveRecord: 0.8ms)
 
 
+Started GET "/logout" for 127.0.0.1 at 2017-12-05 21:17:50 -0600
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-05 21:17:50 -0600
+Processing by ItinerariesController#new as HTML
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-05 21:17:50 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 86ms (Views: 83.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-12-05 21:18:23 -0600
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/WCG4hNyeEhMD01zl6/Cese/L1eDSlZPQDUJRLv9Ob6erZ6x3zIkphaOZ9qTkboS/yLJedlfSbsy1Y0zItHfuw==", "user"=>{"first_name"=>"patty", "last_name"=>"patty", "email"=>"patty@patty.com", "password"=>"[FILTERED]"}, "commit"=>"Sign up!"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "patty@patty.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["first_name", "patty"], ["last_name", "patty"], ["email", "patty@patty.com"], ["password_digest", "$2a$10$ig4pYoZLVr9Dizax.N18kulHj57MlURCmrjFgeCMqm2loqJYyCyjq"], ["created_at", "2017-12-06 03:18:24.021180"], ["updated_at", "2017-12-06 03:18:24.021180"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys
+Completed 302 Found in 83ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/surveys" for 127.0.0.1 at 2017-12-05 21:18:24 -0600
+Processing by SurveysController#index as HTML
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.4ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 0]]
+  Rendered surveys/_open_ended_question.html.erb (0.5ms)
+  Rendered surveys/_open_ended_response.html.erb (0.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 99ms (Views: 97.3ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/survey_questions/1/user_responses" for 127.0.0.1 at 2017-12-05 21:18:31 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"asdf", "survey_question_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "asdf"], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["survey_question_id", 1], ["response", "asdf"], ["created_at", "2017-12-06 03:18:31.150018"], ["updated_at", "2017-12-06 03:18:31.150018"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=2
+Completed 302 Found in 8ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/surveys?page=2" for 127.0.0.1 at 2017-12-05 21:18:31 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"2"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  Rendered surveys/_yes_no_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (1.9ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 2]]
+  Rendered surveys/_yes_no_response.html.erb (5.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 121ms (Views: 117.2ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/survey_questions/2/user_responses" for 127.0.0.1 at 2017-12-05 21:18:35 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"No...I don't prefer physical activity for my events", "survey_question_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (1.7ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "No...I don't prefer physical activity for my events"], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["survey_question_id", 2], ["response", "No...I don't prefer physical activity for my events"], ["created_at", "2017-12-06 03:18:35.331152"], ["updated_at", "2017-12-06 03:18:35.331152"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=3
+Completed 302 Found in 9ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/surveys?page=3" for 127.0.0.1 at 2017-12-05 21:18:35 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"3"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  Rendered surveys/_yes_no_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 3]]
+  Rendered surveys/_yes_no_response.html.erb (2.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 102ms (Views: 100.4ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/survey_questions/3/user_responses" for 127.0.0.1 at 2017-12-05 21:18:39 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"No, not much of a drinker these days", "survey_question_id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "No, not much of a drinker these days"], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["survey_question_id", 3], ["response", "No, not much of a drinker these days"], ["created_at", "2017-12-06 03:18:39.886025"], ["updated_at", "2017-12-06 03:18:39.886025"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=4
+Completed 302 Found in 8ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/surveys?page=4" for 127.0.0.1 at 2017-12-05 21:18:39 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"4"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 3]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 4]]
+  Rendered surveys/_multiple_choice_response.html.erb (3.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 120ms (Views: 118.1ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/survey_questions/4/user_responses" for 127.0.0.1 at 2017-12-05 21:18:44 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Love it", "page"=>"1", "survey_question_id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Love it"], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["survey_question_id", 4], ["response", "Love it"], ["created_at", "2017-12-06 03:18:44.031039"], ["updated_at", "2017-12-06 03:18:44.031039"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=5
+Completed 302 Found in 9ms (ActiveRecord: 3.4ms)
+
+
+Started GET "/surveys?page=5" for 127.0.0.1 at 2017-12-05 21:18:44 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"5"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 4]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 5]]
+  Rendered surveys/_multiple_choice_response.html.erb (2.5ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 112ms (Views: 109.9ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/survey_questions/5/user_responses" for 127.0.0.1 at 2017-12-05 21:18:48 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Las Vegas", "page"=>"1", "survey_question_id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (1.3ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Las Vegas"], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["survey_question_id", 5], ["response", "Las Vegas"], ["created_at", "2017-12-06 03:18:48.212471"], ["updated_at", "2017-12-06 03:18:48.212471"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=6
+Completed 302 Found in 9ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/surveys?page=6" for 127.0.0.1 at 2017-12-05 21:18:48 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"6"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 5]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 6]]
+  Rendered surveys/_multiple_choice_response.html.erb (4.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 121ms (Views: 119.3ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/survey_questions/6/user_responses" for 127.0.0.1 at 2017-12-05 21:18:56 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Ride bike or go for a run ", "page"=>"1", "survey_question_id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (2.8ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Ride bike or go for a run "], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["survey_question_id", 6], ["response", "Ride bike or go for a run "], ["created_at", "2017-12-06 03:18:56.162100"], ["updated_at", "2017-12-06 03:18:56.162100"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=7
+Completed 302 Found in 11ms (ActiveRecord: 4.5ms)
+
+
+Started GET "/surveys?page=7" for 127.0.0.1 at 2017-12-05 21:18:56 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"7"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.3ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 6]]
+  Rendered surveys/_multiple_choice_question.html.erb (0.5ms)
+  [1m[36mSurveyResponse Load (0.3ms)[0m  [1m[34mSELECT "survey_responses".* FROM "survey_responses" WHERE "survey_responses"."survey_question_id" = $1[0m  [["survey_question_id", 7]]
+  Rendered surveys/_multiple_choice_response.html.erb (2.8ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 113ms (Views: 110.7ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/survey_questions/7/user_responses" for 127.0.0.1 at 2017-12-05 21:18:59 -0600
+Processing by UserResponsesController#create as HTML
+  Parameters: {"answer"=>"Classic Rock", "page"=>"1", "survey_question_id"=>"7"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUserResponse Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "user_responses" WHERE "user_responses"."response" = $1 AND "user_responses"."user_id" = $2 LIMIT $3[0m  [["response", "Classic Rock"], ["user_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "user_responses" ("user_id", "survey_question_id", "response", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["user_id", 4], ["survey_question_id", 7], ["response", "Classic Rock"], ["created_at", "2017-12-06 03:18:59.787222"], ["updated_at", "2017-12-06 03:18:59.787222"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/surveys?page=8
+Completed 302 Found in 9ms (ActiveRecord: 3.0ms)
+
+
+Started GET "/surveys?page=8" for 127.0.0.1 at 2017-12-05 21:18:59 -0600
+Processing by SurveysController#index as HTML
+  Parameters: {"page"=>"8"}
+  Rendering surveys/index.html.erb within layouts/application
+  [1m[36mSurveyQuestion Load (0.4ms)[0m  [1m[34mSELECT  "survey_questions".* FROM "survey_questions" LIMIT $1 OFFSET $2[0m  [["LIMIT", 1], ["OFFSET", 7]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  Rendered surveys/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 109ms (Views: 107.4ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/preferences" for 127.0.0.1 at 2017-12-05 21:19:15 -0600
+Processing by PreferencesController#create as HTML
+  Parameters: {"authenticity_token"=>"wi2HwALmcJhBMoRgEVGH9UGlRmB192rDgQMcBUsyNh6h4J+TzqYsdhuzrskVb/+deTigTi/idTfz45hy0h7QGw=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUserResponse Load (1.1ms)[0m  [1m[34mSELECT "user_responses".* FROM "user_responses" WHERE "user_responses"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "is_necessary?", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["user_id", 4], ["keywords", "---\n- restaurants\n"], ["events_categories", "---\n- asdf\n"], ["business_categories", "---\n- asdf\n"], ["google_places_types", "---\n- restaurant\n- cafe\n"], ["is_necessary?", "t"], ["created_at", "2017-12-06 03:19:15.282163"], ["updated_at", "2017-12-06 03:19:15.282163"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 4], ["keywords", "---\n- outside\n- experience\n- best\n- games\n"], ["events_categories", "---\n- sports-active-life\n- performing-arts\n- festivals-fairs\n"], ["business_categories", "---\n- active\n- arts\n- massage_therapy\n"], ["google_places_types", "---\n- amusement parks\n- art_gallery\n- aquarium\n- bowling_alley\n- gym\n- park\n- spa\n- zoo\n"], ["created_at", "2017-12-06 03:19:15.290283"], ["updated_at", "2017-12-06 03:19:15.290283"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 4], ["keywords", "---\n- fun\n- great\n- happy\n"], ["events_categories", "---\n- music\n- festivals-fairs\n- fashion\n- film\n"], ["business_categories", "---\n- nightlife\n- arts\n"], ["google_places_types", "---\n- movie_theater\n- beauty_salon\n- book_store\n- clothing_store\n- shopping_mall\n- museum\n"], ["created_at", "2017-12-06 03:19:15.302222"], ["updated_at", "2017-12-06 03:19:15.302222"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "preferences" ("user_id", "keywords", "events_categories", "business_categories", "google_places_types", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 4], ["keywords", "---\n- energy\n- party\n- social\n"], ["events_categories", "---\n- nightlife\n- performing-arts\n- lectures-books\n- visual-arts\n"], ["business_categories", "---\n- nightlife\n- shopping\n- beautysvc\n"], ["google_places_types", "---\n- bar\n- nightclub\n- stadium\n- university\n"], ["created_at", "2017-12-06 03:19:15.313609"], ["updated_at", "2017-12-06 03:19:15.313609"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 49ms (ActiveRecord: 10.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-05 21:19:15 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.5ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 4]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 122ms (Views: 116.4ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-05 21:20:21 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-31", "begin_time"=>"17:00", "end_time"=>"23:00", "location"=>"60607", "budget"=>"300"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-31"], ["begin_time", "17:00"], ["end_time", "23:00"], ["budget", 300], ["location", "60607"], ["user_id", 4], ["created_at", "2017-12-06 03:20:21.489376"], ["updated_at", "2017-12-06 03:20:21.489376"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.4ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.6ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (10.3ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["name", "The 6th Annual Chicago Resolution Gala at The AON Grand Ballroom at Navy Pier"], ["display_address", "600 East Grand Avenue, Chicago, IL 60611"], ["time_start", "2018-01-01 04:00"], ["event_site_url", "https://www.yelp.com/events/chicago-the-6th-annual-chicago-resolution-gala-at-the-aon-grand-ballroom-at-navy-pier?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "http://bit.ly/2oiqsWo"], ["image_url", "https://s3-media1.fl.yelpcdn.com/ephoto/rupLBXpzWIqZz1DUTnrY3A/o.jpg"], ["latitude", "41.891731"], ["longitude", "-87.6022587"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-06 03:20:23.162480"], ["updated_at", "2017-12-06 03:20:23.162480"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.4ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Chicago 2018 New Years Eve (NYE) Yacht Party"], ["display_address", "200 N Breakwater Access Chicago, IL 60601"], ["time_start", "2018-01-01 05:00"], ["event_site_url", "https://www.yelp.com/events/chicago-chicago-2018-new-years-eve-nye-yacht-party?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.eventbrite.com/e/chicago-2018-new-years-eve-nye-yacht-party-tickets-33407655196?aff=yelp&discount=nye"], ["cost", 117], ["cost_max", 157], ["image_url", "https://s3-media4.fl.yelpcdn.com/ephoto/MD9s8o0B0vBlpo_J6rJLtw/o.jpg"], ["latitude", "41.8879176783306"], ["longitude", "-87.6128658373261"], ["version", "event"], ["itinerary_id", 1], ["created_at", "2017-12-06 03:20:23.530857"], ["updated_at", "2017-12-06 03:20:23.530857"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 2563ms (ActiveRecord: 33.9ms)
+
+
+  
+NoMethodError (undefined method `sample' for nil:NilClass):
+  
+app/controllers/itineraries_controller.rb:124:in `submit_business_api_call'
+app/controllers/itineraries_controller.rb:231:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:20:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-05 21:22:34 -0600
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-31", "begin_time"=>"17:00", "end_time"=>"23:00", "location"=>"60607", "budget"=>"300"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-31"], ["begin_time", "17:00"], ["end_time", "23:00"], ["budget", 300], ["location", "60607"], ["user_id", 4], ["created_at", "2017-12-06 03:22:34.972683"], ["updated_at", "2017-12-06 03:22:34.972683"]]
+  [1m[35m (40.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.5ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.7ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.4ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Blue Man Group Chicago Family New Year's Eve Performance"], ["display_address", "3133 N Halsted Chicago, IL 60657"], ["time_start", "2017-12-31 21:00"], ["event_site_url", "https://www.yelp.com/events/chicago-blue-man-group-chicago-family-new-years-eve-performance?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.ticketmaster.com/Blue-Man-Group-tickets/artist/843991?dma_id=249&identity_login=1"], ["cost", 39], ["cost_max", 99], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/ggmVT___1ndoYnSNMDlEmA/o.jpg"], ["latitude", "41.9388543"], ["longitude", "-87.6489243"], ["version", "event"], ["itinerary_id", 2], ["created_at", "2017-12-06 03:22:37.052711"], ["updated_at", "2017-12-06 03:22:37.052711"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 2690ms (ActiveRecord: 71.6ms)
+
+
+  
+NoMethodError (undefined method `sample' for nil:NilClass):
+  
+app/controllers/itineraries_controller.rb:124:in `submit_business_api_call'
+app/controllers/itineraries_controller.rb:231:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:20:in `create'
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-05 21:22:39 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-31", "begin_time"=>"17:00", "end_time"=>"23:00", "location"=>"60607", "budget"=>"300"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-31"], ["begin_time", "17:00"], ["end_time", "23:00"], ["budget", 300], ["location", "60607"], ["user_id", 4], ["created_at", "2017-12-06 03:22:39.504693"], ["updated_at", "2017-12-06 03:22:39.504693"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.5ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.5ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 3]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"[0m  [["name", "New Year's Eve 5K"], ["display_address", "2401 N Lake Shore Dr Chicago, IL 60614"], ["time_start", "2017-12-31 15:30"], ["event_site_url", "https://www.yelp.com/events/chicago-new-years-eve-5k?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://riseandshine5k.enmotive.com/events/register/586bfa81-63b0-4f39-9781-54325206f5f9"], ["cost", 35], ["image_url", "https://s3-media2.fl.yelpcdn.com/ephoto/1WJKE4I32UVn4ulBXvVjhw/o.jpg"], ["latitude", "41.9271029"], ["longitude", "-87.6306989"], ["version", "event"], ["itinerary_id", 3], ["created_at", "2017-12-06 03:22:40.622658"], ["updated_at", "2017-12-06 03:22:40.622658"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 1526ms (ActiveRecord: 15.3ms)
+
+
+  
+NoMethodError (undefined method `sample' for nil:NilClass):
+  
+app/controllers/itineraries_controller.rb:124:in `submit_business_api_call'
+app/controllers/itineraries_controller.rb:231:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:20:in `create'
+Started GET "/" for 127.0.0.1 at 2017-12-05 21:22:41 -0600
+Processing by ItinerariesController#new as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mPreference Load (0.7ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 4]]
+  Rendering itineraries/new.html.erb within layouts/application
+  Rendered itineraries/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 1321ms (Views: 1301.5ms | ActiveRecord: 8.1ms)
+
+
+Started POST "/itineraries" for 127.0.0.1 at 2017-12-05 21:23:37 -0600
+Processing by ItinerariesController#create as HTML
+  Parameters: {"date"=>"2017-12-31", "begin_time"=>"17:00", "end_time"=>"23:40", "location"=>"1033 w. vanburen", "budget"=>"300"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "itineraries" ("date", "begin_time", "end_time", "budget", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["date", "2017-12-31"], ["begin_time", "17:00"], ["end_time", "23:40"], ["budget", 300], ["location", "1033 w. vanburen"], ["user_id", 4], ["created_at", "2017-12-06 03:23:37.597611"], ["updated_at", "2017-12-06 03:23:37.597611"]]
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPreference Load (0.7ms)[0m  [1m[34mSELECT "preferences".* FROM "preferences" WHERE "preferences"."user_id" = $1[0m  [["user_id", 4]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Blue Man Group Chicago Family New Year's Eve Performance"], ["display_address", "3133 N Halsted Chicago, IL 60657"], ["time_start", "2017-12-31 21:00"], ["event_site_url", "https://www.yelp.com/events/chicago-blue-man-group-chicago-family-new-years-eve-performance?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.ticketmaster.com/Blue-Man-Group-tickets/artist/843991?dma_id=249&identity_login=1"], ["cost", 39], ["cost_max", 99], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/ggmVT___1ndoYnSNMDlEmA/o.jpg"], ["latitude", "41.9388543"], ["longitude", "-87.6489243"], ["version", "event"], ["itinerary_id", 4], ["created_at", "2017-12-06 03:23:39.347256"], ["updated_at", "2017-12-06 03:23:39.347256"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActivity Load (0.3ms)[0m  [1m[34mSELECT "activities".* FROM "activities" WHERE "activities"."itinerary_id" = $1[0m  [["itinerary_id", 4]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mItinerary Load (0.5ms)[0m  [1m[34mSELECT  "itineraries".* FROM "itineraries" WHERE "itineraries"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "activities" ("name", "display_address", "time_start", "event_site_url", "tickets_url", "cost", "cost_max", "image_url", "latitude", "longitude", "version", "itinerary_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING "id"[0m  [["name", "Blue Man Group Chicago Family New Year's Eve Performance"], ["display_address", "3133 N Halsted Chicago, IL 60657"], ["time_start", "2017-12-31 21:00"], ["event_site_url", "https://www.yelp.com/events/chicago-blue-man-group-chicago-family-new-years-eve-performance?adjust_creative=ripQN4avDLtYv3UyaKOnWQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=ripQN4avDLtYv3UyaKOnWQ"], ["tickets_url", "https://www.ticketmaster.com/Blue-Man-Group-tickets/artist/843991?dma_id=249&identity_login=1"], ["cost", 39], ["cost_max", 99], ["image_url", "https://s3-media3.fl.yelpcdn.com/ephoto/ggmVT___1ndoYnSNMDlEmA/o.jpg"], ["latitude", "41.9388543"], ["longitude", "-87.6489243"], ["version", "event"], ["itinerary_id", 4], ["created_at", "2017-12-06 03:23:40.145084"], ["updated_at", "2017-12-06 03:23:40.145084"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 2991ms (ActiveRecord: 48.5ms)
+
+
+  
+NoMethodError (undefined method `sample' for nil:NilClass):
+  
+app/controllers/itineraries_controller.rb:124:in `submit_business_api_call'
+app/controllers/itineraries_controller.rb:231:in `create_itinerary_logged_in'
+app/controllers/itineraries_controller.rb:20:in `create'
