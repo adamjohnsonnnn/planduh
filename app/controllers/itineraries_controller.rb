@@ -1,4 +1,6 @@
 class ItinerariesController < ApplicationController
+  layout "itinerary", except: [:new]
+
   def new
     if logged_in?
       if current_user.preferences.length > 0

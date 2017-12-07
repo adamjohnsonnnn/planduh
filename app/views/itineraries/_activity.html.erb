@@ -1,40 +1,57 @@
-<li>
-  <div class="activity">
+<div class="container">
     <% if @error %>
       <h3><%= @error %></h3>
     <% else %>
-      <ul style="list-style-type:none">
-      <% if activity.version == "event" %>
-        <li><h3>Event: <%= activity.name %></h3></li>
-        <li><%= image_tag(activity.image_url, size: "320x240") %></li>
-        <li>Address: <%= activity.display_address %></li>
-        <li>Date: <%= activity.format_date %></li>
-        <li>Time: <%= activity.format_time %></li>
-        <li><%= link_to "Visit Event Site", activity.event_site_url %></li>
-        <li><%= link_to "Buy Tickets", activity.tickets_url if activity.is_free == false %></li>
-        <li>Cost: $<%= activity.filter_cost %></li><br>
-      <% elsif activity.version == "business" %>
-        <li><h3>Business Result: <%= activity.name %></h3></li>
-        <li><%= image_tag(activity.image_url, size: "320x240") %></li>
-        <li>Address: <%= activity.display_address %></li>
-        <li>Phone: <%= activity.display_phone %></li>
-        <li>Rating: <%= activity.rating %></li>
-        <li>Price: <%= activity.price %></li>
-        <li>Type: <%= activity.title %></li>
-        <li><%= link_to "Visit Website", activity.url %></li>
-      <% else %>
-        <li><h3>Google Result: <%= activity.name %></h3></li>
+
+  <% if activity.version == "event" %>
+
+      <h3 class="w3-text-green">Event: <%= activity.name %></h3>
+      <div class="w3-display-container ">
+        <img src="<%= activity.image_url%>" style="width:100%; margin-bottom:-6px">
+
+          <p class="response-address"><i class="fa fa-fw fa-location-arrow"></i> Address: <%= activity.display_address %></p>
+          <p><i class="fa fa-fw fa-calendar"></i> Date: <%= activity.format_date %></p>
+          <p><i class="fa fa-fw fa-clock-o"></i>Time: <%= activity.format_time %></p>
+          <p><i class="fa fa-fw fa-usd"></i> Cost: $<%= activity.filter_cost %></p>
+          <p><i class="fa fa-fw fa-external-link-square"></i><%= link_to "Visit Event Site", activity.event_site_url %></p>
+          <p><i class="fa fa-fw fa-ticket"></i> <%= link_to "Buy Tickets", activity.tickets_url if activity.has_tickets_url %></p>
+      </div>
+      <hr>
+
+    <% elsif activity.version == "business" %>
+        <h3 class="w3-text-green">Business Result: <%= activity.name %></h3>
+        <div class="w3-display-container mySlides">
+          <img src="<%= activity.image_url%>" style="width:100%; margin-bottom:-6px">
+
+            <p class="response-address"><i class="fa fa-fw fa-location-arrow"></i> Address: <%= activity.display_address %></p>
+            <p><i class="fa fa-fw fa-usd"></i> Price: <%= activity.price %></p>
+            <p><i class="fa fa-fw fa-square"></i>Type: <%= activity.title %></p>
+            <p><i class="fa fa-fw fa-mobile"></i>  <%= activity.display_phone %></p>
+            <p><i class="fa fa-fw fa-external-link-square"></i><%= link_to "Visit Website", activity.url %></p>
+        </div>
+        <hr>
+
+    <% else %>
+        <h3 class="w3-text-green">Google Result: <%= activity.name %></h3>
       <% if activity.image_url %>
-        <li><%= image_tag(activity.image_url, size: "320x240") %></li>
+        <div class="w3-display-container mySlides">
+          <img src="<%= activity.image_url%>" style="width:100%; margin-bottom:-6px">
       <% end %>
-        <li>Address: <%= activity.display_address %></li>
-        <li>Phone: <%= activity.display_phone %></li>
-        <li>Rating: <%= activity.rating %></li>
-        <li>Price: <%= activity.price %></li>
-        <li><%= link_to "Visit Website", activity.url %></li><br>
+            <p class="response-address"><i class="fa fa-fw fa-location-arrow"></i> Address: <%= activity.display_address %></p>
+            <p><i class="fa fa-fw fa-usd"></i> Price: <%= activity.price %></p>
+            <p><i class="fa fa-fw fa-star"></i>Rating: <%= activity.rating %></p>
+            <p><i class="fa fa-fw fa-mobile"></i>  <%= activity.display_phone %></p>
+            <p><i class="fa fa-fw fa-external-link-square"></i><%= link_to "Visit Website", activity.url %></p>
+        </div>
+        <hr>
       <% end %>
-      </ul>
     <% end %>
   </div>
-</li>
+
+
+
+
+
+
+
 
