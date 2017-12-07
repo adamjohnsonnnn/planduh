@@ -9,6 +9,7 @@ class SurveysController < ApplicationController
   	@page = params[:id].to_i
   	if params[:id].to_i < 8
   		@question = SurveyQuestion.find(params[:id])
+      render 'show'
   	end
   end
 
