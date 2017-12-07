@@ -6,15 +6,14 @@ class SurveysController < ApplicationController
   end
 
   def show
-  	@page = params[:id].to_i
-  	if params[:id].to_i < 8
-  		@question = SurveyQuestion.find(params[:id])
-      render 'show'
-  	end
+    id = params[:id].to_i % 7
+  	@question = SurveyQuestion.find_by(order: id)
+    @page = @question.order
+    render 'show'
   end
 
   def new
-    survey = SurveyQuestion.find(1)
+    survey = SurveyQuestion.find_by(order: 1)
     redirect_to survey_path(survey)
   end
 
