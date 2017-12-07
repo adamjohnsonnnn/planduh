@@ -18,7 +18,9 @@ class UsersController < ApplicationController
 
   def show
     if logged_in?
-      if current_user.id == params[:id]
+      p params[:id]
+      p current_user.id
+      if current_user.id == params[:id].to_i
        @itineraries = current_user.itineraries.where(confirmed?: true)
        return  "users/show"
      else
