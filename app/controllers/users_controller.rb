@@ -6,10 +6,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(secure_params)
-    @survey = SurveyQuestion.find(1)
+    @survey = SurveyQuestion.find_by(order: 1)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to survey_path(@survey)
+      redirect_to new_survey_path
     else
       @errors = @user.errors.full_messages
       render 'new'
@@ -18,8 +18,6 @@ class UsersController < ApplicationController
 
   def show
     if logged_in?
-      p params[:id]
-      p current_user.id
       if current_user.id == params[:id].to_i
        @itineraries = current_user.itineraries.where(confirmed?: true)
        return  "users/show"

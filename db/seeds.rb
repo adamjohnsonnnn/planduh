@@ -3,13 +3,13 @@ SurveyResponse.destroy_all
 Recommender.destroy_all
 
 # SurveyQuestion.create!(:question_text => 'If you had a day off work, which one of these activities would appeal most to you? ')
-question_0 = SurveyQuestion.create!(:question_text => 'Do you have any dietary restrictions?', :version => "Open-ended")
-question_1 = SurveyQuestion.create!(:question_text => 'Do you like physical activity?', :version => "Yes/No")
-question_2 = SurveyQuestion.create!(:question_text => 'Would you enjoy a cocktail?', :version => "Yes/No")
-question_5 = SurveyQuestion.create!(:question_text => 'How do you feel about being outdoors?', :version => "Multiple Choice")
-question_6 = SurveyQuestion.create!(:question_text => 'Given a choice, would you visit Paris, YellowStone, or Las Vegas?', :version => "Multiple Choice")
-question_7 = SurveyQuestion.create!(:question_text => 'Which of these activities appeal most to you?', :version => "Multiple Choice")
-question_8 = SurveyQuestion.create!(:question_text => 'What is your favorite genre of music?', :version => "Multiple Choice")
+question_0 = SurveyQuestion.create!(:question_text => 'Do you have any dietary restrictions?', :version => "Open-ended", order: 1)
+question_1 = SurveyQuestion.create!(:question_text => 'Do you like physical activity?', :version => "Yes/No", order: 2)
+question_2 = SurveyQuestion.create!(:question_text => 'Would you enjoy a cocktail?', :version => "Yes/No", order: 3)
+question_5 = SurveyQuestion.create!(:question_text => 'How do you feel about being outdoors?', :version => "Multiple Choice", order: 4)
+question_6 = SurveyQuestion.create!(:question_text => 'Given a choice, would you visit Paris, YellowStone, or Las Vegas?', :version => "Multiple Choice", order: 5)
+question_7 = SurveyQuestion.create!(:question_text => 'Which of these activities appeal most to you?', :version => "Multiple Choice", order: 6)
+question_8 = SurveyQuestion.create!(:question_text => 'What is your favorite genre of music?', :version => "Multiple Choice", order: 7)
 
 response_1 = SurveyResponse.create!(:response => "Yes, I'm very active!", :survey_question => question_1)
 response_2 = SurveyResponse.create!(:response => "No...I don't prefer physical activity for my events", :survey_question => question_1)
