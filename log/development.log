@@ -16173,3 +16173,36 @@ Processing by UsersController#show as HTML
 Completed 200 OK in 169ms (Views: 82.5ms | ActiveRecord: 42.6ms)
 
 
+Started GET "/logout" for 127.0.0.1 at 2017-12-06 16:51:23 -0600
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-06 16:51:23 -0600
+Processing by ItinerariesController#new as HTML
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 16:51:23 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 141ms (Views: 115.9ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-12-06 16:51:25 -0600
+Processing by ItinerariesController#new as HTML
+Redirected to http://localhost:3000/users/new
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-12-06 16:51:25 -0600
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 92ms (Views: 89.1ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mYelpResponse Load (31.6ms)[0m  [1m[34mSELECT  "yelp_responses".* FROM "yelp_responses" ORDER BY "yelp_responses"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]

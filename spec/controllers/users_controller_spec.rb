@@ -1,9 +1,9 @@
 require 'rails_helper'
-pop
+
 
 RSpec.describe UsersController do
 
-  let(:user) {User.create!(:first_name => "Winnie", :last_name => "Mele", :email=> "winnie@no.com", :password => 'password', :agreed => true)}
+  let(:dude) {User.create!(:first_name => "Winnie", :last_name => "Mele", :email=> "winnie@no.com", :password => 'password', :agreed => true)}
 
 
 

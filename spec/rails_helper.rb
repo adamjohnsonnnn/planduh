@@ -61,6 +61,4 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-def pop
-  p "Hello"
-end
+
