@@ -8,7 +8,7 @@
     <table class="buttons-nav-itinerary">
         <tr>
             <td class="response-buttons-cell">
-                  <button type="button" class="btn-itinerary-show" data-toggle="modal" data-target="#showModal" data-whatever="save">Save it!</button>
+                  <button type="button" class="btn-itinerary-show" data-toggle="modal" data-target="#showModal" data-whatever="save">Save PlanDuh!</button>
             </td>
             <td class="response-buttons-cell">
                   <form action="/itineraries" method="POST" >
@@ -199,7 +199,26 @@
   }).call(this, OPTIONS);
 </script>
 </div>
-
-
+<br />
+<br />
+<div class="show-itinerary-button-container">
+    <table class="buttons-nav-itinerary">
+        <tr>
+            <td class="response-buttons-cell">
+                  <button type="button" class="btn-itinerary-show" data-toggle="modal" data-target="#showModal" data-whatever="save">Save PlanDuh!</button>
+            </td>
+            <td class="response-buttons-cell">
+                  <form action="/itineraries" method="POST" >
+                    <input type="hidden" name="date" value="<%= @itinerary.date %>" >
+                    <input type="hidden" name="begin_time" value="<%= @itinerary.begin_time %>" >
+                    <input type="hidden" name="end_time" value="<%= @itinerary.end_time %>" >
+                    <input type="hidden" name="budget" value="<%= @itinerary.budget %>" >
+                    <input type="hidden" name="location" value="<%= @itinerary.location %>" >
+                    <button type="submit" class="btn-itinerary-show" >Try again.</button>
+                  </form>
+            </td>
+        </tr>
+    </table>
+</div>
 
 

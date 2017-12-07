@@ -92,6 +92,7 @@ class ItinerariesController < ApplicationController
     end_date_time = user_input_to_unix(date, end_time)
     y = YelpResponse.new
     response = y.get_events_response({location: location, categories: category_request, start_date: start_date_time, end_date: end_date_time})
+    p response
     if response["events"]
       event_budget = budget.to_i * 0.75
       filtered_response = response["events"].select do |event|
