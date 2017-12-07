@@ -1,11 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-# require 'faker'
+SurveyQuestion.destroy_all
+SurveyResponse.destroy_all
+Recommender.destroy_all
 
 # SurveyQuestion.create!(:question_text => 'If you had a day off work, which one of these activities would appeal most to you? ')
 question_0 = SurveyQuestion.create!(:question_text => 'Do you have any dietary restrictions?', :version => "Open-ended")
@@ -41,9 +36,6 @@ response_29 = SurveyResponse.create!(:response => 'Hip Hop', :survey_question =>
 response_30 = SurveyResponse.create!(:response => "I'm down for anything!"  , :survey_question => question_8)
 response_30 = SurveyResponse.create!(:response => "N/A"  , :survey_question => question_8)
 response_31 = SurveyResponse.create!(:response => nil  , :survey_question => question_0)
-
-# User.find_or_create_by!(first_name: "Jimbo", last_name: "Fancy", email: "jbo@woof.bork", password: "asdf1234")
-# Itinerary.create!(confirmed?: true, user: user, begin_time: "12:00", end_time: "22:00", date: "12/15/2017", budget: 100, location: "Chicago" )
 
 recommender = Recommender.create!(event_matrix: {
 		hours: {
