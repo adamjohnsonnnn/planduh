@@ -20,6 +20,13 @@ module ApplicationHelper
       current_user == user
   end
 
+  ##SURVEY COMPLETE HELPERS
+
+  def current_response_count
+    current_user.user_responses.count + 1
+  end
+
+
 # TIME HELPERS (ITINERARIES)
   def slice_time_itinerary(time)
     time[0..1].to_i
@@ -30,11 +37,15 @@ module ApplicationHelper
     end_time = slice_time_itinerary(end_time)
     if start_time <= end_time
       time_window = end_time - start_time
-      return time_window
     else
       adjusted_end_time = end_time + 24
       time_window = adjusted_end_time - start_time
+    end
+
+    if time_window > 0 && time_window <= 12
       return time_window
+    else
+      return nil
     end
   end
 
@@ -48,11 +59,11 @@ module ApplicationHelper
   end
 
   def convert_to_yelp_budget(dollar_amount)
-  dollar_amount = dollar_amount.to_i
-   return "1,2" if dollar_amount <= 10
-   return "1,2,3" if dollar_amount <= 30
-   return "1,2,3" if dollar_amount <= 60
-   return "1,2,3,4" if dollar_amount > 60
+    dollar_amount = dollar_amount.to_i
+    return "1,2" if dollar_amount <= 10
+    return "1,2,3" if dollar_amount <= 30
+    return "1,2,3" if dollar_amount <= 60
+    return "1,2,3,4" if dollar_amount > 60
   end
 
     def find_and_ensure_user(id)

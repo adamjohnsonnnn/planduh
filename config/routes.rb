@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   root "itineraries#new"
 
   get 'logout', to: "sessions#destroy", as: 'logout'
+
   get '/itineraries/:id/delete', to: "itineraries#destroy", as: 'delete'
 
 end

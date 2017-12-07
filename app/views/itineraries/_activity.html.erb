@@ -38,7 +38,7 @@
           <img src="<%= activity.image_url%>" style="width:100%; margin-bottom:-6px">
       <% end %>
             <p class="response-address"><i class="fa fa-fw fa-location-arrow"></i> Address: <%= activity.display_address %></p>
-            <p><i class="fa fa-fw fa-usd"></i> Price: <%= activity.price %></p>
+            <p><i class="fa fa-fw fa-usd"></i> Price: <%= activity.google_place_show_price %></p>
             <p><i class="fa fa-fw fa-star"></i>Rating: <%= activity.rating %></p>
             <p><i class="fa fa-fw fa-mobile"></i>  <%= activity.display_phone %></p>
             <p><i class="fa fa-fw fa-external-link-square"></i><%= link_to "Visit Website", activity.url %></p>

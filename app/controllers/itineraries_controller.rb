@@ -6,10 +6,10 @@ class ItinerariesController < ApplicationController
       if current_user.preferences.length > 0
         render 'new'
       else
-        redirect_to surveys_path
+        redirect_to surveys_path(1)
       end
     else
-      redirect_to new_user_path
+     redirect_to new_user_path
     end
   end
 
@@ -18,14 +18,15 @@ class ItinerariesController < ApplicationController
     window = time_window(params[:begin_time], params[:end_time])
 
     if logged_in?
-      if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
+      if params_not_empty(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location]) && window != nil
         api_response = create_itinerary_logged_in(params[:date], params[:begin_time], params[:end_time], params[:budget], params[:location])
         destroy_duplicate_activities(api_response)
+        select_activities(window, api_response)
 
         redirect_to "/itineraries/#{@itinerary.id}"
       else
-        @errors = ["You must fill in all fields completely."]
-        render 'new'
+        @errors = ["Please enter a time window of 1-12 hours."]
+        render new_itinerary_path
       end
     else
         redirect_to new_user_path
@@ -45,7 +46,7 @@ class ItinerariesController < ApplicationController
     end
   end
 
-   def edit
+  def edit
     @itinerary = Itinerary.find_by(id: params[:id])
   end
 
@@ -74,7 +75,7 @@ class ItinerariesController < ApplicationController
   private
 
   # YELP EVENT API METHODS
-  def submit_events_api_call(date, begin_time, end_time, location, itinerary)
+  def submit_events_api_call(budget, date, begin_time, end_time, location, itinerary)
     preferences_request = current_user.supplemental_preferences
     designated_preference = preferences_request.sample
     category_request = designated_preference.events_categories.sample
@@ -82,20 +83,27 @@ class ItinerariesController < ApplicationController
     end_date_time = user_input_to_unix(date, end_time)
     y = YelpResponse.new
     response = y.get_events_response({location: location, categories: category_request, start_date: start_date_time, end_date: end_date_time})
-    handle_events_response(response, y, itinerary)
+    if response["events"]
+      event_budget = budget.to_i * 0.75
+      filtered_response = response["events"].select do |event|
+        event["cost"].to_i < event_budget.to_i || event["cost"] == nil
+      end
+      return_response = filtered_response.sample
+    end
+    handle_events_response(response, return_response, y, itinerary, category_request)
     y.destroy
   end
 
-  def handle_events_response(response, y, itinerary)
-    if response["error"]
+  def handle_events_response(response, return_response, y, itinerary, category)
+    if response["error"] || return_response == nil
       @error = "Sorry we're having a hard time finding an event for you. Please try again."
     else
-      y.assign_event_values(response)
-      set_event_attributes(y, itinerary)
+      y.assign_event_values(return_response)
+      set_event_attributes(y, itinerary, category)
     end
   end
 
-  def set_event_attributes(y, itinerary)
+  def set_event_attributes(y, itinerary, category)
       Activity.create!(
       name: y.name,
       time_start: y.time_start,
@@ -108,25 +116,29 @@ class ItinerariesController < ApplicationController
       latitude: y.latitude,
       longitude: y.longitude,
       itinerary_id: itinerary.id,
+      category: category,
       version: "event"
     )
   end
 
-  # YELP BUSINESS API METHODS
-  def submit_business_api_call(date, begin_time, budget, location, itinerary)
-        preferences_request_biz = current_user.supplemental_preferences
-        designated_preference_biz = preferences_request_biz.sample
-        category_request_biz = designated_preference_biz.business_categories.sample
-        business_search_term = designated_preference_biz.keywords.sample
-        open_date_time = user_input_to_unix(date, begin_time)
-        user_budget = convert_to_yelp_budget(budget)
-        y = YelpResponse.new
-        response = y.get_businesses_response({term: business_search_term, categories: category_request_biz, location: location, price: user_budget, open_at: open_date_time, limit: 20})
-        response_container = []
-        response_container << response["businesses"].sample
+# YELP BUSINESS API METHODS
+def submit_business_api_call(date, begin_time, budget, location, itinerary)
+      preferences_request_biz = current_user.supplemental_preferences
+      designated_preference_biz = preferences_request_biz.sample
+      category_request_biz = designated_preference_biz.business_categories.sample
+      business_search_term = designated_preference_biz.keywords.sample
+      open_date_time = user_input_to_unix(date, begin_time)
+      user_budget = convert_to_yelp_budget(budget)
+      y = YelpResponse.new
+      response = y.get_businesses_response({term: business_search_term, categories: category_request_biz, location: location, price: user_budget, open_at: open_date_time, limit: 20})
+      response_container = []
+      if response["businesses"]
+        filtered_response = response["businesses"].select { |business| business["rating"] >= 3 }
+        response_container << filtered_response.sample
         response_convert_hash = {}
         response_convert_hash["businesses"] = response_container
         handle_businesses_response(response_convert_hash, y, itinerary, category_request_biz)
+      end
   end
 
   def handle_businesses_response(response, y, itinerary, category)
@@ -150,7 +162,7 @@ class ItinerariesController < ApplicationController
       url: y.url,
       latitude: y.latitude,
       longitude: y.longitude,
-      image_url: y.image_url,
+      image_url: y.image_url || "https://i.imgur.com/W29FmAv.png",
       display_address: y.display_address,
       itinerary_id: itinerary.id,
       category: category,
@@ -168,7 +180,6 @@ class ItinerariesController < ApplicationController
   end
 
   def submit_google_places_api_call(lat_long, itinerary)
-    # identify preferences
     preferences_request_biz = current_user.supplemental_preferences
     designated_preference_biz = preferences_request_biz.sample
     business_search_term = designated_preference_biz.keywords.sample
@@ -176,19 +187,19 @@ class ItinerariesController < ApplicationController
     google_places_request_types = designated_preference_biz.google_places_types.sample
     query = business_search_term
 
-    # submit GOOGLE PLACES API request
     @client = GooglePlaces::Client.new(ENV["GOOGLE_PLACES_TOKEN"])
     initial_response = @client.spots(lat_long[0], lat_long[1], :types => google_places_request_types, :keywords => query, :radius => 2000)
-    sorted_response = initial_response.sort_by { |response| response.rating || 0 }
+    filtered_response = initial_response.delete_if { |response| response.types.include?("convenience_store") || response.rating == nil }
+    sorted_response = filtered_response.sort_by { |response| response.rating }
     reverse_sorted_response = sorted_response.reverse
     top_five_responses = reverse_sorted_response.slice(0,5)
     if top_five_responses.sample
       full_response = @client.spot(top_five_responses.sample.place_id)
-      set_google_places_attributes(full_response, itinerary)
+      set_google_places_attributes(full_response, itinerary, google_places_request_types)
     end
   end
 
-  def set_google_places_attributes(response, itinerary)
+  def set_google_places_attributes(response, itinerary, category)
       photos = response.photos
       if photos.length > 0
         photo = photos[0].fetch_url(800)
@@ -207,6 +218,7 @@ class ItinerariesController < ApplicationController
       display_address: response.formatted_address || "mystery",
       business_hours: response.opening_hours || "mystery",
       itinerary_id: itinerary.id,
+      category: category,
       version: "google_place"
     )
   end
@@ -220,13 +232,11 @@ class ItinerariesController < ApplicationController
 
   def create_itinerary_logged_in(date, begin_time, end_time, budget, location)
      @itinerary = Itinerary.create(user: current_user, date: date, begin_time: begin_time, end_time: end_time, budget: budget, location: location)
-      # create time window
       window = time_window(begin_time, end_time)
-      # get latitude and longitude of location
       lat_long = create_lat_long_coordinates(location)
       i = 0
       while i < window
-        yelp_event_response = submit_events_api_call(date, begin_time, end_time, location, @itinerary)
+        yelp_event_response = submit_events_api_call(budget, date, begin_time, end_time, location, @itinerary)
         if yelp_event_response.name != nil
           i += 1
         end
@@ -263,11 +273,78 @@ class ItinerariesController < ApplicationController
 
   def destroy_duplicate_activities(itinerary)
       activities = Activity.where(itinerary: itinerary)
-      grouped_activities = activities.group_by { |activity| activity.name}
+      grouped_activities = activities.group_by { |activity| activity.name }
       grouped_activities.values.each do |duplicates|
         first_one = duplicates.shift
         duplicates.each { |repeated_activity| repeated_activity.destroy }
       end
+  end
+
+  def select_activities(window, itinerary)
+      activities = Activity.where(itinerary: itinerary)
+      grouped_activities = activities.group_by { |activity| activity.category }
+
+      collection_returned_restaurants = []
+      if grouped_activities["restaurant"]
+        category_one_restaurant_count = grouped_activities["restaurant"].length
+        collection_returned_restaurants << grouped_activities["restaurant"]
+      else
+        category_one_restaurant_count = 0
+      end
+      if grouped_activities["restaurants"]
+        category_two_restaurant_count = grouped_activities["restaurants"].length
+        collection_returned_restaurants << grouped_activities["restaurants"]
+      else
+        category_two_restaurant_count = 0
+      end
+      if grouped_activities["food-and-drink"]
+        category_three_restaurant_count = grouped_activities["food-and-drink"].length
+        collection_returned_restaurants << grouped_activities["food-and-drink"]
+      else
+        category_three_restaurant_count = 0
+      end
+
+      restaurants_count = category_three_restaurant_count + category_two_restaurant_count + category_one_restaurant_count
+
+      if restaurants_count > target_number_of_restaurants(window)
+        target_number_of_restaurants(window).times do
+          collection_returned_restaurants.shuffle.pop
+        end
+        collection_returned_restaurants[0].each do |extra_restaurant|
+          extra_restaurant.destroy
+        end
+      end
+      if itinerary.activities.count > target_number_of_activities(window)
+        non_food_activities = grouped_activities.except("restaurant", "restaurants", "food-and-drink")
+        collection_non_food_activities = []
+        non_food_activities.values.each do |activities|
+          activities.each { |activity| collection_non_food_activities << activity }
+        end
+        shuffled_non_food_activities = collection_non_food_activities.shuffle
+        target_number_of_activities(window).times do
+          shuffled_non_food_activities.pop
+        end
+        if activities.count > target_number_of_activities(window) + target_number_of_restaurants(window)
+          shuffled_non_food_activities.each do |activity|
+            activity.destroy
+          end
+        end
+      end
+  end
+
+  def target_number_of_activities(window)
+    return 1 if window <= 2
+    return 2 if window > 2 && window <= 4
+    return 3 if window > 4 && window <= 6
+    return 4 if window > 6 && window <= 8
+    return 5 if window > 8 && window <= 10
+    return 6
+  end
+
+  def target_number_of_restaurants(window)
+    return 1 if window <= 4
+    return 2 if window > 4 && window <= 8
+    return 3 if window > 8 && window <= 12
   end
 
 end
