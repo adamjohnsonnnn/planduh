@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :user_responses
   end
 
+  resources :password_resets
+
   resources :user_responses
 
   resources :itineraries

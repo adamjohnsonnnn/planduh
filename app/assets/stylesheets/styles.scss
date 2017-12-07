@@ -1,9 +1,9 @@
 body {
-  background-color: #F9F9F9;
+  background-color: #fcfcfc;
 }
 
-.customjumbotron{
-            background-image: url('https://i.amz.mshcdn.com/atVl90rKiSGeSLkp9cjbGZwG03A=/950x534/filters:quality(90)/2013%2F11%2F18%2F42%2F8540647831.2f72e.jpg');
+.customjumbotron {
+    background-color: #e2faff;
 }
 
 .btn-success {
@@ -57,8 +57,6 @@ body {
     margin-bottom: 8px;
 }
 
-
-
 .footer-question {
     margin-bottom: 70px;
 }
@@ -76,7 +74,100 @@ body {
     margin-right: 10px;
 }
 
+.response-address {
+    margin-top: 20px;
+}
+
+.show-itinerary-button-container {
+    width: 100%;
+    padding: 0px;
+    margin-bottom: 30px;
+}
+
+.response-buttons {
+    display: inline-block;
+    width: 50%;
+    margin: 0px;
+    padding: 0px;
+    text-align: center
+}
+.buttons-nav-itinerary {
+    width: 100%
+}
+
+.response-buttons-cell {
+    width: 50%;
+    margin: 0px;
+    padding: 0px;
+    text-align: center
+}
+
+.btn-primary {
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+
+img.panda {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 25%;
+}
+
 .error-message {
     color: red;
 }
 
+.btn-itinerary-show {
+    background-color: white;
+    border: 3px solid black;
+    color: black;
+    text-decoration: none;
+    padding: 12px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 98%;
+    font-size: 1.3em;
+}
+
+.btn-itinerary-show:hover {
+    background-color: #e2faff;
+    color: black;
+    font-size: 1.4em;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+}
+
+.activity-name {
+    margin-bottom: 20px;
+}
+
+.itineraries-list-profile {
+    margin-top: 25px;
+}
+
+.itinerary-list-activity {
+    list-style: none;
+    border: 1px solid silver;
+    width: 90%;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.list-itinerary-name {
+    font-size: 1.4em;
+}
+
+.itinerary-list-link {
+    color: silver;
+}

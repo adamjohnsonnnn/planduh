@@ -37,6 +37,11 @@ class Activity < ApplicationRecord
     end
   end
 
+  def has_tickets_url
+    return false if self.is_free || self.tickets_url == ""
+    true
+  end
+
   def build_info_window
     if self.version == "business" || self.version == "google_place"
       activity_info = "<h5>#{self.name}</h5>
@@ -46,12 +51,13 @@ class Activity < ApplicationRecord
       activity_info = "<h5>#{self.name}</h5>
                       <p>#{self.display_address}</p>
                       <a href=#{self.event_site_url}>Visit Website</a>"
-    # elsif self.version == "google_place"
-    #   activity_info = "<h5>#{self.name}</h5>
-    #                   <p>#{self.display_address}</p>
-    #                   <a href=#{self.url}>Visit Website</a>"
     end
     activity_info
+  end
+
+  def has_tickets_url
+    return false if self.is_free || self.tickets_url == ""
+    true
   end
 
 end
