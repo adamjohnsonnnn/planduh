@@ -1,12 +1,25 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showModal" data-whatever="save">Looks awesome, save it!</button>
-<form action="/itineraries" method="POST" >
-  <input type="hidden" name="date" value="<%= @itinerary.date %>" >
-  <input type="hidden" name="begin_time" value="<%= @itinerary.begin_time %>" >
-  <input type="hidden" name="end_time" value="<%= @itinerary.end_time %>" >
-  <input type="hidden" name="budget" value="<%= @itinerary.budget %>" >
-  <input type="hidden" name="location" value="<%= @itinerary.location %>" >
-  <input type="submit" class="btn btn-primary" value="Hmmmmm... try again">
-</form>
+<header class="w3-display-container w3-content " style="max-width:1500px">
+ <div class="w3-container w3-black">
+      <h2><i class="fa w3-margin-right"></i>Results</h2>
+  </div>
+
+</header>
+
+
+<div class="response-buttons">
+  <button type="button" class="btn btn-primary mod-save w3-black" data-toggle="modal" data-target="#showModal" data-whatever="save">Looks awesome, save it!</button>
+</div>
+
+<div class="response-buttons">
+  <form action="/itineraries" method="POST" >
+    <input type="hidden" name="date" value="<%= @itinerary.date %>" >
+    <input type="hidden" name="begin_time" value="<%= @itinerary.begin_time %>" >
+    <input type="hidden" name="end_time" value="<%= @itinerary.end_time %>" >
+    <input type="hidden" name="budget" value="<%= @itinerary.budget %>" >
+    <input type="hidden" name="location" value="<%= @itinerary.location %>" >
+    <input type="submit" class="btn btn-primary w3-black" value="Hmmmmm... try again">
+  </form>
+</div>
 
 <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -16,7 +29,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+
+ </div>
       <div class="modal-body">
         <form id="itinerary-form" action="/itineraries/<%=@itinerary.id%>">
           <input type="hidden" name="_method" value="PUT" >
@@ -34,12 +48,11 @@
   </div>
 </div>
 
-
-<ul style="list-style-type:none">
+<!-- renders partial -->
   <%= render partial: "activity", collection: @activities %>
-</ul>
+<!-- end renders partial -->
 
-<div id="map" style='width: 400px; height: 400px;'></div>
+<div class="container" id="map" style='width: 350px; height: 400px;'></div>
 
 <script src="//maps.google.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_TOKEN'] %>"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
@@ -147,8 +160,9 @@
     handler.fitMapToBounds();
   });
 </script><br>
+</div>
 
-<div id="lyft-web-button-parent"></div>
+<div class="container w3-center" id="lyft-web-button-parent"></div>
 <script type="text/javascript">
   var OPTIONS = {
     scriptSrc: '<%= javascript_url('lyftWebButton.min.js') %>',
@@ -181,3 +195,8 @@
   }, c.src = t.scriptSrc, a.insertBefore(c, a.childNodes[0])
   }).call(this, OPTIONS);
 </script>
+</div>
+
+
+
+

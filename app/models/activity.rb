@@ -55,4 +55,9 @@ class Activity < ApplicationRecord
     activity_info
   end
 
+  def has_tickets_url
+    return false if self.is_free || self.tickets_url == ""
+    true
+  end
+
 end

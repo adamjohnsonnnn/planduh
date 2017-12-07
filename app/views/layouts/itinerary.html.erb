@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PlanDuh</title>
+
+    <%= csrf_meta_tags %>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= stylesheet_link_tag    'application',  media: 'all' %>
+    <%= javascript_include_tag  'application' %>
+    <!-- Test Styling -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+    </style>
+
+
+
+  </head>
+
+  <body cz-shortcut-listen="true" >
+
+    <div class="container">
+
+    <nav class="navbar navbar-expand-md navbar-dark w3-black">
+      <%= link_to "PlanDuh", root_path, class: "navbar-brand" %>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarsExample04" style="">
+        <ul class="navbar-nav ml-auto">
+          <% if logged_in? %>
+            <li class="nav-item active"><%= link_to "#{current_user.first_name}'s Profile", user_path(current_user.id), class: "nav-link"  %></li>
+            <li class="nav-item active"><%= link_to "Logout", logout_path, class: "nav-link" %></li>
+          <% else %>
+            <li class="nav-item active"><%= link_to "Register", new_user_path, class: "nav-link" %></li>
+            <li class="nav-item active"><%= link_to "Login", new_session_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+
+      </div>
+    </nav>
+
+    <main role="main">
+
+
+      <div class="customjumbotron">
+        <center>
+          <!-- <p> -->
+          <img src='https://i.imgur.com/W29FmAv.png' width="100px" class="panda" />
+          <!-- </p> -->
+          <br/>
+      </div>
+
+
+
+
+
+
+      <% flash.each do |name, msg| %>
+        <%= content_tag(:div, msg, class: "alert") %>
+
+
+
+      <% end  %>
+
+        <%= yield %>
+
+    </main>
+
+
+
+
+<!-- Footer -->
+<footer class="main-footer w3-padding-32 w3-black w3-center">
+  <h5 class="footer-question" >What is PlanDuh?</h5>
+
+  <p class="footer-powered-by">Powered by:<br> Adam, Zach, Mitch, Kalier & Nicole <br>PlanDuh Bear, Inc. © 2017</p>
+</footer>
+
+</div> <!-- /container -->
+
+
+</body>
+
+
+</html>
