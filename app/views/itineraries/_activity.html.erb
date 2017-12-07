@@ -14,7 +14,9 @@
           <p><i class="fa fa-fw fa-clock-o"></i>Time: <%= activity.format_time %></p>
           <p><i class="fa fa-fw fa-usd"></i> Cost: $<%= activity.filter_cost %></p>
           <p><i class="fa fa-fw fa-external-link-square"></i><%= link_to "Visit Event Site", activity.event_site_url %></p>
-          <p><i class="fa fa-fw fa-ticket"></i> <%= link_to "Buy Tickets", activity.tickets_url if activity.has_tickets_url %></p>
+          <% if activity.tickets_url != "" %>
+            <p><i class="fa fa-fw fa-ticket"></i> <%= link_to "Buy Tickets", activity.tickets_url if activity.has_tickets_url %></p>
+          <% end %>
       </div>
       <hr>
 
