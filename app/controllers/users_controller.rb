@@ -17,13 +17,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    p "in show"
-    redirect_unless_logged_in
-     @itineraries = current_user.itineraries.where(confirmed?: true)
-    if find_and_ensure_user(params[:id])
-     return  "users/show"
-    else
-      return '404'
+    if logged_in?
+       @itineraries = current_user.itineraries.where(confirmed?: true)
+       return  "users/show"
+     else
+      redirect_to new_session_path
     end
   end
 
