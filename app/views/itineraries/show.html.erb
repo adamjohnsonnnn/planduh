@@ -1,20 +1,16 @@
 <header class="w3-display-container w3-content " style="max-width:1500px">
- <div class="w3-container w3-black">
+    <div class="w3-container w3-black">
       <h2><i class="fa w3-margin-right"></i>Your PlanDuh</h2>
-  </div>
-
+    </div>
 </header>
 
 <div class="show-itinerary-button-container">
     <table class="buttons-nav-itinerary">
         <tr>
             <td class="response-buttons-cell">
-                <!-- <div class="response-buttons"> -->
                   <button type="button" class="btn-itinerary-show" data-toggle="modal" data-target="#showModal" data-whatever="save">Save it!</button>
-<!--                 </div> -->
             </td>
             <td class="response-buttons-cell">
-                <!-- <div class="response-buttons"> -->
                   <form action="/itineraries" method="POST" >
                     <input type="hidden" name="date" value="<%= @itinerary.date %>" >
                     <input type="hidden" name="begin_time" value="<%= @itinerary.begin_time %>" >
@@ -23,7 +19,6 @@
                     <input type="hidden" name="location" value="<%= @itinerary.location %>" >
                     <button type="submit" class="btn-itinerary-show" >Try again.</button>
                   </form>
-                <!-- </div> -->
             </td>
         </tr>
     </table>

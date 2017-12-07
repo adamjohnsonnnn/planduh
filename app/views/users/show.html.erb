@@ -1,6 +1,10 @@
-<h1><%= current_user.first_name %>'s PlanDuhs:</h1>
+<header class="w3-display-container w3-content " style="max-width:1500px">
+    <div class="w3-container w3-black">
+      <h2><i class="fa w3-margin-right"></i><%= current_user.first_name %>'s PlanDuhs:</h2>
+    </div>
+</header>
 
-<ul>
+<ul class="itineraries-list-profile">
 <% @itineraries.each do |itinerary| %>
 	<%= render partial: 'list', locals: {itinerary: itinerary} %>
 <% end %>
