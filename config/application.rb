@@ -33,7 +33,7 @@ module RailsRegistrationSkeleton
   end
 end
 
-
+config.exceptions_app = self.routes
 
 GoogleMapsService.configure do |config|
   config.key = ''
