@@ -33,7 +33,7 @@
         <%= form.check_box :agreed, {}, 'true', nil %>
       </div>
       <div class="terms-agree">
-        <label for="terms-agree-button">I Agree To <a href="/terms-of-use" >Terms of Use</a>.</label>
+        <label for="terms-agree-button">I Agree To <%= link_to "Terms of Use", terms_of_use_index_path %></a>.</label>
       </div>
     </div>
   <p>

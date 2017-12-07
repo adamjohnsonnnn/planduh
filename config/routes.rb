@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   resources :preferences, only: [:new, :create, :destroy]
 
+  resources :terms_of_use, only: [:index]
+
   root "itineraries#new"
 
   get 'logout', to: "sessions#destroy", as: 'logout'
