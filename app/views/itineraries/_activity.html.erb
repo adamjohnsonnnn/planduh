@@ -5,7 +5,7 @@
 
   <% if activity.version == "event" %>
 
-      <h3 class="w3-text-green">Event: <%= activity.name %></h3>
+      <h3 class="w3-text-green activity-name"><%= activity.name %></h3>
       <div class="w3-display-container ">
         <img src="<%= activity.image_url%>" style="width:100%; margin-bottom:-6px">
 
@@ -19,7 +19,7 @@
       <hr>
 
     <% elsif activity.version == "business" %>
-        <h3 class="w3-text-green">Business Result: <%= activity.name %></h3>
+        <h3 class="w3-text-green activity-name"><%= activity.name %></h3>
         <div class="w3-display-container mySlides">
           <img src="<%= activity.image_url%>" style="width:100%; margin-bottom:-6px">
 
@@ -32,7 +32,7 @@
         <hr>
 
     <% else %>
-        <h3 class="w3-text-green">Google Result: <%= activity.name %></h3>
+        <h3 class="w3-text-green activity-name"><%= activity.name %></h3>
       <% if activity.image_url %>
         <div class="w3-display-container mySlides">
           <img src="<%= activity.image_url%>" style="width:100%; margin-bottom:-6px">

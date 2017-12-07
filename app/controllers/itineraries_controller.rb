@@ -35,15 +35,24 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    @itinerary = Itinerary.find_by(id: params[:id])
-    @activities = @itinerary.activities
-    @promo_code = "PLANDUHFUN"
+    if logged_in?
+      @itinerary = Itinerary.find_by(id: params[:id])
+      if current_user.itineraries.include?(@itinerary)
+        @activities = @itinerary.activities
+        @promo_code = "PLANDUHFUN"
 
-    @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
-      marker.lat activity.latitude
-      marker.lng activity.longitude
-      marker.infowindow activity.build_info_window
+        @markers_hash = Gmaps4rails.build_markers(@activities) do |activity, marker|
+          marker.lat activity.latitude
+          marker.lng activity.longitude
+          marker.infowindow activity.build_info_window
+        end
+      else
+        redirect_to new_itinerary_path
+      end
+    else
+      redirect_to new_session_path
     end
+
   end
 
   def edit
