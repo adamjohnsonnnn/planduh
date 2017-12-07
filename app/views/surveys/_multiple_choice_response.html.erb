@@ -1,6 +1,4 @@
-
-
-<% if @page < 7 %>
+<% if page < 7 %>
   <div class="pag-links">
     <form  class="w3-container w3-card-4 survey-form" action="/survey_questions/<%= question.id %>/user_responses" method="POST">
         <select class="w3-select" name="answer">
@@ -10,7 +8,6 @@
         </select>
         <%= hidden_field_tag 'page', '1', {class: 'js-form-page'}%>
         <button class="w3-btn w3-black multi-button" type="submit"><i class="fa "></i> NEXT</button>
-        <!-- <input type="submit" value="submit" > -->
       </form>
   </div>
 <% else %>
@@ -23,7 +20,14 @@
         </select>
         <%= hidden_field_tag 'page', '1', {class: 'js-form-page'}%>
         <button class="w3-btn w3-black multi-button" type="submit"><i class="fa "></i> NEXT</button>
-        <!-- <input type="submit" value="submit" > -->
       </form>
   </div>
+<% end %>
+
+<% if question.id == 5 %>
+<img src="https://media.timeout.com/images/103817003/image.jpg" alt="physical" style="width:100%" class="survey-image">
+<% elsif question.id == 6 %>
+<img src="http://townwall.ca/images/gallery/blog/77951493926345_H49A7049.jpg" style="width:100%" class="survey-image">
+<% else %>
+<img src="https://thumbs.dreamstime.com/b/people-enjoying-outdoors-activities-city-park-recreation-s-samara-russia-may-sunny-day-67052918.jpg" style="width:100%" class="survey-image">
 <% end %>
