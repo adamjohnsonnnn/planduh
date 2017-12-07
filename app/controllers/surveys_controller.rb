@@ -12,4 +12,9 @@ class SurveysController < ApplicationController
   	end
   end
 
+  def new
+    survey = SurveyQuestion.find(1)
+    redirect_to survey_path(survey)
+  end
+
 end

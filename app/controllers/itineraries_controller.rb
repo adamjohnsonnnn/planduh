@@ -6,7 +6,7 @@ class ItinerariesController < ApplicationController
       if current_user.preferences.length > 0
         render 'new'
       else
-        redirect_to surveys_path(1)
+        redirect_to new_survey_path
       end
     else
      redirect_to new_user_path
