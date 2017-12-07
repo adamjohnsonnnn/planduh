@@ -18,9 +18,13 @@ class UsersController < ApplicationController
 
   def show
     if logged_in?
+      if current_user.id == params[:id]
        @itineraries = current_user.itineraries.where(confirmed?: true)
        return  "users/show"
      else
+      redirect_to new_itinerary_path
+     end
+    else
       redirect_to new_session_path
     end
   end
