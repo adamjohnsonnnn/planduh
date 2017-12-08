@@ -7,6 +7,9 @@ class SurveysController < ApplicationController
 
   def show
     id = params[:id].to_i % 7
+    if id == 0
+      id = 7
+    end
   	@question = SurveyQuestion.find_by(order: id)
     @page = @question.order
     render 'show'
