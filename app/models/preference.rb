@@ -7,3 +7,6 @@ class Preference < ApplicationRecord
  serialize :google_places_types
 
 end
+
+#Test
+###############

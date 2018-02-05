@@ -31,9 +31,6 @@ class ItinerariesController < ApplicationController
         end
       end
     end
-    # if @itinerary.activities > window
-    #   # run sort method
-    # end
     redirect_to "/itineraries/#{@itinerary.id}"
   end
 
